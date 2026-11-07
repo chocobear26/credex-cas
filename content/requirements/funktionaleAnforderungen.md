@@ -2,7 +2,7 @@
 title: "Funktionale Anforderungen – CredEx Phase 1"
 linkTitle: "Funktionale Anforderungen"
 type: requirement-catalog
-description: "Die funktionalen Anforderungen FA-01 bis FA-10 mit Abnahmekriterium und Bezug auf User Stories und Use Cases."
+description: "Die funktionalen Anforderungen FA-01 bis FA-11 mit Abnahmekriterium und Bezug auf User Stories und Use Cases."
 weight: 2
 tags: [antrag, pflichtdokument, dokument, zuordnung, protokolleintrag, berater, partner]
 sources:
@@ -26,12 +26,17 @@ sources:
     resource: /epics/epics.md
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-2
+    resource: /sources/cr_1_2.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T10:30:00Z
 ---
 
 # Funktionale Anforderungen – CredEx Phase 1
+
+> [!NOTE] v1.2 – Geändert 2026-11-07
+> FA-11 neu (Prüfen per Auftrag an die KI); FA-01 gilt für die Anträge des Teams.
 
 ## Überblick
 
@@ -53,10 +58,11 @@ Die funktionalen Anforderungen beschreiben, was das System können muss. Quelle 
 | FA-08 | Einreichen | Das System darf über MCP kein Einreichen anbieten. | Wenn die MCP-Werkzeugliste kein Werkzeug zum Einreichen enthält und ein Einreichversuch über die KI scheitert. | [US-7.1](../epics/user_stories/us_7_1.md), GA3 | Hoch |
 | FA-09 | Protokoll | Das System muss jede Ablage, Bestätigung, Umordnung und Einreichung mit Zeit, Akteur und Quelle protokollieren. | Wenn nach einem Testlauf jede durchgeführte Aktion mit Zeit, Akteur und Quelle im Protokoll steht. | [US-4.1](../epics/user_stories/us_4_1.md), [US-6.2](../epics/user_stories/us_6_2.md), GA4 | Hoch |
 | FA-10 | Auswertung | Das System muss Kennzahlen pro Partner bereitstellen: Anträge über MCP, Dauer bis Einreichung, Anteil Bestätigungen. | Wenn die Auswertung pro Partner und Monat diese Kennzahlen korrekt ausweist (Abgleich mit den Messdaten des PoC). | [US-9.1](../epics/user_stories/us_9_1.md), [UC-09](../use_case/nutzung_auswerten/nutzungAuswerten.md) | Mittel |
+| FA-11 | Prüfen | Das System muss Bestätigen, Umordnen und Verwerfen auch über MCP anbieten, aber nur mit ausdrücklichem Auftrag des Beraters im Pflichtfeld auftrag_beraterin, und die Aktion mit akteur BERATER_VIA_KI und dem Auftrag im Wortlaut protokollieren. | Wenn ein Aufruf ohne Auftrag abgelehnt wird und ein Aufruf mit Auftrag den Status wie in der Übersicht setzt und im Protokoll als BERATER_VIA_KI mit Auftrag steht. | [US-6.3](../epics/user_stories/us_6_3.md), [UC-06](../use_case/zuordnung_bestaetigen/zuordnungBestaetigen.md) | Mittel |
 
 ---
 
 ## Offene Punkte
 
 - **FA-07** ist gegenüber dem Excel vom 31.10.2026 geändert: kein Einreichen mit Begründung mehr (siehe [CR-1.0](../sources/cr_1_0.md)). Das Excel ist nachzuführen.
-- **FA-01** spricht von den Anträgen des Teams; das Fachklassenmodell kennt keine Klasse Team.
+- **FA-11** ist neu (Teamentscheid 07.11.2026) und im Anforderungs-Excel nachzutragen.

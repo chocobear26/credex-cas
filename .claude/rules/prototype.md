@@ -1,0 +1,19 @@
+---
+paths:
+  - content/prototype/**
+---
+
+# Konventionen Prototypen
+
+## Dateien
+- `{prototyp}.md` – eine Seite pro Prototyp; Screenshots in `img/` daneben (PNG, keine Diagramme)
+
+## Aufbau
+```
+# Prototyp – {Name}
+## Zweck            → Welche Frage der Anforderungserhebung der Prototyp beantwortet
+## Art              → horizontal / vertikal, Wiedergabetreue (low / mid / high fidelity), Werkzeug
+## Screens          → Screenshots mit Bildunterschrift
+## Abgedeckte Stories → Links
+## Stand und Abweichungen → was vom aktuellen Konzept abweicht und angepasst werden muss
+```

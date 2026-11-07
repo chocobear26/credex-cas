@@ -6,6 +6,16 @@
 
 title: Produktdokumentation – CredEx Phase 1
 locale: de-ch
+defaultContentLanguage: de
+languages:
+  de:
+    languageName: Deutsch
+    weight: 1
+
+# Docsy's print view (`/_print/`) puts a whole section on one page – the way to a PDF of the
+# documentation for the hand-in: open the print view of the home page and print it to PDF.
+outputs:
+  section: [HTML, print, RSS]
 
 # The docs are served from https://chocobear26.github.io/credex-cas/site/ (GitHub Pages) — the address the landing page in
 # index.html links to. Hugo writes root-relative URLs, so the path has to be right here, not just
@@ -85,13 +95,21 @@ params:
   # without editing this file with HUGO_PARAMS_KROKI_URL, e.g. for a self-hosted Kroki container.
   kroki_url: https://kroki.io
 
+  copyright: "Gruppe 6 CredEx · CAS Business Analysis and Methods · ZHAW"
+  github_repo: https://github.com/chocobear26/credex-cas
+  github_branch: main
+  print:
+    disable_toc: false
+
   offlineSearch: true
   offlineSearchSummaryLength: 70
   offlineSearchMaxResults: 10
 
   ui:
     showLightDarkModeMenu: true
-    sidebar_menu_compact: false
+    sidebar_menu_compact: true
+    ul_show: 1
+    navbar_logo: false
     sidebar_menu_foldable: true
     sidebar_search_disable: false
     sidebar_root_enabled: true

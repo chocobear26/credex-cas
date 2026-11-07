@@ -5,7 +5,7 @@ start
 :credex_offene_antraege aufrufen;
 |#FEFCE8|CredEx-System|
 if (KiVerbindung gültig?) then (ja)
-  :Anträge mit status = IN_ERFASSUNG\nim Zugriffsbereich des Beraters lesen;
+  :Anträge mit status = IN_ERFASSUNG\nim Team des Beraters lesen;
   :Antrag, Kreditnehmer, Objekt und\nAnzahl fehlender Pflichtdokumente melden;
   |Partner-KI|
   if (Mehrere offene Anträge?) then (ja)

@@ -9,9 +9,11 @@ sources:
     resource: /business_process/businessProcess.md
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-2
+    resource: /sources/cr_1_2.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T10:30:00Z
 ---
 
 # Berater/in
@@ -24,4 +26,4 @@ Eine Person beim Partner, die Hypothekaranträge erfasst und einreicht – entsp
 
 ## Systemzugriff
 
-Übersicht im CredEx-Tool für die Anträge in seinem Zugriffsbereich: Status je Pflichtdokument ansehen, Zuordnungen bestätigen, umordnen oder verwerfen, Antrag einreichen. Bei Brokern ohne IT: KiVerbindung selbst einrichten. Kein direkter Zugriff auf den MCP-Server – das tut seine KI.
+Übersicht im CredEx-Tool für die Anträge seines Teams: Status je Pflichtdokument ansehen, Zuordnungen bestätigen, umordnen oder verwerfen, Antrag einreichen. Bei Brokern ohne IT: KiVerbindung selbst einrichten. Kein direkter Zugriff auf den MCP-Server – das tut seine KI, auch beim Bestätigen per ausdrücklichem Auftrag.

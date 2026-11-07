@@ -2,16 +2,18 @@
 title: "Berater"
 type: entity
 description: "Eine Person beim Partner, die Anträge erfasst und einreicht – Kundenberaterin einer Bank oder selbständiger Hypothekarbroker."
-weight: 2
+weight: 3
 tags: [berater]
 sources:
   - id: domain-model
     resource: /domain_model/domainModel.md
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-2
+    resource: /sources/cr_1_2.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T10:30:00Z
 ---
 
 # Berater
@@ -20,7 +22,7 @@ Eine Person beim Partner, die Anträge erfasst und einreicht – Kundenberaterin
 
 **Herkunft:** existiert in der CredEx-Plattform (Abgleich mit dem CredEx-Datenmodell offen)
 
-Das Fachklassenmodell kennt keine Klasse `Team`. Die Anforderungen FA-01 und NFA-10 sprechen vom Team des Beraters; das ist ein offener Punkt (siehe [CR-1.0](../../sources/cr_1_0.md)).
+Jeder Berater gehört zu genau einem [Team](team.md); er sieht über seine KI die Anträge seines Teams (Teamentscheid 07.11.2026, [CR-1.2](../../sources/cr_1_2.md)).
 
 ## Attribute
 

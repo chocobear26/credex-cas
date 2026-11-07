@@ -1,0 +1,26 @@
+---
+paths:
+  - content/problem/**
+---
+
+# Konventionen Ausgangslage
+
+## Dateien
+- `ausgangslage.md` – die Brücke von Modul 1 (Grobkonzept) zu Modul 2 (Detailkonzept)
+
+## Aufbau
+```
+# Ausgangslage – {Systemname}
+## Der Fall              → Geschäftsmodell und Kennzahlen, mit Quelle
+## Ist-Prozess           → Bild des Ist-Prozesses aus Modul 1, Schmerzpunkte als Liste
+## Leitfrage             → die SMART-Leitfrage aus dem Problemstatement, wörtlich
+## Hypothesenbaum        → Hypothesen mit Status belegt / im Pilot zu testen / offen
+## Lösungsentscheid      → Varianten und Entscheid aus Modul 1
+## Business Case         → Kennzahlen und Hebel, mit Quelle
+## Feedback Modul 1      → Tabelle: Feedback | Antwort in Modul 2 | Artefakt
+```
+
+## Inhalt
+- Zahlen exakt wie in den Unterlagen von Modul 1; jede Zahl mit Quelle
+- Die Leitfrage ist die Referenz für GA1; Abweichungen in anderen Artefakten sind Fehler
+- Jede Feedback-Zeile verlinkt das Artefakt, das sie beantwortet

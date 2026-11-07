@@ -81,6 +81,19 @@ Datei bearbeiten und `make generate` ausführen.
 | `user-story` | `content/epics/user_stories/us_<epic>_<seq>.md` | `.claude/rules/epics.md` | Eine User Story im Format Card – Conversation – Confirmation, mit MoSCoW und KANO. |
 | `requirement-catalog` | `content/requirements/<catalog>.md` | `.claude/rules/requirements.md` | Ein Anforderungskatalog – Geschäftsanforderungen, funktionale oder nicht-funktionale Anforderungen mit IDs und Abnahmekriterien. |
 | `interface-spec` | `content/interface/<interface>.md` | `.claude/rules/interface.md` | Die Spezifikation einer Schnittstelle – Werkzeuge, Eingaben, Ausgaben und Fehlerfälle. |
+| `problem-statement` | `content/problem/ausgangslage.md` | `.claude/rules/problem.md` | Ausgangslage aus Modul 1 – Fall, Ist-Prozess, Leitfrage, Hypothesenbaum, Lösungsentscheid, Business Case und Feedback. |
+| `glossary` | `content/glossary/glossar.md` | `.claude/rules/glossary.md` | Alle Fachbegriffe A bis Z, jeder mit Bedeutung und Link auf die Fachklasse oder das Artefakt. |
+| `user-role-model` | `content/personas/benutzerrollen.md` | `.claude/rules/personas.md` | Das Benutzerrollenmodell – alle Rollen mit Attributen, zwei davon im Fokus. |
+| `persona` | `content/personas/<name>.md` | `.claude/rules/personas.md` | Eine Persona – Kontext, Ziele, Frust, Szenario und was sie von der Lösung braucht. |
+| `decision-log` | `content/decisions/entscheide.md` | `.claude/rules/decisions.md` | Alle Teamentscheide auf einen Blick, mit Datum und Status. |
+| `decision` | `content/decisions/e<nn><Titel>.md` | `.claude/rules/decisions.md` | Ein Teamentscheid – Kontext, Optionen, Entscheid, Begründung und Folgen für die Artefakte. |
+| `option-evaluation` | `content/evaluation/nutzwertanalyse.md` | `.claude/rules/evaluation.md` | Die Bewertung der Lösungsoptionen mit gewichteten Kriterien und Sensitivität. |
+| `prototype` | `content/prototype/<prototyp>.md` | `.claude/rules/prototype.md` | Ein Prototyp – Zweck in der Anforderungserhebung, Art, Screens und Stand. |
+| `validation` | `content/validation/<validierung>.md` | `.claude/rules/validation.md` | Eine Validierung – Hypothesen oder Fragen, Vorgehen, Ergebnisse und was sich dadurch geändert hat. |
+| `architecture-view` | `content/architecture/<sicht>.md` | `.claude/rules/architecture.md` | Eine Architektursicht – Komponenten oder Ablauf über Systeme hinweg, als PlantUML-Diagramm. |
+| `delivery-plan` | `content/delivery/umsetzungsplan.md` | `.claude/rules/delivery.md` | Vorgehen, Releaseplan, Risiken und Entscheidungspunkte bis zum Go/No-Go. |
+| `traceability-matrix` | `content/traceability/rueckverfolgung.md` | — | Die Rückverfolgung von Geschäftsanforderungen über User Stories zu Anforderungen und Use Cases. Erzeugt aus den Artefakten. |
+| `approval-status` | `content/traceability/freigaben.md` | — | Welche Artefakte ein Mensch aus der Gruppe freigegeben hat. Erzeugt aus den `verified`-Einträgen. |
 | `change-log` | `content/change_log/changeLog.md` | `.claude/rules/change-log.md` | Jede Version und jedes darin erstellte oder geänderte Artefakt. Dauerhaft. |
 | `change-request` | `content/sources/cr_<major>_<minor>.md` | `.claude/rules/sources.md` | Ein Change Request – was verlangt wurde, was er betrifft und was entschieden wurde. Geänderte Artefakte zitieren ihn. |
 | `assessment` | `content/sources/okf_assessment_<yyyy>_<mm>_<dd>.md` | `.claude/rules/sources.md` | Ein Lauf von /okf-check – jede Prüfung des OKF-v0.2-Registers mit Status und Beleg. Wird nie überschrieben. |
@@ -127,7 +140,13 @@ Use-Case-Diagramm, Fachklassenmodell, Soll-Prozess und ihren Use Cases; eine Use
 und dem Use Case, auf den sie zurückgeht; die Geschäftsanforderungen aus dem Change Request; die
 funktionalen Anforderungen aus Use Cases und User Stories; die nicht-funktionalen Anforderungen aus
 den Geschäftsanforderungen und dem Systemkontext; die MCP-Schnittstelle aus den Use Cases der
-Partner-KI und den funktionalen Anforderungen. Ein Artefakt, das ein Change Request erstellt oder
+Partner-KI und den funktionalen Anforderungen; die Ausgangslage, die Personas, das
+Benutzerrollenmodell, die Entscheide und die Nutzwertanalyse aus dem Change Request, der sie anlegt;
+die Personas aus dem Benutzerrollenmodell; die Architektursichten aus Systemkontext und
+MCP-Schnittstelle; die Prototypen aus den User Stories, die sie zeigen; die Validierung aus den
+Artefakten, die sie prüft; der Umsetzungsplan aus Story Map und Ausgangslage. Die
+Rückverfolgungsmatrix `content/traceability/rueckverfolgung.md` wird von `make generate` aus den
+Stories und Katalogen erzeugt – nie von Hand bearbeiten. Ein Artefakt, das ein Change Request erstellt oder
 umgebaut hat, zitiert auch diesen Change Request.
 
 - `resource` ist **bundle-absolut** – beginnt mit `/` und wird ab `content/` gelesen.
@@ -162,6 +181,8 @@ lesbar sein, wo niemand das Frontmatter rendert.
 Leg nie eine `index.md` in `content/` an: Der Name ist vom Open Knowledge Format reserviert und würde
 den Ordner zu einer Einzelseite machen. Die Seite eines Ordners ist `_index.md` mit `type: section`.
 Die einzige `log.md` ist `content/log.md`, erzeugt durch `make generate` – nie von Hand bearbeiten.
+Eine User Story nennt in der ersten Zeile ihrer *Conversation* ihre Geschäftsanforderungen
+(`· GA: GA1, GA3`) und unter «Anforderungen:» ihre FA und NFA; daraus entsteht die Rückverfolgungsmatrix.
 
 ## Vor dem ersten Schreiben in einen Ordner die Regeln lesen
 
@@ -175,6 +196,15 @@ Die einzige `log.md` ist `content/log.md`, erzeugt durch `make generate` – nie
 | `content/epics/` | `.claude/rules/epics.md` |
 | `content/requirements/` | `.claude/rules/requirements.md` |
 | `content/interface/` | `.claude/rules/interface.md` |
+| `content/problem/` | `.claude/rules/problem.md` |
+| `content/glossary/` | `.claude/rules/glossary.md` |
+| `content/personas/` | `.claude/rules/personas.md` |
+| `content/decisions/` | `.claude/rules/decisions.md` |
+| `content/evaluation/` | `.claude/rules/evaluation.md` |
+| `content/prototype/` | `.claude/rules/prototype.md` |
+| `content/validation/` | `.claude/rules/validation.md` |
+| `content/architecture/` | `.claude/rules/architecture.md` |
+| `content/delivery/` | `.claude/rules/delivery.md` |
 | `content/change_log/` | `.claude/rules/change-log.md` |
 | `content/sources/` | `.claude/rules/sources.md` |
 

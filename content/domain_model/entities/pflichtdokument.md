@@ -2,7 +2,7 @@
 title: "Pflichtdokument"
 type: entity
 description: "Eine Unterlage, die CredEx für einen Antrag verlangt – heute ein Upload-Feld in Schritt 5."
-weight: 9
+weight: 10
 tags: [pflichtdokument]
 sources:
   - id: domain-model
@@ -11,7 +11,7 @@ sources:
     resource: /sources/cr_1_0.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T11:15:00Z
 ---
 
 # Pflichtdokument

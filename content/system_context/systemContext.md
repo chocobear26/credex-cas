@@ -14,9 +14,11 @@ sources:
     resource: /sources/cr_1_0.md
   - id: cr-1-1
     resource: /sources/cr_1_1.md
+  - id: cr-1-2
+    resource: /sources/cr_1_2.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T09:55:00Z
+  at: 2026-11-07T10:30:00Z
 ---
 
 # Systemkontext – CredEx Phase 1
@@ -44,13 +46,13 @@ Im Scope von Phase 1 (rot) liegen drei neue Teile von CredEx: der **MCP-Server**
 |---|---|---|
 | Berater/in | Partner-KI | Auftrag (Prompt), z.B. «Lade die Unterlagen für meinen offenen CredEx-Antrag hoch» |
 | Partner-DMS | Partner-KI | Dateien des Kreditnehmers |
-| Partner-KI | MCP-Server | Dokument mit Zuordnung (Pflichtdokument, Konfidenz, optional Seitenbereich) |
+| Partner-KI | MCP-Server | Dokument mit Zuordnung (Pflichtdokument, Konfidenz, optional Seitenbereich); Bestätigung, Umordnung oder Verwerfen im ausdrücklichen Auftrag des Beraters |
 | MCP-Server | Partner-KI | Offene Anträge, Pflichtdokumente, Ablagestatus |
 | MCP-Server | Identity Provider | Token der Anmeldung |
 | Identity Provider | MCP-Server | Identität und Berechtigung (Anträge des Teams) |
 | MCP-Server | CredEx-Plattform | Dokument und Zuordnung |
 | CredEx-Plattform | MCP-Server | Antrag und Pflichtdokumente |
-| MCP-Server | Protokoll | Protokolleintrag mit Akteur KI |
+| MCP-Server | Protokoll | Protokolleintrag mit Akteur KI oder BERATER_VIA_KI |
 | CredEx-Plattform | Übersicht | Status je Pflichtdokument |
 | Übersicht | Berater/in | Status je Pflichtdokument mit Datei, Quelle und Konfidenz |
 | Berater/in | Übersicht | Bestätigung, Umordnung, Verwerfen, Einreichen |

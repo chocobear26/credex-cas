@@ -2,7 +2,7 @@
 title: "Antrag"
 type: entity
 description: "Ein Hypothekarantrag eines Partners auf der CredEx-Plattform; in Phase 1 geht es um Schritt 5 «Hochladen»."
-weight: 5
+weight: 6
 tags: [antrag]
 sources:
   - id: domain-model
@@ -11,7 +11,7 @@ sources:
     resource: /sources/cr_1_0.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T11:15:00Z
 ---
 
 # Antrag

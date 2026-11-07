@@ -35,6 +35,7 @@ test:
 verify:
 	@test -n "$(PAGES)" || (echo "usage: make verify PAGES=\"content/a.md content/b.md\" [WHO=owner]"; exit 1)
 	@$(PY) $(S)/verify_page.py $(PAGES) $(if $(WHO),--who "$(WHO)",)
+	@$(PY) $(S)/generate.py
 
 ## Live-reload the site while writing. Diagrams render through Kroki, so this needs network access;
 ## offline, a diagram shows as a link to its .puml source instead.

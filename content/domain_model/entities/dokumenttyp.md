@@ -2,7 +2,7 @@
 title: "Dokumenttyp"
 type: entity
 description: "Die Art einer Unterlage, z.B. Lohnausweis oder Grundbuchauszug, mit den erlaubten Dateiformaten."
-weight: 10
+weight: 11
 tags: [dokumenttyp]
 sources:
   - id: domain-model
@@ -11,7 +11,7 @@ sources:
     resource: /sources/cr_1_0.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T11:15:00Z
 ---
 
 # Dokumenttyp

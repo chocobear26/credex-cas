@@ -79,6 +79,67 @@ types:
     rules: interface.md
     requires: [sources, generated, tags]
     holds: Die Spezifikation einer Schnittstelle – Werkzeuge, Eingaben, Ausgaben und Fehlerfälle.
+  problem-statement:
+    where: problem/ausgangslage.md
+    rules: problem.md
+    requires: [sources, generated, tags]
+    holds: Ausgangslage aus Modul 1 – Fall, Ist-Prozess, Leitfrage, Hypothesenbaum, Lösungsentscheid, Business Case und Feedback.
+  glossary:
+    where: glossary/glossar.md
+    rules: glossary.md
+    requires: [sources, generated, tags]
+    holds: Alle Fachbegriffe A bis Z, jeder mit Bedeutung und Link auf die Fachklasse oder das Artefakt.
+  user-role-model:
+    where: personas/benutzerrollen.md
+    rules: personas.md
+    requires: [sources, generated, tags]
+    holds: Das Benutzerrollenmodell – alle Rollen mit Attributen, zwei davon im Fokus.
+  persona:
+    where: personas/<name>.md
+    rules: personas.md
+    requires: [sources, generated, tags]
+    holds: Eine Persona – Kontext, Ziele, Frust, Szenario und was sie von der Lösung braucht.
+  decision-log:
+    where: decisions/entscheide.md
+    rules: decisions.md
+    requires: [sources, generated]
+    holds: Alle Teamentscheide auf einen Blick, mit Datum und Status.
+  decision:
+    where: decisions/e<nn><Titel>.md
+    rules: decisions.md
+    requires: [sources, generated]
+    holds: Ein Teamentscheid – Kontext, Optionen, Entscheid, Begründung und Folgen für die Artefakte.
+  option-evaluation:
+    where: evaluation/nutzwertanalyse.md
+    rules: evaluation.md
+    requires: [sources, generated, tags]
+    holds: Die Bewertung der Lösungsoptionen mit gewichteten Kriterien und Sensitivität.
+  prototype:
+    where: prototype/<prototyp>.md
+    rules: prototype.md
+    requires: [sources, generated, tags]
+    holds: Ein Prototyp – Zweck in der Anforderungserhebung, Art, Screens und Stand.
+  validation:
+    where: validation/<validierung>.md
+    rules: validation.md
+    requires: [sources, generated, tags]
+    holds: Eine Validierung – Hypothesen oder Fragen, Vorgehen, Ergebnisse und was sich dadurch geändert hat.
+  architecture-view:
+    where: architecture/<sicht>.md
+    rules: architecture.md
+    requires: [sources, generated, tags]
+    holds: Eine Architektursicht – Komponenten oder Ablauf über Systeme hinweg, als PlantUML-Diagramm.
+  delivery-plan:
+    where: delivery/umsetzungsplan.md
+    rules: delivery.md
+    requires: [sources, generated, tags]
+    holds: Vorgehen, Releaseplan, Risiken und Entscheidungspunkte bis zum Go/No-Go.
+  traceability-matrix:
+    where: traceability/rueckverfolgung.md
+    holds: Die Rückverfolgung von Geschäftsanforderungen über User Stories zu Anforderungen und Use Cases. Erzeugt aus den Artefakten.
+  approval-status:
+    where: traceability/freigaben.md
+    holds: Welche Artefakte ein Mensch aus der Gruppe freigegeben hat. Erzeugt aus den `verified`-Einträgen.
   change-log:
     where: change_log/changeLog.md
     rules: change-log.md

@@ -16,6 +16,11 @@ repeat
   case (passt nicht)
     :Dokument verwerfen (3b);
   endswitch
+  if (Weg?) then (in der Übersicht)
+  else (Auftrag an die KI (3c))
+    |#F5F3FF|Partner-KI|
+    :Werkzeug mit auftrag_beraterin aufrufen;
+  endif
   |CredEx-System|
   if (Dokument verworfen?) then (nein)
     :Zuordnung setzen (quelle = MENSCH);
@@ -23,7 +28,7 @@ repeat
   else (ja)
     :CredEx-System setzt Dokument\n(status = VERWORFEN);
   endif
-  :Protokolleintrag schreiben (akteur = BERATER);
+  :Protokolleintrag schreiben\n(akteur = BERATER oder BERATER_VIA_KI);
   |Berater/in|
 repeat while (Weitere unsichere Zuordnung?) is (ja) not (nein)
 stop

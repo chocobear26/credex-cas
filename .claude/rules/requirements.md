@@ -15,6 +15,7 @@ paths:
 # {Katalogname} – {Systemname}
 ## Überblick          → Ein Absatz: Zweck, Quelle (Anforderungs-Excel der Gruppe, Stand), Links auf verwandte Kataloge
 ## Anforderungen      → Tabelle (siehe unten)
+## Restriktionen      → nur im NFA-Katalog: Tabelle Restriktion | Art | Herkunft | Wirkung
 ## Offene Punkte      → Zielwerte oder Fragen, die noch zu validieren sind
 ```
 
@@ -23,6 +24,11 @@ paths:
 - Funktional: `ID | Funktion | Anforderung | Abnahmekriterium | Bezug | Wichtigkeit`
 - Nicht-funktional: `ID | Merkmal (ISO 25010) | Anforderung | Abnahmekriterium | Wichtigkeit`
 - Wichtigkeit Hoch = Must, Mittel = Should, Tief = Could
+
+## Restriktionen
+Der Kurs unterscheidet nach Glinz bei den nicht-funktionalen Anforderungen zwischen spezifischer
+Qualität und Restriktion. Restriktionen (physisch, regulatorisch, wirtschaftlich, organisatorisch,
+kulturell) lassen sich nicht verhandeln und stehen deshalb in einem eigenen Abschnitt mit `R-nn`.
 
 ## Inhalt
 - Anforderungen nach Satzschablone: «Das System muss / darf nicht …»

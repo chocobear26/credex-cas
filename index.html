@@ -157,6 +157,8 @@
     details { margin-top: 16px; }
     details summary { cursor: pointer; color: var(--accent); font-weight: 600; margin-bottom: 14px; }
     footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
+    a.cta { display:inline-block; margin-top:6px; padding:10px 18px; border-radius:8px; background:#1E293B; color:#fff; text-decoration:none; font-weight:600; }
+    a.cta:hover { background:#DC2626; }
   </style>
 </head>
 <body>
@@ -169,106 +171,97 @@
       <a href="site/">Dokumentation CredEx Phase 1</a>; der Code liegt auf
       <a href="https://github.com/chocobear26/credex-cas" target="_blank">GitHub</a>. Grundlage ist das Beispiel
       <a href="https://github.com/marcelRonner/okf-productdocumentation" target="_blank">okf-productdocumentation</a> von Marcel Ronner.</p>
-    <p class="lead">This repository is <strong>step 2</strong> of a two-step series. Step 1,
-      <a href="https://github.com/marcelRonner/okf-llm-wiki" target="_blank">okf-llm-wiki</a>, shows the basics on a simple knowledge wiki. Here the same
-      ideas are applied to the documentation of a software product.</p>
+    <p class="lead"><a class="cta" href="site/">Zur Dokumentation →</a></p>
 
     <section>
-      <h2>The idea in one paragraph</h2>
-      <p>Requirements documents usually go out of date, because every change has to be copied by hand into many places —
-        and after a while nobody can say which document a statement came from, or whether anyone checked it. Here, every
-        document carries that information in a small, standard label, and an AI agent called <strong>Jarvis</strong> helps
-        with the requirements analysis: you tell it what should change; it works out which documents are affected, updates
-        them in the right order, and records what it did. You stay in charge: nothing counts as approved until a person
-        says so.</p>
+      <h2>Die Idee in einem Absatz</h2>
+      <p>Anforderungsdokumente veralten meist, weil jede Änderung von Hand an vielen Stellen nachgezogen werden muss –
+        und nach einer Weile weiss niemand mehr, woher eine Aussage stammt oder ob sie jemand geprüft hat. Hier trägt jedes
+        Dokument diese Information in einem kleinen, standardisierten Etikett, und ein KI-Agent namens
+        <strong>Jarvis</strong> hilft bei der Anforderungsanalyse: Die Gruppe sagt, was sich ändern soll; Jarvis ermittelt,
+        welche Dokumente betroffen sind, führt sie in der richtigen Reihenfolge nach und hält fest, was er getan hat.
+        Entscheiden und freigeben tut ein Mensch.</p>
     </section>
 
     <section>
-      <h2>The label on every page</h2>
-      <p>Each document starts with a short block of labels that people rarely see but tools read. It says what kind of
-        document it is, which documents it was derived from (<code>sources</code>), who wrote it and when
-        (<code>generated</code>), whether a person approved it (<code>verified</code>), and which parts of the domain it is
-        about (<code>tags</code>). The labels follow an open standard, the
+      <h2>Das Etikett auf jeder Seite</h2>
+      <p>Jedes Dokument beginnt mit einem kurzen Block, den Menschen selten sehen, Werkzeuge aber lesen: welche Art von
+        Dokument es ist, woraus es abgeleitet ist (<code>sources</code>), wer es wann geschrieben hat
+        (<code>generated</code>), ob ein Mensch es freigegeben hat (<code>verified</code>) und welche Fachklassen es betrifft
+        (<code>tags</code>). Das Etikett folgt einem offenen Standard, dem
         <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md" target="_blank">Open Knowledge Format</a>
-        (OKF), so any other agent can read this documentation without special tools.</p>
-      <p>How well does the documentation follow that standard? Type <code>/okf-check</code>, and Jarvis goes through the
-        standard’s 41 rules one by one and files a report next to the change requests in <code>content/sources/</code>. Old
-        reports are never overwritten, so two of them show what got better in between — and a change request that fixes
-        a finding points back at the report that found it.</p>
-      <p>The diagrams are written as text too, and drawn automatically when the site is built — so a picture can never
-        disagree with the text it was drawn from.</p>
+        (OKF); jeder andere Agent kann die Dokumentation ohne Spezialwerkzeug lesen.</p>
+      <p>Wie gut die Dokumentation den Standard einhält, prüft <code>/okf-check</code> gegen 41 Regeln und legt den Bericht
+        neben die Change Requests in <code>content/sources/</code>. Berichte werden nie überschrieben.</p>
+      <p>Auch die Diagramme sind Text – PlantUML, BPMN und D2 – und werden beim Bauen gezeichnet. Ein Bild kann deshalb
+        nie vom Text abweichen, aus dem es entsteht.</p>
     </section>
 
     <section>
-      <h2>The five parts</h2>
+      <h2>Die fünf Teile</h2>
       <div class="cards">
-        <div class="card"><h3>📄 The documentation</h3>
-          <p>Plain text files in <code>content/</code>, together one OKF bundle: the domain model, business process, use
-            cases, state chart, epics and user stories. One file per artifact, one folder per kind of artifact.</p></div>
-        <div class="card"><h3>📝 The change requests</h3>
-          <p>Every change is written down first, in <code>content/sources/</code>: what was asked, what it affects, and what was
-            decided. The documents that change point back to it.</p></div>
-        <div class="card"><h3>🧭 Jarvis and its instructions</h3>
-          <p>Jarvis is the agent that helps with the requirements analysis. Text files tell it how to work:
-            <code>AGENTS.md</code> for the general rules, <code>.claude/rules/</code> for how each kind of artifact must
-            look, and <code>.claude/skills/</code> for step-by-step procedures. GitHub Copilot and Claude Code both read
-            them.</p></div>
-        <div class="card"><h3>✅ The checks</h3>
-          <p>Small programs in <code>scripts/</code> that catch mistakes a person would miss: a broken link, a missing label,
-            a diagram that does not draw. If a check fails, nothing is published.</p></div>
-        <div class="card"><h3>🌐 The website</h3>
-          <p>A tool called Hugo turns the text files into the documentation website. Every time the main version on GitHub
-            changes, the site is rebuilt and uploaded automatically.</p></div>
+        <div class="card"><h3>📄 Die Dokumentation</h3>
+          <p>Textdateien in <code>content/</code>, zusammen ein OKF-Bundle: von der Ausgangslage über Fachklassenmodell,
+            Soll-Prozess, Use Cases und Stories bis zu Anforderungen, MCP-Schnittstelle, Prototypen und Validierung.</p></div>
+        <div class="card"><h3>📝 Change Requests und Entscheide</h3>
+          <p>Jede Änderung wird zuerst in <code>content/sources/</code> aufgeschrieben, jeder Teamentscheid in
+            <code>content/decisions/</code>. Die geänderten Dokumente verweisen darauf.</p></div>
+        <div class="card"><h3>🧭 Jarvis und seine Anweisungen</h3>
+          <p><code>AGENTS.md</code> enthält die allgemeinen Regeln, <code>.claude/rules/</code> die Form jedes Artefakttyps,
+            <code>.claude/skills/</code> die Abläufe. GitHub Copilot und Claude Code lesen dieselben Dateien.</p></div>
+        <div class="card"><h3>✅ Die Prüfungen</h3>
+          <p>Programme in <code>scripts/</code> finden, was ein Mensch übersieht: einen kaputten Link, ein fehlendes Etikett,
+            ein Diagramm, das nicht zeichnet, eine Anforderung ohne Story. Schlägt eine Prüfung fehl, wird nichts veröffentlicht.</p></div>
+        <div class="card"><h3>🌐 Die Website</h3>
+          <p>Hugo macht aus den Textdateien die Website. Bei jeder Änderung auf GitHub wird sie neu gebaut und veröffentlicht.</p></div>
       </div>
     </section>
 
     <section>
-      <h2>How a change flows through it</h2>
+      <h2>Wie eine Änderung durchläuft</h2>
       <ol class="flow">
-        <li><strong>You ask for a change</strong> — for example “eingereicht wird nur ein vollständiger Antrag”.</li>
-        <li><strong>Jarvis analyses it</strong>, asks about anything unclear, and shows which documents it affects.</li>
-        <li><strong>Jarvis writes a change request</strong> into <code>content/sources/</code>, once you agree on the scope.</li>
-        <li><strong>Jarvis updates the documents from the inside out</strong>, starting with the domain model, because everything else depends on it.</li>
-        <li><strong>Jarvis drafts user stories</strong> for anything the system should now do differently, and shows them to you first.</li>
-        <li><strong>Jarvis records the version</strong> in the change log, stamps the OKF labels, and runs all the checks.</li>
-        <li><strong>You approve</strong> — and record it with one command, <code>make verify</code>, which adds a <code>verified</code> label. The agent is not allowed to do that step for you.</li>
-        <li><strong>The change goes to GitHub</strong>, and the website rebuilds itself.</li>
+        <li><strong>Die Gruppe verlangt eine Änderung</strong> – zum Beispiel «eingereicht wird nur ein vollständiger Antrag».</li>
+        <li><strong>Jarvis analysiert sie</strong>, fragt nach, was unklar ist, und zeigt, welche Dokumente betroffen sind.</li>
+        <li><strong>Jarvis schreibt einen Change Request</strong> nach <code>content/sources/</code>, sobald der Umfang klar ist.</li>
+        <li><strong>Jarvis führt die Dokumente von innen nach aussen nach</strong>, zuerst das Fachklassenmodell, weil alles andere darauf aufbaut.</li>
+        <li><strong>Jarvis entwirft User Stories</strong> für alles, was das System nun anders tun soll, und legt sie zuerst vor.</li>
+        <li><strong>Jarvis hält die Version fest</strong> im Change Log, stempelt die Etiketten und lässt alle Prüfungen laufen.</li>
+        <li><strong>Ein Mensch gibt frei</strong> – mit <code>make verify</code> oder auf GitHub mit «Freigabe erfassen». Der Agent darf das nicht.</li>
+        <li><strong>Die Änderung geht auf GitHub</strong>, und die Website baut sich neu.</li>
       </ol>
     </section>
 
     <section>
-      <h2>Why the order matters</h2>
-      <p>The documents build on each other. Change something on the left, and everything to its right may need to change too:</p>
+      <h2>Warum die Reihenfolge zählt</h2>
+      <p>Die Dokumente bauen aufeinander auf. Was links ändert, kann alles rechts davon ändern:</p>
       <div class="chain">
-        <span>Domain Model</span><b>→</b><span>Business Process</span><b>→</b><span>Use Cases</span><b>→</b><span>State Charts &amp; Epics</span><b>→</b><span>User Stories</span><b>→</b><span>Change Log</span>
+        <span>Fachklassenmodell</span><b>→</b><span>Soll-Prozess</span><b>→</b><span>Use Cases</span><b>→</b><span>Zustände &amp; Epics</span><b>→</b><span>User Stories</span><b>→</b><span>Anforderungen</span><b>→</b><span>Rückverfolgung</span>
       </div>
-      <p>The documentation home page shows this chain in detail, with the IDs that connect the documents and a list of what
-        to check after each kind of change.</p>
+      <p>Die Startseite der Dokumentation zeigt die Kette im Detail, mit den IDs, die die Dokumente verbinden.</p>
     </section>
 
     <section>
-      <h2>Where the idea comes from</h2>
-      <p>The labels come from the <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md" target="_blank">Open Knowledge Format</a>.
-        The way of working follows the <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank">LLM Wiki</a>
-        pattern: instead of searching raw notes every time a question comes up, an agent keeps a set of linked, up-to-date
-        pages — and a person keeps the final say.</p>
+      <h2>Woher die Idee stammt</h2>
+      <p>Das Etikett stammt aus dem <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md" target="_blank">Open Knowledge Format</a>,
+        die Arbeitsweise aus dem <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank">LLM-Wiki</a>-Muster,
+        das Repository aus dem Lehrbeispiel <a href="https://github.com/marcelRonner/okf-productdocumentation" target="_blank">okf-productdocumentation</a>
+        von Marcel Ronner (CAS Business Analysis and Methods, ZHAW).</p>
     </section>
 
     <section>
-      <h2>Read Jarvis's instructions yourself</h2>
-      <p>Below is exactly what Jarvis is told to do — the same files the agent reads, copied here automatically on every build.</p>
+      <h2>Jarvis' Anweisungen selbst lesen</h2>
+      <p>Unten steht genau, was Jarvis gesagt wird – dieselben Dateien, die der Agent liest, bei jedem Build hierher kopiert.</p>
       <details>
-        <summary>Show the instructions</summary>
+        <summary>Anweisungen anzeigen</summary>
         <div class="file-badge">AGENTS.md · .claude/skills · .claude/rules</div>
-        <article id="content">Loading…</article>
+        <article id="content">Wird geladen…</article>
       </details>
     </section>
 
     <footer>
-      Setting the repository up yourself? Read the <a href="https://github.com/marcelRonner/okf-productdocumentation#readme" target="_blank">README</a>.
-      Want to learn how to build documentation and an agent like this? That is part of the
-      <a href="https://www.zhaw.ch/de/sml/weiterbildung/detail/kurs/cas-business-analysis-and-methods" target="_blank">CAS Business Analysis and Methods</a>
-      at the ZHAW School of Management and Law.
+      Gruppe 6 CredEx (Marco, Jessica, Cem) · Leistungsnachweis Modul 2 ·
+      <a href="https://www.zhaw.ch/de/sml/weiterbildung/detail/kurs/cas-business-analysis-and-methods" target="_blank">CAS Business Analysis and Methods</a>,
+      ZHAW School of Management and Law · <a href="https://github.com/chocobear26/credex-cas" target="_blank">Code auf GitHub</a>
     </footer>
   </div>
 
@@ -358,6 +351,19 @@ Datei bearbeiten und `make generate` ausführen.
 | `user-story` | `content/epics/user_stories/us_<epic>_<seq>.md` | `.claude/rules/epics.md` | Eine User Story im Format Card – Conversation – Confirmation, mit MoSCoW und KANO. |
 | `requirement-catalog` | `content/requirements/<catalog>.md` | `.claude/rules/requirements.md` | Ein Anforderungskatalog – Geschäftsanforderungen, funktionale oder nicht-funktionale Anforderungen mit IDs und Abnahmekriterien. |
 | `interface-spec` | `content/interface/<interface>.md` | `.claude/rules/interface.md` | Die Spezifikation einer Schnittstelle – Werkzeuge, Eingaben, Ausgaben und Fehlerfälle. |
+| `problem-statement` | `content/problem/ausgangslage.md` | `.claude/rules/problem.md` | Ausgangslage aus Modul 1 – Fall, Ist-Prozess, Leitfrage, Hypothesenbaum, Lösungsentscheid, Business Case und Feedback. |
+| `glossary` | `content/glossary/glossar.md` | `.claude/rules/glossary.md` | Alle Fachbegriffe A bis Z, jeder mit Bedeutung und Link auf die Fachklasse oder das Artefakt. |
+| `user-role-model` | `content/personas/benutzerrollen.md` | `.claude/rules/personas.md` | Das Benutzerrollenmodell – alle Rollen mit Attributen, zwei davon im Fokus. |
+| `persona` | `content/personas/<name>.md` | `.claude/rules/personas.md` | Eine Persona – Kontext, Ziele, Frust, Szenario und was sie von der Lösung braucht. |
+| `decision-log` | `content/decisions/entscheide.md` | `.claude/rules/decisions.md` | Alle Teamentscheide auf einen Blick, mit Datum und Status. |
+| `decision` | `content/decisions/e<nn><Titel>.md` | `.claude/rules/decisions.md` | Ein Teamentscheid – Kontext, Optionen, Entscheid, Begründung und Folgen für die Artefakte. |
+| `option-evaluation` | `content/evaluation/nutzwertanalyse.md` | `.claude/rules/evaluation.md` | Die Bewertung der Lösungsoptionen mit gewichteten Kriterien und Sensitivität. |
+| `prototype` | `content/prototype/<prototyp>.md` | `.claude/rules/prototype.md` | Ein Prototyp – Zweck in der Anforderungserhebung, Art, Screens und Stand. |
+| `validation` | `content/validation/<validierung>.md` | `.claude/rules/validation.md` | Eine Validierung – Hypothesen oder Fragen, Vorgehen, Ergebnisse und was sich dadurch geändert hat. |
+| `architecture-view` | `content/architecture/<sicht>.md` | `.claude/rules/architecture.md` | Eine Architektursicht – Komponenten oder Ablauf über Systeme hinweg, als PlantUML-Diagramm. |
+| `delivery-plan` | `content/delivery/umsetzungsplan.md` | `.claude/rules/delivery.md` | Vorgehen, Releaseplan, Risiken und Entscheidungspunkte bis zum Go/No-Go. |
+| `traceability-matrix` | `content/traceability/rueckverfolgung.md` | — | Die Rückverfolgung von Geschäftsanforderungen über User Stories zu Anforderungen und Use Cases. Erzeugt aus den Artefakten. |
+| `approval-status` | `content/traceability/freigaben.md` | — | Welche Artefakte ein Mensch aus der Gruppe freigegeben hat. Erzeugt aus den `verified`-Einträgen. |
 | `change-log` | `content/change_log/changeLog.md` | `.claude/rules/change-log.md` | Jede Version und jedes darin erstellte oder geänderte Artefakt. Dauerhaft. |
 | `change-request` | `content/sources/cr_<major>_<minor>.md` | `.claude/rules/sources.md` | Ein Change Request – was verlangt wurde, was er betrifft und was entschieden wurde. Geänderte Artefakte zitieren ihn. |
 | `assessment` | `content/sources/okf_assessment_<yyyy>_<mm>_<dd>.md` | `.claude/rules/sources.md` | Ein Lauf von /okf-check – jede Prüfung des OKF-v0.2-Registers mit Status und Beleg. Wird nie überschrieben. |
@@ -403,7 +409,13 @@ Use-Case-Diagramm, Fachklassenmodell, Soll-Prozess und ihren Use Cases; eine Use
 und dem Use Case, auf den sie zurückgeht; die Geschäftsanforderungen aus dem Change Request; die
 funktionalen Anforderungen aus Use Cases und User Stories; die nicht-funktionalen Anforderungen aus
 den Geschäftsanforderungen und dem Systemkontext; die MCP-Schnittstelle aus den Use Cases der
-Partner-KI und den funktionalen Anforderungen. Ein Artefakt, das ein Change Request erstellt oder
+Partner-KI und den funktionalen Anforderungen; die Ausgangslage, die Personas, das
+Benutzerrollenmodell, die Entscheide und die Nutzwertanalyse aus dem Change Request, der sie anlegt;
+die Personas aus dem Benutzerrollenmodell; die Architektursichten aus Systemkontext und
+MCP-Schnittstelle; die Prototypen aus den User Stories, die sie zeigen; die Validierung aus den
+Artefakten, die sie prüft; der Umsetzungsplan aus Story Map und Ausgangslage. Die
+Rückverfolgungsmatrix `content/traceability/rueckverfolgung.md` wird von `make generate` aus den
+Stories und Katalogen erzeugt – nie von Hand bearbeiten. Ein Artefakt, das ein Change Request erstellt oder
 umgebaut hat, zitiert auch diesen Change Request.
 
 - `resource` ist **bundle-absolut** – beginnt mit `/` und wird ab `content/` gelesen.
@@ -438,6 +450,8 @@ lesbar sein, wo niemand das Frontmatter rendert.
 Leg nie eine `index.md` in `content/` an: Der Name ist vom Open Knowledge Format reserviert und würde
 den Ordner zu einer Einzelseite machen. Die Seite eines Ordners ist `_index.md` mit `type: section`.
 Die einzige `log.md` ist `content/log.md`, erzeugt durch `make generate` – nie von Hand bearbeiten.
+Eine User Story nennt in der ersten Zeile ihrer *Conversation* ihre Geschäftsanforderungen
+(`· GA: GA1, GA3`) und unter «Anforderungen:» ihre FA und NFA; daraus entsteht die Rückverfolgungsmatrix.
 
 ## Vor dem ersten Schreiben in einen Ordner die Regeln lesen
 
@@ -451,6 +465,15 @@ Die einzige `log.md` ist `content/log.md`, erzeugt durch `make generate` – nie
 | `content/epics/` | `.claude/rules/epics.md` |
 | `content/requirements/` | `.claude/rules/requirements.md` |
 | `content/interface/` | `.claude/rules/interface.md` |
+| `content/problem/` | `.claude/rules/problem.md` |
+| `content/glossary/` | `.claude/rules/glossary.md` |
+| `content/personas/` | `.claude/rules/personas.md` |
+| `content/decisions/` | `.claude/rules/decisions.md` |
+| `content/evaluation/` | `.claude/rules/evaluation.md` |
+| `content/prototype/` | `.claude/rules/prototype.md` |
+| `content/validation/` | `.claude/rules/validation.md` |
+| `content/architecture/` | `.claude/rules/architecture.md` |
+| `content/delivery/` | `.claude/rules/delivery.md` |
 | `content/change_log/` | `.claude/rules/change-log.md` |
 | `content/sources/` | `.claude/rules/sources.md` |
 
@@ -567,6 +590,31 @@ change the register and say so in the assessment. Adding a check is normal; renu
 
 ---
 
+<p class="file-badge">.claude/rules/architecture.md</p>
+
+# Konventionen Architektursichten
+
+## Dateien
+- `komponenten.md` + `komponenten.puml` – UML-Komponentendiagramm
+- `mcpAblauf.md` + `mcpAblauf.puml` – UML-Sequenzdiagramm eines vollständigen Durchlaufs
+
+## Aufbau
+```
+# Architektur – {Sicht}
+## Überblick        → Ein Absatz, Links auf Systemkontext und MCP-Schnittstelle
+## Diagramm         → ![…]({sicht}.puml)
+## Elemente         → nur was das Diagramm nicht selbst sagt (Verantwortung, Technologie)
+```
+
+## PlantUML
+- Komponenten: Neues mit Stereotyp `<<neu>>`, Bestehendes ohne; Schnittstellen als `()`
+- Sequenz: Teilnehmer in der Reihenfolge Berater/in, Partner-KI, MCP-Server, Plattform, Protokoll,
+  Glarner KB; Werkzeugaufrufe mit ihrem exakten Namen; `alt` und `loop` für Verzweigungen
+- Kein eigenes Styling (gemeinsames Stilblatt)
+
+
+---
+
 <p class="file-badge">.claude/rules/business-process.md</p>
 
 # Konventionen Soll-Prozess
@@ -662,6 +710,52 @@ Absatz, der Liste oder der Tabelle: `{.v-new}`, `{.v-changed}`, `{.v-deprecated}
 ## Checkliste
 Wer irgendein Artefakt erstellt oder ändert, **muss** den Eintrag in `content/change_log/changeLog.md`
 nachführen (Checkliste in `AGENTS.md`).
+
+
+---
+
+<p class="file-badge">.claude/rules/decisions.md</p>
+
+# Konventionen Teamentscheide
+
+## Dateien
+- `entscheide.md` – Übersicht aller Entscheide (`type: decision-log`)
+- `e{nn}{TitelInCamelCase}.md` – ein Entscheid pro Datei (`type: decision`), fortlaufend nummeriert
+
+## Aufbau Entscheid
+```
+# E{nn} – {Entscheid als Aussage}
+**Status:** entschieden · offen · ersetzt durch E{mm}   **Datum:** YYYY-MM-DD   **Quelle:** Teamentscheid / Feedback / Interview
+## Kontext       → Warum die Frage aufkam
+## Optionen      → Aufzählung der betrachteten Optionen
+## Entscheid     → Ein Satz
+## Begründung    → Aufzählung
+## Folgen        → Welche Artefakte sich dadurch ändern, mit Links; der Change Request, der sie umgesetzt hat
+```
+
+## Inhalt
+- Ein Entscheid wird nie umgeschrieben. Ändert die Gruppe ihre Meinung, folgt ein neuer Entscheid,
+  und der alte bekommt den Status «ersetzt durch E{mm}»
+- Offene Entscheide nennen, wer bis wann entscheidet
+
+
+---
+
+<p class="file-badge">.claude/rules/delivery.md</p>
+
+# Konventionen Umsetzungsplan
+
+## Dateien
+- `umsetzungsplan.md`
+
+## Aufbau
+```
+# Umsetzungsplan – {Systemname}
+## Vorgehen         → klassisch oder agil, mit Begründung (Stacey-Matrix)
+## Releaseplan      → Tabelle: Release | Inhalt | Stories | Zeitraum | Meilenstein
+## Risiken          → Tabelle: Risiko | Wirkung | Massnahme
+## Entscheidungspunkte → Go/No-Go mit Kriterien
+```
 
 
 ---
@@ -780,6 +874,52 @@ gehört, KANO, wie die Nutzer sie erleben.
 
 ---
 
+<p class="file-badge">.claude/rules/evaluation.md</p>
+
+# Konventionen Bewertung der Lösungsoptionen
+
+## Dateien
+- `nutzwertanalyse.md` – Optionen, Kriterien, Gewichte, Punkte, Ergebnis und Sensitivität
+
+## Aufbau
+```
+# Nutzwertanalyse – {Systemname}
+## Optionen         → Tabelle: Option | Beschreibung
+## Kriterien und Bewertung → Tabelle: Kriterium | Gewicht | A … E | Begründung; Zeile Nutzwert und Rang
+## Sensitivität     → dieselbe Rechnung mit anderen Gewichten
+## Ergebnis         → Was die Gruppe daraus entscheidet, mit Link auf den Entscheid
+```
+
+## Inhalt
+- Skala 1 (schlecht) bis 5 (sehr gut); Gewichte summieren sich zu 1.00
+- Nutzwerte sind gerechnet, nicht geschätzt; sie stimmen mit dem Excel der Gruppe überein
+- Jedes Kriterium verweist auf eine Geschäftsanforderung oder ein Feedback
+
+
+---
+
+<p class="file-badge">.claude/rules/glossary.md</p>
+
+# Konventionen Glossar
+
+## Dateien
+- `glossar.md` – eine Datei, alle Begriffe
+
+## Aufbau
+```
+# Glossar – {Systemname}
+## Überblick     → Ein Satz + Hinweis, dass Klassennamen auf die Entität verlinken
+## A … Z         → ein H2 pro Anfangsbuchstabe; darunter eine Tabelle: Begriff | Bedeutung | Siehe
+```
+
+## Inhalt
+- Jede Fachklasse hat einen Eintrag und verlinkt ihre Entitätsseite
+- Abkürzungen ausgeschrieben (GLKB = Glarner Kantonalbank, MCP = Model Context Protocol)
+- Ein neuer Begriff in einem Artefakt bekommt im selben Change Request einen Glossareintrag
+
+
+---
+
 <p class="file-badge">.claude/rules/interface.md</p>
 
 # Konventionen Schnittstellen
@@ -806,6 +946,86 @@ gehört, KANO, wie die Nutzer sie erleben.
 
 ---
 
+<p class="file-badge">.claude/rules/personas.md</p>
+
+# Konventionen Benutzerrollen und Personas
+
+## Dateien
+- `benutzerrollen.md` – das Benutzerrollenmodell (`type: user-role-model`)
+- `{vornameNachname}.md` – eine Persona pro Datei (`type: persona`)
+
+## Aufbau Benutzerrollenmodell
+```
+# Benutzerrollenmodell – {Systemname}
+## Vorgehen          → Kandidaten gesammelt, gruppiert, konsolidiert
+## Rollen            → Tabelle: Rolle | Nutzung | Fachwissen | KI/IT | Ziel | Use Cases
+## Fokusrollen       → welche Rollen eine Persona bekommen und warum
+```
+
+## Aufbau Persona
+```
+# Persona – {Name}
+**Rolle:** R{n} … · **primär / sekundär**
+> Zitat (mit Quelle)
+## Steckbrief        → Tabelle: Merkmal | Ausprägung (Annahmen markiert)
+## Ziele · ## Frust heute · ## Szenario mit der Lösung · ## Was sie braucht (mit Story-Links)
+## Quellen und Annahmen
+```
+
+## Inhalt
+- Jede Angabe ohne Interviewquelle ist als *(Annahme)* markiert und in der Validierung zu prüfen
+- Das Szenario nutzt Klassennamen und verlinkt die Stories
+
+
+---
+
+<p class="file-badge">.claude/rules/problem.md</p>
+
+# Konventionen Ausgangslage
+
+## Dateien
+- `ausgangslage.md` – die Brücke von Modul 1 (Grobkonzept) zu Modul 2 (Detailkonzept)
+
+## Aufbau
+```
+# Ausgangslage – {Systemname}
+## Der Fall              → Geschäftsmodell und Kennzahlen, mit Quelle
+## Ist-Prozess           → Bild des Ist-Prozesses aus Modul 1, Schmerzpunkte als Liste
+## Leitfrage             → die SMART-Leitfrage aus dem Problemstatement, wörtlich
+## Hypothesenbaum        → Hypothesen mit Status belegt / im Pilot zu testen / offen
+## Lösungsentscheid      → Varianten und Entscheid aus Modul 1
+## Business Case         → Kennzahlen und Hebel, mit Quelle
+## Feedback Modul 1      → Tabelle: Feedback | Antwort in Modul 2 | Artefakt
+```
+
+## Inhalt
+- Zahlen exakt wie in den Unterlagen von Modul 1; jede Zahl mit Quelle
+- Die Leitfrage ist die Referenz für GA1; Abweichungen in anderen Artefakten sind Fehler
+- Jede Feedback-Zeile verlinkt das Artefakt, das sie beantwortet
+
+
+---
+
+<p class="file-badge">.claude/rules/prototype.md</p>
+
+# Konventionen Prototypen
+
+## Dateien
+- `{prototyp}.md` – eine Seite pro Prototyp; Screenshots in `img/` daneben (PNG, keine Diagramme)
+
+## Aufbau
+```
+# Prototyp – {Name}
+## Zweck            → Welche Frage der Anforderungserhebung der Prototyp beantwortet
+## Art              → horizontal / vertikal, Wiedergabetreue (low / mid / high fidelity), Werkzeug
+## Screens          → Screenshots mit Bildunterschrift
+## Abgedeckte Stories → Links
+## Stand und Abweichungen → was vom aktuellen Konzept abweicht und angepasst werden muss
+```
+
+
+---
+
 <p class="file-badge">.claude/rules/requirements.md</p>
 
 # Konventionen Anforderungskataloge
@@ -820,6 +1040,7 @@ gehört, KANO, wie die Nutzer sie erleben.
 # {Katalogname} – {Systemname}
 ## Überblick          → Ein Absatz: Zweck, Quelle (Anforderungs-Excel der Gruppe, Stand), Links auf verwandte Kataloge
 ## Anforderungen      → Tabelle (siehe unten)
+## Restriktionen      → nur im NFA-Katalog: Tabelle Restriktion | Art | Herkunft | Wirkung
 ## Offene Punkte      → Zielwerte oder Fragen, die noch zu validieren sind
 ```
 
@@ -828,6 +1049,11 @@ gehört, KANO, wie die Nutzer sie erleben.
 - Funktional: `ID | Funktion | Anforderung | Abnahmekriterium | Bezug | Wichtigkeit`
 - Nicht-funktional: `ID | Merkmal (ISO 25010) | Anforderung | Abnahmekriterium | Wichtigkeit`
 - Wichtigkeit Hoch = Must, Mittel = Should, Tief = Could
+
+## Restriktionen
+Der Kurs unterscheidet nach Glinz bei den nicht-funktionalen Anforderungen zwischen spezifischer
+Qualität und Restriktion. Restriktionen (physisch, regulatorisch, wirtschaftlich, organisatorisch,
+kulturell) lassen sich nicht verhandeln und stehen deshalb in einem eigenen Abschnitt mit `R-nn`.
 
 ## Inhalt
 - Anforderungen nach Satzschablone: «Das System muss / darf nicht …»
@@ -1120,6 +1346,32 @@ Jeder Use Case bekommt einen **Unterordner** in `use_case/` (snake_case, z.B. `u
 - `stop` für jeden Endpfad
 - Klassennamen in den Aktionen (z.B. «CredEx-System speichert Dokument im Antrag»)
 - Beschriftungen kurz, max. 2 Zeilen mit `\n`
+
+
+---
+
+<p class="file-badge">.claude/rules/validation.md</p>
+
+# Konventionen Validierung
+
+## Dateien
+- `validierung.md` – Validierungsgespräche mit Betroffenen
+- `pocTest.md` – Test des PoC mit Beratenden (heute gegen neu)
+
+## Aufbau
+```
+# Validierung – {Gegenstand}
+## Ziel             → Welche Annahme oder Anforderung geprüft wird
+## Vorgehen         → Teilnehmende, Methode, Termine
+## Hypothesen / Fragen → nummeriert (H1, V1-F1 …)
+## Ergebnisse       → Tabelle: Frage oder Hypothese | Ergebnis | Folge für die Anforderungen
+## Änderungen an den Artefakten → Links auf die Change Requests, die aus der Validierung folgen
+```
+
+## Inhalt
+- Ergebnisse stehen nur hier, wenn sie erhoben wurden; Ausstehendes ist als *ausstehend* markiert,
+  nie geschätzt
+- Jede Folge für die Anforderungen wird ein Change Request
 
   </script>
 

@@ -4,25 +4,30 @@ linkTitle: "Fachklassenmodell"
 type: domain-model
 description: "Das Fachklassenmodell von CredEx Phase 1 auf einen Blick: Klassendiagramm und ein Link auf jede Fachklasse."
 weight: 1
-tags: [partner, berater, ki-verbindung, pruefer, antrag, kreditnehmer, dokument, zuordnung, pflichtdokument, dokumenttyp, protokolleintrag]
+tags: [partner, team, berater, ki-verbindung, pruefer, antrag, kreditnehmer, dokument, zuordnung, pflichtdokument, dokumenttyp, protokolleintrag]
 sources:
   - id: cr-1-0
     resource: /sources/cr_1_0.md
   - id: cr-1-1
     resource: /sources/cr_1_1.md
+  - id: cr-1-2
+    resource: /sources/cr_1_2.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T09:55:00Z
+  at: 2026-11-07T10:30:00Z
 ---
 
 # Fachklassenmodell – CredEx Phase 1
+
+> [!NOTE] v1.2 – Geändert 2026-11-07
+> Neue Klasse Team (Zugriff auf Anträge des Teams); Protokolleintrag kennt den Akteur BERATER_VIA_KI.
 
 > [!NOTE] v1.1 – Geändert 2026-11-07
 > Klassendiagramm im gemeinsamen Diagrammstil, rechtwinklige Linien.
 
 ## Überblick
 
-Das Fachklassenmodell beschreibt die fachlichen Objekte von CredEx Phase 1 – Dokumentenupload über die eigene KI des Partners. Acht Klassen gibt es heute schon in der CredEx-Plattform; neu sind `KiVerbindung`, `Zuordnung` und `Protokolleintrag` (Stereotyp `<<neu>>`). Fachliche Sicht ohne Methoden und technische Schlüssel. Grundlage ist das Fachklassenmodell der Gruppe vom 30.10.2026; der Abgleich mit dem bestehenden Datenmodell von CredEx ist offen.
+Das Fachklassenmodell beschreibt die fachlichen Objekte von CredEx Phase 1 – Dokumentenupload über die eigene KI des Partners. Acht Klassen gibt es heute schon in der CredEx-Plattform; neu sind `Team`, `KiVerbindung`, `Zuordnung` und `Protokolleintrag` (Stereotyp `<<neu>>`). Fachliche Sicht ohne Methoden und technische Schlüssel. Grundlage ist das Fachklassenmodell der Gruppe vom 30.10.2026; der Abgleich mit dem bestehenden Datenmodell von CredEx ist offen.
 
 ---
 
@@ -35,6 +40,7 @@ Das Fachklassenmodell beschreibt die fachlichen Objekte von CredEx Phase 1 – D
 ## Klassen
 
 - [Partner](entities/partner.md)
+- [Team](entities/team.md)
 - [Berater](entities/berater.md)
 - [KiVerbindung](entities/kiVerbindung.md)
 - [Prüfer](entities/pruefer.md)
@@ -51,7 +57,8 @@ Das Fachklassenmodell beschreibt die fachlichen Objekte von CredEx Phase 1 – D
 ## Beziehungen
 
 ```
-Partner "1" -- "1..*" Berater : beschäftigt
+Partner "1" -- "1..*" Team : organisiert
+Team "1" -- "1..*" Berater : umfasst
 Berater "1" -- "0..*" KiVerbindung : nutzt
 Berater "1" -- "0..*" Antrag : erfasst
 Prüfer "0..1" -- "0..*" Antrag : prüft, gibt frei
@@ -67,7 +74,8 @@ Zuordnung "0..*" -- "0..1" Pflichtdokument : verweist auf
 
 | Beziehung | Beschreibung |
 |---|---|
-| Partner beschäftigt Berater | Jeder Berater gehört zu genau einem Partner. |
+| Partner organisiert Team | Ein Partner gliedert seine Berater in ein oder mehrere Teams. |
+| Team umfasst Berater | Jeder Berater gehört zu genau einem Team; er sieht über die KI die Anträge seines Teams. |
 | Berater nutzt KiVerbindung | Ein Berater kann seine KI mit CredEx verbinden, auch mehrere KI-Clients. |
 | Berater erfasst Antrag | Der Berater erfasst den Antrag und reicht ihn ein. |
 | Prüfer prüft Antrag | Ein Prüfer der Glarner KB prüft eingereichte Anträge und gibt sie frei. |

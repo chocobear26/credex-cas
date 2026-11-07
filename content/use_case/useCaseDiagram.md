@@ -12,9 +12,11 @@ sources:
     resource: /sources/cr_1_0.md
   - id: cr-1-1
     resource: /sources/cr_1_1.md
+  - id: cr-1-2
+    resource: /sources/cr_1_2.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T09:55:00Z
+  at: 2026-11-07T10:30:00Z
 ---
 
 # Use-Case-Diagramm – CredEx Phase 1
@@ -24,7 +26,7 @@ generated:
 
 ## Überblick
 
-Das Use-Case-Diagramm zeigt, wie die Akteure aus dem [Soll-Prozess](../business_process/businessProcess.md) mit CredEx Phase 1 interagieren. Die Systemgrenze umfasst MCP-Server, Übersicht und Auswertung. Die Nummern stammen aus dem Detailkonzept der Gruppe; UC-08 ist nicht vergeben. UC-02 bis UC-05 ruft die Partner-KI im Auftrag des Beraters als Werkzeuge auf; Bestätigen und Einreichen bleiben beim Menschen (UC-06, UC-07). Im Detail spezifiziert waren in der Gruppe UC-04, UC-06 und UC-07.
+Das Use-Case-Diagramm zeigt, wie die Akteure aus dem [Soll-Prozess](../business_process/businessProcess.md) mit CredEx Phase 1 interagieren. Die Systemgrenze umfasst MCP-Server, Übersicht und Auswertung. Die Nummern stammen aus dem Detailkonzept der Gruppe; UC-08 ist nicht vergeben. UC-02 bis UC-05 ruft die Partner-KI im Auftrag des Beraters als Werkzeuge auf. Bestätigen bleibt ein Entscheid des Menschen (UC-06), auch wenn er ihn über seine KI ausführen lässt; einreichen kann nur der Mensch in der Übersicht (UC-07). Im Detail spezifiziert waren in der Gruppe UC-04, UC-06 und UC-07.
 
 ---
 
@@ -69,7 +71,7 @@ CredEx meldet, welche Pflichtdokumente fehlen oder unsicher sind.
 Entspricht **Prozessschritten 2.6 und 4.1**.[^business-process]
 
 ### UC-06 Zuordnung bestätigen oder ändern
-Der Berater bestätigt, ändert oder verwirft Zuordnungen in der Übersicht.
+Der Berater bestätigt, ändert oder verwirft Zuordnungen, in der Übersicht oder per ausdrücklichem Auftrag an seine KI.
 Entspricht **Prozessschritten 3.1 – 3.4**.[^business-process]
 
 ### UC-07 Antrag einreichen

@@ -8,12 +8,17 @@ tags: [berater, antrag, pflichtdokument, zuordnung, partner, kreditnehmer]
 sources:
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-2
+    resource: /sources/cr_1_2.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T10:30:00Z
 ---
 
 # Geschäftsanforderungen – CredEx Phase 1
+
+> [!NOTE] v1.2 – Geändert 2026-11-07
+> GA1 auf den Zielwert aus Modul 1 korrigiert (31.5 statt «ca. 31» Min.); GA3 präzisiert (Bestätigen auch per Auftrag an die KI).
 
 ## Überblick
 
@@ -25,9 +30,9 @@ Die Geschäftsanforderungen sagen, was Phase 1 für CredEx und die Partner errei
 
 | ID | Geschäftsanforderung | Messgrösse / Ziel | Quelle |
 |---|---|---|---|
-| GA1 | Aufwand beim Partner senken | Dauer bis Einreichung −30 % (Ø 45 auf ca. 31 Min.), 6 Monate nach Go-live | Problemstatement, Analytics |
+| GA1 | Aufwand beim Partner senken | Dauer bis Einreichung −30 % (Ø 45 auf 31.5 Min.), 6 Monate nach Go-live; davon entfallen heute Ø 15 Min. auf den Upload | Problemstatement, Analytics, Leitfrage Modul 1 |
 | GA2 | Qualität der Dossiers halten | Vollständigkeit mind. heutiges Niveau; eingereicht wird nur, wenn alle Pflichtdokumente vorhanden sind | Interview PostFinance (O. Braun, 17.09.2026) |
-| GA3 | Verantwortung bleibt beim Berater | Die KI schlägt vor; unsichere Zuordnungen bestätigt der Mensch; nur der Mensch reicht ein | Interviews CredEx (T. Cruz, 15.09.2026) und PostFinance |
+| GA3 | Verantwortung bleibt beim Berater | Die KI schlägt vor; unsichere Zuordnungen bestätigt der Mensch, in der Übersicht oder per ausdrücklichem Auftrag an seine KI; nur der Mensch reicht ein, und nur in der Übersicht | Interviews CredEx (T. Cruz, 15.09.2026) und PostFinance |
 | GA4 | Datenschutz und Nachvollziehbarkeit | Daten nur in der Schweiz; 100 % der Zuordnungen protokolliert | Interview CTO CredEx |
 | GA5 | Kein Eingriff ins Kernsystem | Bestehende Systeme und Schnittstellen von CredEx und Partnern bleiben unverändert | Modul 1, Interview PostFinance |
 | GA6 | Nutzen messbar machen | Nutzung und Zeitersparnis pro Partner ausgewiesen; Basis für Gebühr und Go/No-Go Phase 2 | Business Case Modul 1 |

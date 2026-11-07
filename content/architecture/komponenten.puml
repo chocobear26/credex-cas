@@ -1,0 +1,33 @@
+@startuml Komponenten
+title Komponentendiagramm – CredEx Phase 1
+skinparam linetype ortho
+
+package "Partner (Kontext)" {
+  database "Partner-DMS" as dms
+  component "Partner-KI\n(MCP-Client)" as ki
+}
+
+package "CredEx" {
+  component "MCP-Server" as mcp <<neu>>
+  component "Übersicht\n(Schritt 5)" as ueb <<neu>>
+  component "Auswertung" as ausw <<neu>>
+  database "Protokoll" as prot <<neu>>
+  component "CredEx-Plattform\n(Antrag, Pflichtliste,\nDokumentenablage)" as plat
+}
+
+package "Dritte (Kontext)" {
+  component "Identity Provider\n(OAuth 2.1)" as idp
+  component "Glarner KB" as glkb
+}
+
+dms -down-> ki : Dateien
+ki -down-> mcp : MCP über HTTPS
+mcp -right-> idp : Token prüfen
+mcp -down-> plat : Plattform-API
+ueb -down-> plat
+mcp -down-> prot
+ueb -down-> prot
+ausw -down-> prot
+plat -down-> glkb : Dossier\n(bestehende Schnittstelle)
+
+@enduml

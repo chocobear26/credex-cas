@@ -4,7 +4,7 @@ linkTitle: "UC-02 Offene Anträge abrufen"
 type: use-case
 description: "Die Partner-KI ruft die offenen Anträge ab, auf die der angemeldete Berater zugreifen darf."
 weight: 4
-tags: [antrag, berater, kreditnehmer, pflichtdokument, protokolleintrag, ki-verbindung]
+tags: [antrag, team, berater, kreditnehmer, pflichtdokument, protokolleintrag, ki-verbindung]
 sources:
   - id: use-case-diagram
     resource: /use_case/useCaseDiagram.md
@@ -14,9 +14,11 @@ sources:
     resource: /domain_model/domainModel.md
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-2
+    resource: /sources/cr_1_2.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T10:30:00Z
 ---
 
 # Use Case – UC-02 Offene Anträge abrufen
@@ -44,7 +46,7 @@ Die Partner-KI ruft die offenen Anträge ab, auf die der angemeldete Berater zug
 
 ## Beschreibung
 
-Die Partner-KI fragt ohne Antragsnummer nach den offenen Anträgen. CredEx prüft Identität und Berechtigung aus der KiVerbindung und liefert nur Anträge, auf die der Berater zugreifen darf. Gibt es genau einen offenen Antrag, arbeitet die Partner-KI damit weiter; gibt es mehrere, fragt sie den Berater. Ein Zugriff auf fremde Anträge wird abgelehnt und als Protokolleintrag festgehalten.
+Die Partner-KI fragt ohne Antragsnummer nach den offenen Anträgen. CredEx prüft Identität und Berechtigung aus der KiVerbindung und liefert nur Anträge des Teams, zu dem der Berater gehört. Gibt es genau einen offenen Antrag, arbeitet die Partner-KI damit weiter; gibt es mehrere, fragt sie den Berater. Ein Zugriff auf fremde Anträge wird abgelehnt und als Protokolleintrag festgehalten.
 
 ---
 

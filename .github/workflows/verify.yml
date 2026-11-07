@@ -1,0 +1,51 @@
+name: Freigabe erfassen
+
+# Hält die Freigabe eines Menschen aus der Gruppe fest (OKF `verified`), ohne lokale Installation:
+# Actions → «Freigabe erfassen» → Run workflow. Läuft nur, wenn ein Mensch ihn startet; Jarvis
+# startet ihn nie. Danach wird die Seite neu gebaut und veröffentlicht.
+
+on:
+  workflow_dispatch:
+    inputs:
+      wer:
+        description: Wer gibt frei?
+        required: true
+        type: choice
+        options: [cem, jessica, marco]
+      seiten:
+        description: Seiten, durch Leerzeichen getrennt; Platzhalter erlaubt, z.B. content/epics/user_stories/*.md
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: pip install -r requirements.txt
+      - name: Freigabe eintragen
+        env:
+          SEITEN: ${{ inputs.seiten }}
+          WER: ${{ inputs.wer }}
+        run: |
+          set -f; pages=$(set +f; for p in $SEITEN; do ls $p; done)
+          python3 scripts/verify_page.py $pages --who "$WER"
+          python3 scripts/generate.py
+      - name: Committen und veröffentlichen
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WER: ${{ inputs.wer }}
+        run: |
+          git config user.name "Freigabe $WER"
+          git config user.email "noreply@github.com"
+          git add -A content
+          git commit -m "Freigabe durch $WER" || exit 0
+          git push
+          gh workflow run deploy-docs.yml --ref main

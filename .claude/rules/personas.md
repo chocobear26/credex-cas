@@ -1,0 +1,32 @@
+---
+paths:
+  - content/personas/**
+---
+
+# Konventionen Benutzerrollen und Personas
+
+## Dateien
+- `benutzerrollen.md` – das Benutzerrollenmodell (`type: user-role-model`)
+- `{vornameNachname}.md` – eine Persona pro Datei (`type: persona`)
+
+## Aufbau Benutzerrollenmodell
+```
+# Benutzerrollenmodell – {Systemname}
+## Vorgehen          → Kandidaten gesammelt, gruppiert, konsolidiert
+## Rollen            → Tabelle: Rolle | Nutzung | Fachwissen | KI/IT | Ziel | Use Cases
+## Fokusrollen       → welche Rollen eine Persona bekommen und warum
+```
+
+## Aufbau Persona
+```
+# Persona – {Name}
+**Rolle:** R{n} … · **primär / sekundär**
+> Zitat (mit Quelle)
+## Steckbrief        → Tabelle: Merkmal | Ausprägung (Annahmen markiert)
+## Ziele · ## Frust heute · ## Szenario mit der Lösung · ## Was sie braucht (mit Story-Links)
+## Quellen und Annahmen
+```
+
+## Inhalt
+- Jede Angabe ohne Interviewquelle ist als *(Annahme)* markiert und in der Validierung zu prüfen
+- Das Szenario nutzt Klassennamen und verlinkt die Stories

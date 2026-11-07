@@ -9,6 +9,10 @@ class Partner {
   typ : Enum {BANK, VERSICHERUNG, BROKER}
 }
 
+class Team <<neu>> {
+  name : String
+}
+
 class Berater {
   name : String
   eMail : String
@@ -63,11 +67,12 @@ class Dokumenttyp {
 
 class Protokolleintrag <<neu>> {
   zeitpunkt : DateTime
-  akteur : Enum {KI, BERATER}
+  akteur : Enum {KI, BERATER, BERATER_VIA_KI}
   aktion : String
 }
 
-Partner "1" -- "1..*" Berater : beschäftigt >
+Partner "1" -- "1..*" Team : organisiert >
+Team "1" -- "1..*" Berater : umfasst >
 Berater "1" -- "0..*" KiVerbindung : nutzt >
 Berater "1" -- "0..*" Antrag : erfasst >
 Pruefer "0..1" -- "0..*" Antrag : prüft, gibt frei >

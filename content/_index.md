@@ -9,9 +9,15 @@ sources:
     resource: /sources/cr_1_0.md
   - id: cr-1-1
     resource: /sources/cr_1_1.md
+  - id: cr-1-2
+    resource: /sources/cr_1_2.md
+  - id: cr-1-3
+    resource: /sources/cr_1_3.md
+  - id: cr-1-4
+    resource: /sources/cr_1_4.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T09:55:00Z
+  at: 2026-11-07T11:15:00Z
 ---
 
 # Produktdokumentation – CredEx Phase 1
@@ -26,31 +32,52 @@ Jede Seite ist ein Konzept mit Typ, den Artefakten, aus denen sie abgeleitet ist
 
 ## Artefakte
 
-- [**Fachklassenmodell**](domain_model/domainModel.md) – Fachklassen und ihre Beziehungen
+> [!NOTE] v1.3 – Neu 2026-11-07
+> Ausgangslage, Rollen und Personas, Architektur, Lösungsoptionen, Prototypen, Validierung, Umsetzung, Entscheide, Rückverfolgung, Freigaben und Glossar.
+
+**Warum und wofür**
+
+- [**Ausgangslage**](problem/ausgangslage.md) – Fall, Ist-Prozess, Leitfrage, Hypothesenbaum und Business Case aus Modul 1
+- [**Entscheide**](decisions/entscheide.md) – alle Teamentscheide mit Kontext, Optionen und Folgen
+- [**Geschäftsanforderungen**](requirements/geschaeftsanforderungen.md) – GA1 bis GA6, alle messbar
+
+**Wer**
+
+- [**Benutzerrollen**](personas/benutzerrollen.md) – neun Rollen, zwei im Fokus
+  - [Sandra Keller](personas/sandraKeller.md) – Kundenberaterin, primäre Persona
+  - [Reto Frei](personas/retoFrei.md) – Broker ohne IT, sekundäre Persona
+
+**Was**
+
+- [**Fachklassenmodell**](domain_model/domainModel.md) – zwölf Fachklassen und ihre Beziehungen
   - [Entitäten](domain_model/entities/_index.md) – eine Seite pro Fachklasse
 - [**Soll-Prozess**](business_process/businessProcess.md) – BPMN in zwei Teilen, von der KiVerbindung bis zur Prüfung durch die Glarner KB
 - [**Systemkontext**](system_context/systemContext.md) – Scope, Nachbarsysteme, Informationsflüsse
-- [**Use-Case-Diagramm**](use_case/useCaseDiagram.md) – Akteure und Use Cases
+- [**Use-Case-Diagramm**](use_case/useCaseDiagram.md) – Akteure und acht Use Cases, jeder mit Aktivitätsdiagramm
   - [Akteurbeschreibungen](use_case/actorDescriptions.md) – Rollen und Systemzugriff
-  - [Akteure](use_case/actors/_index.md) – eine Seite pro Akteur
-  - [UC-01 KI mit CredEx verbinden](use_case/ki_verbinden/kiVerbinden.md)
-  - [UC-02 Offene Anträge abrufen](use_case/offene_antraege_abrufen/offeneAntraegeAbrufen.md)
-  - [UC-03 Pflichtliste abfragen](use_case/pflichtliste_abfragen/pflichtlisteAbfragen.md)
-  - [UC-04 Dokument ablegen](use_case/dokument_ablegen/dokumentAblegen.md)
-  - [UC-05 Vollständigkeit prüfen](use_case/vollstaendigkeit_pruefen/vollstaendigkeitPruefen.md)
-  - [UC-06 Zuordnung bestätigen oder ändern](use_case/zuordnung_bestaetigen/zuordnungBestaetigen.md)
-  - [UC-07 Antrag einreichen](use_case/antrag_einreichen/antragEinreichen.md)
-  - [UC-09 Nutzung auswerten](use_case/nutzung_auswerten/nutzungAuswerten.md)
-- [**Zustandsdiagramme**](state_chart/_index.md) – Lebenszyklen, auf Use-Case-Aktivitäten zurückgeführt
-  - [Dokument](state_chart/dokumentStateChart.md) – ABGELEGT → VON_KI_ZUGEORDNET / UNSICHER → BESTAETIGT → EINGEREICHT
-  - [Antrag](state_chart/antragStateChart.md) – IN_ERFASSUNG → EINGEREICHT
-- [**Epics & Story Map**](epics/epics.md) – Epics mit User Stories in Releases
-  - [User Stories](epics/user_stories/_index.md) – 11 Stories im 3C-Format in 3 Releases
-- [**Anforderungen**](requirements/_index.md)
-  - [Geschäftsanforderungen](requirements/geschaeftsanforderungen.md) – GA1 bis GA6
-  - [Funktionale Anforderungen](requirements/funktionaleAnforderungen.md) – FA-01 bis FA-10
-  - [Nicht-funktionale Anforderungen](requirements/nichtfunktionaleAnforderungen.md) – NFA-01 bis NFA-15 nach ISO 25010
-- [**MCP-Schnittstelle**](interface/mcpSchnittstelle.md) – die Werkzeuge für die Partner-KI
+  - [UC-01 KI mit CredEx verbinden](use_case/ki_verbinden/kiVerbinden.md) · [UC-02 Offene Anträge abrufen](use_case/offene_antraege_abrufen/offeneAntraegeAbrufen.md) · [UC-03 Pflichtliste abfragen](use_case/pflichtliste_abfragen/pflichtlisteAbfragen.md) · [UC-04 Dokument ablegen](use_case/dokument_ablegen/dokumentAblegen.md) · [UC-05 Vollständigkeit prüfen](use_case/vollstaendigkeit_pruefen/vollstaendigkeitPruefen.md) · [UC-06 Zuordnung bestätigen oder ändern](use_case/zuordnung_bestaetigen/zuordnungBestaetigen.md) · [UC-07 Antrag einreichen](use_case/antrag_einreichen/antragEinreichen.md) · [UC-09 Nutzung auswerten](use_case/nutzung_auswerten/nutzungAuswerten.md)
+- [**Zustandsdiagramme**](state_chart/_index.md) – [Dokument](state_chart/dokumentStateChart.md) und [Antrag](state_chart/antragStateChart.md)
+- [**Epics & Story Map**](epics/epics.md) – acht Epics, zwölf Stories in drei Releases
+- [**Funktionale Anforderungen**](requirements/funktionaleAnforderungen.md) – FA-01 bis FA-11
+- [**Nicht-funktionale Anforderungen**](requirements/nichtfunktionaleAnforderungen.md) – NFA-01 bis NFA-15 nach ISO 25010, Restriktionen R-01 bis R-08
+
+**Wie**
+
+- [**MCP-Schnittstelle**](interface/mcpSchnittstelle.md) – acht Werkzeuge für die Partner-KI
+- [**Architektur**](architecture/komponenten.md) – Komponenten und [Ablauf über MCP](architecture/mcpAblauf.md) als Sequenzdiagramm
+- [**Nutzwertanalyse**](evaluation/nutzwertanalyse.md) – fünf Optionen, sechs Kriterien, Sensitivität
+
+**Nachweis und Umsetzung**
+
+- [**Prototypen**](prototype/klickprototyp.md) – Klickprototyp und [PoC MCP-Server](prototype/pocMcpServer.md)
+- [**Validierung**](validation/validierung.md) – Gespräche mit CTO und Beratenden, [PoC-Test](validation/pocTest.md) heute gegen neu
+- [**Umsetzungsplan**](delivery/umsetzungsplan.md) – agil in drei Releases bis zum Go/No-Go
+
+**Qualität der Dokumentation**
+
+- [**Rückverfolgung**](traceability/rueckverfolgung.md) – jede Geschäftsanforderung bis zu Story, Anforderung und Use Case, erzeugt
+- [**Freigaben**](traceability/freigaben.md) – welche Artefakte die Gruppe geprüft hat, erzeugt
+- [**Glossar**](glossary/glossar.md) – alle Begriffe von A bis Z
 - [**Change Log**](change_log/changeLog.md) – Versionen mit vollständiger Rückverfolgung
 - [**Quellen**](sources/_index.md) – Change Requests und OKF-Assessments
 - [**Log**](log.md) – jede Version und jedes Assessment, neueste zuerst
@@ -65,6 +92,10 @@ flowchart LR
     oa["OKF-Assessment"] -.-> cr
     cr["Change Request"] -.-> dm
     cr -.-> ga["Geschäfts-<br/>anforderungen"]
+    cr -.-> pr["Ausgangslage"]
+    pr --> ga
+    cr -.-> ent["Entscheide"]
+    ent -.-> dm
     dm["Fachklassenmodell<br/>und Entitäten"] --> bp["Soll-Prozess"]
     bp --> sk["Systemkontext"]
     bp --> ucd["Use-Case-Diagramm<br/>und Akteure"]
@@ -78,6 +109,14 @@ flowchart LR
     ga --> nfa["Nicht-funktionale<br/>Anforderungen"]
     sk --> nfa
     fa --> mcp["MCP-Schnittstelle"]
+    sk --> arc["Architektur"]
+    mcp --> arc
+    us --> pt["Prototypen"]
+    pt --> val["Validierung"]
+    val -.-> cr
+    us --> tr["Rückverfolgung"]
+    fa --> tr
+    nfa --> tr
     uc --> mcp
     sc --> cl["Change Log"]
     us --> cl
@@ -87,6 +126,8 @@ flowchart LR
     classDef req fill:#EFF6FF,stroke:#2563EB,color:#1E3A8A
     class oa,cr src
     class ga,fa,nfa,mcp req
+    classDef gen fill:#F0FDF4,stroke:#16A34A,color:#14532D
+    class tr,log gen
 ```
 
 ### Schlüssel
@@ -99,7 +140,8 @@ Die Rückverfolgung hängt an wenigen IDs, die wörtlich über die Artefakte zit
 | Use-Case-ID | `UC-04` | [Use-Case-Diagramm](use_case/useCaseDiagram.md) | Story Map, FA, MCP-Schnittstelle, Präsentation |
 | Aktivitätslabel | `CredEx-System setzt Dokument (status = UNSICHER)` | Aktivitätsdiagramme (`.puml`) | Übergänge der [Zustandsdiagramme](state_chart/dokumentStateChart.md), *Conversation* der Stories |
 | Story-ID | `US-{epic}.{seq}`, dazu Detailkonzept `US-01` | [User Stories](epics/user_stories/_index.md) | Story Map, FA, Change Log |
-| Anforderungs-ID | `GA1`, `FA-03`, `NFA-12` | [Anforderungen](requirements/_index.md) und Anforderungs-Excel | Use Cases, Stories, Präsentation |
+| Entscheid | `E10` | [Entscheide](decisions/entscheide.md) | Change Requests, betroffene Artefakte |
+| Anforderungs-ID | `GA1`, `FA-03`, `NFA-12`, `R-02` | [Anforderungen](requirements/_index.md) und Anforderungs-Excel | Use Cases, Stories, Präsentation |
 | Fachklasse und Attribut | `Zuordnung`, `konfidenz` | [Entitäten](domain_model/entities/_index.md) | Jedes Artefakt und seine `tags` |
 | Werkzeugname | `credex_dokument_ablegen` | [MCP-Schnittstelle](interface/mcpSchnittstelle.md) | Use Cases, PoC |
 | Quellen-id | `business-process`, `cr-1-0` | `sources:` jedes Artefakts | Fussnoten dieses Artefakts |
@@ -113,6 +155,8 @@ Die Rückverfolgung hängt an wenigen IDs, die wörtlich über die Artefakte zit
 | **Use-Case-Diagramm** – neuer Use Case | Neuer Ordner `use_case/{snake_case}/` mit `.md` und `.puml` · genau ein passendes Epic · Artefaktliste oben |
 | **Aktivitätsdiagramm** – geändertes Label | Jeder Übergang, der es zitiert · jede Story, die es zitiert |
 | **Anforderung** – neue oder geänderte ID | Anforderungs-Excel der Gruppe · Qualitätsanforderungen der Use Cases · Stories |
+| **Entscheid der Gruppe** | Ein neuer Entscheid in [Entscheide](decisions/entscheide.md) (alte nie umschreiben) · die Artefakte unter *Folgen* |
+| **Validierung** – neues Ergebnis | Ein Change Request pro Folge · Personas · Stories · Zielwerte der NFA |
 | **Alles** | Ein Change Request in den [Quellen](sources/_index.md) · eine Zeile im [Change Log](change_log/changeLog.md) · `make build` läuft durch |
 
 ## Mehr dazu

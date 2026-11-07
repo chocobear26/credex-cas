@@ -14,9 +14,11 @@ sources:
     resource: /domain_model/domainModel.md
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-3
+    resource: /sources/cr_1_3.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T10:45:00Z
 ---
 
 # Use Case – UC-04 Dokument ablegen
@@ -60,6 +62,8 @@ Für jede Datei im Dossier bestimmt die Partner-KI das passende Pflichtdokument 
 - [NFA-03 Kapazität](../../requirements/nichtfunktionaleAnforderungen.md)
 - [NFA-09 Fehlertoleranz](../../requirements/nichtfunktionaleAnforderungen.md)
 - [NFA-12 Nachweisbarkeit](../../requirements/nichtfunktionaleAnforderungen.md)
+- [NFA-13 Datenhaltung in der Schweiz](../../requirements/nichtfunktionaleAnforderungen.md)
+- [NFA-14 Verschlüsselung](../../requirements/nichtfunktionaleAnforderungen.md)
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Nicht-funktionale Anforderungen – CredEx Phase 1"
 linkTitle: "Nicht-funktionale Anforderungen"
 type: requirement-catalog
-description: "Die nicht-funktionalen Anforderungen NFA-01 bis NFA-15 nach ISO/IEC 25010 mit Abnahmekriterium."
+description: "Die nicht-funktionalen Anforderungen NFA-01 bis NFA-15 nach ISO/IEC 25010 mit Abnahmekriterium, dazu die Restriktionen R-01 bis R-08."
 weight: 3
 tags: [dokument, zuordnung, protokolleintrag, antrag, berater, ki-verbindung]
 sources:
@@ -12,12 +12,22 @@ sources:
     resource: /system_context/systemContext.md
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-2
+    resource: /sources/cr_1_2.md
+  - id: cr-1-3
+    resource: /sources/cr_1_3.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T10:45:00Z
 ---
 
 # Nicht-funktionale Anforderungen – CredEx Phase 1
+
+> [!NOTE] v1.3 – Neu 2026-11-07
+> Abschnitt Restriktionen R-01 bis R-08.
+
+> [!NOTE] v1.2 – Geändert 2026-11-07
+> NFA-04 gilt für alle acht Werkzeuge.
 
 ## Überblick
 
@@ -32,7 +42,7 @@ Die nicht-funktionalen Anforderungen legen fest, wie gut das System sein muss, g
 | NFA-01 | Funktionale Eignung: Korrektheit | Höchstens 2 % der Dokumente mit Status „zugeordnet“ dürfen falsch zugeordnet sein. | Wenn beim Abgleich der Testläufe mit der Musterlösung des Testdossiers höchstens 2 % der als „zugeordnet“ markierten Dokumente falsch sind. | Hoch |
 | NFA-02 | Leistungseffizienz: Zeitverhalten | Das System muss 95 % der Ablagen bis 32 MB innert 3 s nach Ende der Übertragung bestätigen. | Wenn im Lasttest (100 Ablagen) mind. 95 % der Bestätigungen laut Serverlog höchstens 3 s dauern. | Mittel |
 | NFA-03 | Leistungseffizienz: Kapazität | Das System muss pro Antrag bis 40 Dateien à max. 32 MB annehmen, auch bei 20 parallel bearbeiteten Anträgen. | Wenn der Lasttest mit 20 parallelen Anträgen à 40 Dateien ohne Fehler durchläuft. | Mittel |
-| NFA-04 | Kompatibilität: Interoperabilität | Die MCP-Werkzeuge müssen der offenen MCP-Spezifikation entsprechen und mit mind. 2 KI-Clients funktionieren. | Wenn alle 4 Werkzeuge in Testfällen mit Claude und Copilot das erwartete Ergebnis liefern. | Hoch |
+| NFA-04 | Kompatibilität: Interoperabilität | Die MCP-Werkzeuge müssen der offenen MCP-Spezifikation entsprechen und mit mind. 2 KI-Clients funktionieren. | Wenn alle acht Werkzeuge in Testfällen mit Claude und Copilot das erwartete Ergebnis liefern. | Hoch |
 | NFA-05 | Kompatibilität: Koexistenz | Die bestehende Schnittstelle zur Glarner KB darf nicht verändert werden. | Wenn der Regressionstest der Dossierübergabe an die Glarner KB ohne Abweichung durchläuft und keine Änderung an der Schnittstelle nötig war. | Hoch |
 | NFA-06 | Benutzbarkeit: Erlernbarkeit | Beratende müssen die Übersicht ohne Schulung bedienen können. | Wenn im Usability-Test (16. bis 18.11.2026) mind. 4 von 5 Beratenden den Testantrag ohne Hilfe einreichen. | Hoch |
 | NFA-07 | Benutzbarkeit: Zugänglichkeit | Jeder Status muss mit Symbol und Text angezeigt werden, der Textkontrast muss mind. 4.5:1 betragen. | Wenn alle Status in der Graustufenansicht unterscheidbar sind und das Kontrast-Tool für alle Texte mind. 4.5:1 misst. | Mittel |
@@ -49,10 +59,26 @@ Die nicht-funktionalen Anforderungen legen fest, wie gut das System sein muss, g
 
 ---
 
+## Restriktionen
+
+Restriktionen sind nicht verhandelbar und schränken den Lösungsraum ein (Einteilung nach Glinz, Kick-off Modul 2). Sie stehen deshalb getrennt von den Qualitätsanforderungen.
+
+| ID | Restriktion | Art | Herkunft | Wirkung |
+|---|---|---|---|---|
+| R-01 | Personendaten der Kreditnehmer werden nach dem Schweizer Datenschutzgesetz (DSG) bearbeitet. | regulatorisch | DSG; Interview CTO CredEx | NFA-10, NFA-13, NFA-14 |
+| R-02 | Dokumente und Protokolle werden nur in der Schweiz gespeichert und verarbeitet. | regulatorisch, vertraglich | Modul 1; bestehender Vertrag mit dem Swisscom-Rechenzentrum | NFA-13 |
+| R-03 | Die Verarbeitung durch die Partner-KI und die Information der Kreditnehmer darüber liegen in der Verantwortung des Partners. | organisatorisch, rechtlich | Teamentscheid [E06](../decisions/e06Us09Gestrichen.md); rechtliche Klärung offen | keine Systemfunktion |
+| R-04 | Die bestehende Schnittstelle zur Glarner KB bleibt unverändert. | technisch | GA5; Interview PostFinance | NFA-05, NFA-11 |
+| R-05 | Kernsysteme der Partner werden nicht angebunden. | technisch, wirtschaftlich | Scope Phase 1 ([E02](../decisions/e02ScopeNurPhase1.md)) | Option C ausgeschieden |
+| R-06 | Der MCP-Server folgt dem offenen MCP-Standard; keine anbieterspezifische Erweiterung. | technisch | [E03](../decisions/e03OffenerMcpStattCopilot.md) | NFA-04 |
+| R-07 | CredEx baut den MCP-Server intern nach den eigenen Entwicklungsstandards. | organisatorisch | [E08](../decisions/e08McpServerIntern.md) | keine Wartbarkeits-NFA |
+| R-08 | Budget Phase 1: Investition Jahr 0 CHF 71'840; Phase 2 erst nach Go/No-Go. | wirtschaftlich | Business Case Modul 1 | [Umsetzungsplan](../delivery/umsetzungsplan.md) |
+
+---
+
 ## Offene Punkte
 
 - Zielwerte für NFA-01 (Korrektheit) und NFA-02 (Zeitverhalten) nach dem PoC-Test festlegen.
-- NFA-04 verlangt «alle 4 Werkzeuge»; der PoC hat zusätzliche Werkzeuge (siehe [MCP-Schnittstelle](../interface/mcpSchnittstelle.md)).
-- NFA-10 spricht vom Team; das Fachklassenmodell kennt keine Klasse Team.
+- NFA-04: «alle acht Werkzeuge» im Anforderungs-Excel nachtragen (dort noch «alle 4»).
 - NFA-12: Aufbewahrungsdauer der Protokolleinträge mit der Compliance der Glarner KB klären.
 - Das Detailkonzept (Kapitel 6.3) führt noch eine ältere Liste mit 9 NFA und anderen IDs; massgebend ist diese Liste.

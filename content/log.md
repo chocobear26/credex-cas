@@ -11,5 +11,8 @@ weight: 80
 
 ## 2026-11-07
 
+- **Release:** [v1.4 – Website und Freigabe-Workflow](change_log/changeLog.md) — Deutsche Oberfläche, Druckfassung, Freigabe ohne lokale Installation und eine erzeugte Übersicht der Freigaben. Siehe CR-1.4.
+- **Release:** [v1.3 – Vollständigkeit nach CAS Modul 2](change_log/changeLog.md) — Alle Artefakte, die Modul 2 verlangt: Ausgangslage, Rollen und Personas, Restriktionen, Entscheide, Lösungsoptionen, Prototypen, Validierung, Architektur, Umsetzung, Rückverfolgung und Glossar. Siehe CR-1.3.
+- **Release:** [v1.2 – Teamentscheide vom 7. November](change_log/changeLog.md) — Nur vollständig einreichen, Zugriff auf die Anträge des Teams und Bestätigen per Auftrag an die KI. Siehe CR-1.2.
 - **Release:** [v1.1 – Lesbarere Diagramme](change_log/changeLog.md) — Alle Diagramme einheitlich und übersichtlich: gemeinsamer PlantUML-Stil, Soll-Prozess als BPMN in zwei Teilen, Systemkontext in D2; inhaltlich unverändert. Siehe CR-1.1.
 - **Release:** [v1.0 – Erstfassung Phase 1](change_log/changeLog.md) — Erstfassung der Produktdokumentation CredEx Phase 1 aus dem Arbeitsstand der Gruppe 6, mit den Teamentscheiden bis 07.11.2026 und markierten Annahmen. Siehe CR-1.0.

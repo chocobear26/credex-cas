@@ -1,0 +1,60 @@
+@startuml McpAblauf
+title Sequenzdiagramm – ein Antrag von der Ablage bis zur Einreichung
+autonumber "<b>0."
+
+actor "Berater/in" as b
+participant "Partner-KI" as ki
+participant "CredEx\nMCP-Server" as mcp
+participant "CredEx-Plattform" as plat
+database "Protokoll" as prot
+participant "Übersicht" as ueb
+participant "Glarner KB" as glkb
+
+b -> ki : «Lade die Unterlagen für meinen\noffenen CredEx-Antrag hoch.»
+ki -> mcp : credex_offene_antraege()
+mcp -> plat : offene Anträge des Teams (Token geprüft)
+mcp --> ki : Antrag D226894, 18 Pflichtdokumente fehlen
+ki -> mcp : credex_pflichtliste(antrag_id)
+mcp --> ki : Pflichtdokumente mit Bezug und Status
+
+loop für jede Datei im Partner-DMS
+  ki -> ki : Datei lesen, Pflichtdokument\nund Konfidenz bestimmen
+  ki -> mcp : credex_dokument_ablegen(antrag_id, datei,\npflichtdok_id, konfidenz, seiten)
+  mcp -> plat : Dokument speichern
+  alt konfidenz ≥ Schwelle
+    mcp -> plat : Dokument (status = VON_KI_ZUGEORDNET)
+  else konfidenz < Schwelle
+    mcp -> plat : Dokument (status = UNSICHER)
+  end
+  mcp -> prot : Protokolleintrag (akteur = KI)
+  mcp --> ki : Status
+end
+
+ki -> mcp : credex_vollstaendigkeit_pruefen(antrag_id)
+mcp --> ki : 2 unsicher, 2 fehlen, Link zur Übersicht
+ki --> b : Zusammenfassung mit Link
+
+== Prüfen ==
+alt in der Übersicht
+  b -> ueb : Dokument ansehen, bestätigen
+  ueb -> plat : Dokument (status = BESTAETIGT)
+  ueb -> prot : Protokolleintrag (akteur = BERATER)
+else per Auftrag an die KI
+  b -> ki : «Bestätige Dokument 17 als\nSteuererklärung Petra.»
+  ki -> mcp : credex_zuordnung_bestaetigen(antrag_id,\ndokument_id, auftrag_beraterin)
+  mcp -> plat : Dokument (status = BESTAETIGT)
+  mcp -> prot : Protokolleintrag (akteur = BERATER_VIA_KI, Auftrag)
+end
+
+== Einreichen (nur in der Übersicht) ==
+b -> ueb : Einreichen
+ueb -> plat : Vollständigkeit prüfen
+alt vollständig
+  plat -> glkb : Dossier über bestehende Schnittstelle
+  plat -> plat : Antrag (status = EINGEREICHT)
+  ueb -> prot : Protokolleintrag (Einreichung)
+else Pflichtdokument fehlt oder unsicher
+  ueb --> b : Einreichen gesperrt, Hinweis
+end
+
+@enduml

@@ -85,3 +85,49 @@ skinparam rectangle {
   FontStyle bold
   FontColor #475569
 }
+skinparam sequence {
+  ParticipantBackgroundColor #F8FAFC
+  ParticipantBorderColor #94A3B8
+  ParticipantFontStyle bold
+  ParticipantFontSize 12
+  ActorBackgroundColor #DBEAFE
+  ActorBorderColor #2563EB
+  LifeLineBorderColor #CBD5E1
+  LifeLineBackgroundColor #F1F5F9
+  GroupBorderColor #94A3B8
+  GroupBackgroundColor #F8FAFC
+  GroupHeaderFontColor #334155
+  DividerBackgroundColor #F1F5F9
+  DividerBorderColor #CBD5E1
+  ArrowFontSize 11
+  MessageAlign left
+}
+skinparam component {
+  BackgroundColor #F8FAFC
+  BorderColor #94A3B8
+  FontStyle bold
+  FontSize 12
+  StereotypeFontColor #B91C1C
+}
+skinparam component<<neu>> {
+  BackgroundColor #FFFFFF
+  BorderColor #DC2626
+}
+skinparam interface {
+  BackgroundColor #FFFFFF
+  BorderColor #475569
+}
+skinparam database {
+  BackgroundColor #F8FAFC
+  BorderColor #94A3B8
+}
+skinparam database<<neu>> {
+  BackgroundColor #FFFFFF
+  BorderColor #DC2626
+}
+skinparam package {
+  BackgroundColor #FFFFFF
+  BorderColor #CBD5E1
+  FontColor #475569
+  FontStyle bold
+}

@@ -12,9 +12,11 @@ sources:
     resource: /sources/cr_1_0.md
   - id: cr-1-1
     resource: /sources/cr_1_1.md
+  - id: cr-1-2
+    resource: /sources/cr_1_2.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T09:55:00Z
+  at: 2026-11-07T10:30:00Z
 ---
 
 # Soll-Prozess – Dokumentenupload über die eigene KI des Partners
@@ -29,6 +31,9 @@ Der Soll-Prozess beschreibt Schritt 5 «Hochladen» eines Antrags in Phase 1: De
 
 > [!NOTE] v1.1 – Geändert 2026-11-07
 > Der Soll-Prozess ist neu ein BPMN-2.0-Modell in zwei Teilen statt eines Mermaid-Flussdiagramms. Schritte und Nummern sind unverändert.
+
+> [!NOTE] v1.2 – Geändert 2026-11-07
+> Schritt 3.3: Der Berater kann auch per ausdrücklichem Auftrag an seine KI bestätigen, umordnen oder verwerfen.
 
 Das Modell ist BPMN 2.0 mit Pool und Lanes; jede Lane ist ein Akteur. Teil 1 endet mit dem Link-Ereignis «weiter mit Teil 2», Teil 2 beginnt mit «von Teil 1». Die Quelldateien lassen sich in [bpmn.io](https://demo.bpmn.io) öffnen und bearbeiten.
 
@@ -45,7 +50,7 @@ Das Modell ist BPMN 2.0 mit Pool und Lanes; jede Lane ist ein Akteur. Teil 1 end
 ## Änderungen gegenüber heute
 
 - **Fällt weg:** Sammel-PDFs von Hand trennen und jedes der Pflichtdokumente einzeln in sein Upload-Feld laden.
-- **Neu:** Die Partner-KI legt ab (2.1 – 2.5), der Berater prüft nur noch die unsicheren Zuordnungen (3.2 – 3.4).
+- **Neu:** Die Partner-KI legt ab (2.1 – 2.5), der Berater prüft nur noch die unsicheren Zuordnungen (3.2 – 3.4), in der Übersicht oder per Auftrag an seine KI, ohne das KI-Fenster zu verlassen.
 - **Neu:** Fehlende Pflichtdokumente sind vor dem Einreichen sichtbar (2.6, 4.1) statt erst bei der Prüfung durch die Glarner KB.
 - **Bleibt:** Nur der Berater reicht ein (4.2); die Partner-KI kann nicht einreichen. Fehlende Unterlagen beschafft der Berater selbst (4.1a), CredEx fordert nichts beim Kreditnehmer an.
 - **Bleibt:** Übermittlung an die Glarner KB über die bestehende Schnittstelle (4.3) und Prüfung wie heute (5.1).

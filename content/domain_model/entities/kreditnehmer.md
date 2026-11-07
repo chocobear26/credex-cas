@@ -2,7 +2,7 @@
 title: "Kreditnehmer"
 type: entity
 description: "Eine Person, für die ein Antrag gestellt wird; ein Antrag kann mehrere Kreditnehmer betreffen."
-weight: 6
+weight: 7
 tags: [kreditnehmer]
 sources:
   - id: domain-model
@@ -11,7 +11,7 @@ sources:
     resource: /sources/cr_1_0.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T11:15:00Z
 ---
 
 # Kreditnehmer

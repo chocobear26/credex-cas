@@ -53,6 +53,9 @@ SCHEMA = ROOT / "schema.yml"
 CHANGE_LOG = ROOT / "content" / "change_log" / "changeLog.md"
 SOURCES = ROOT / "content" / "sources"
 LOG = ROOT / "content" / "log.md"
+CONTENT = ROOT / "content"
+TRACE = CONTENT / "traceability" / "rueckverfolgung.md"
+APPROVALS = CONTENT / "traceability" / "freigaben.md"
 ASSESSMENT_RE = re.compile(r"okf_assessment_(\d{4})_(\d{2})_(\d{2})(?:_(\d+))?\.md")
 VERSION_RE = re.compile(r"^## (v\d+\.\d+) – (.+?) \((\d{4}-\d{2}-\d{2})\)\s*\n+(.+?)\n", re.M)
 
@@ -169,6 +172,113 @@ def okf_log(change_log: Path = CHANGE_LOG, sources: Path = SOURCES) -> str:
     return "\n".join(out)
 
 
+def _rows(text: str, prefix: str) -> list[list[str]]:
+    """Table rows of a catalog whose first cell starts with `prefix` (GA, FA-, NFA-)."""
+    out = []
+    for line in text.splitlines():
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if line.startswith("|") and cells and re.fullmatch(rf"{prefix}\d+", cells[0]):
+            out.append(cells)
+    return out
+
+
+def traceability(content: Path = CONTENT) -> str:
+    """content/traceability/rueckverfolgung.md — from the stories and the requirement catalogs.
+
+    Every user story names its business requirements (`· GA: GA1, GA3`) and its requirements
+    (`- Anforderungen: [FA-03](…)`); its use case comes from `sources:`. The page lists the chain
+    GA → story → FA/NFA → use case and every element nothing traces to.
+    """
+    req = content / "requirements"
+    ga = _rows((req / "geschaeftsanforderungen.md").read_text(encoding="utf-8"), "GA")
+    fa = _rows((req / "funktionaleAnforderungen.md").read_text(encoding="utf-8"), "FA-")
+    nfa = _rows((req / "nichtfunktionaleAnforderungen.md").read_text(encoding="utf-8"), "NFA-")
+    ucs = {}
+    for path in sorted((content / "use_case").glob("*/*.md"), key=lambda p: p.read_text(encoding="utf-8").split("title:", 1)[1][:40]):
+        meta, body = split(path.read_text(encoding="utf-8"))
+        if meta.get("type") != "use-case":
+            continue
+        uc_id = re.search(r"UC-\d+", meta.get("title", "")).group(0)
+        quality = body.split("## Qualitätsanforderungen", 1)[-1].split("---", 1)[0] if "## Qualitätsanforderungen" in body else ""
+        ucs[path.relative_to(content).as_posix()] = (uc_id, meta.get("linkTitle", uc_id), sorted(set(re.findall(r"N?FA-\d+", quality)), key=lambda r: (r.startswith("N"), int(r.split("-")[1]))))
+    stories = []
+    for path in sorted((content / "epics" / "user_stories").glob("us_*.md"), key=lambda p: [int(x) for x in re.findall(r"\d+", p.stem)]):
+        meta, body = split(path.read_text(encoding="utf-8"))
+        sid, title = meta["title"].split(" – ", 1)
+        tags = meta.get("tags", [])
+        uc = next((ucs[s["resource"].lstrip("/")] for s in meta.get("sources", []) if s["resource"].lstrip("/") in ucs), ("–", "–", []))
+        ga_m = re.search(r"· GA: ([^\n]+)", body)
+        req_m = re.search(r"^- Anforderungen: ([^\n]+)$", body, re.M)
+        stories.append({
+            "id": sid, "title": title, "file": path.name, "uc": uc,
+            "ga": re.findall(r"GA\d+", ga_m.group(1)) if ga_m else [],
+            "req": re.findall(r"N?FA-\d+", req_m.group(1)) if req_m else [],
+            "release": next((t.upper().split("-")[0] for t in tags if re.fullmatch(r"r\d-.*", t)), "–"),
+            "moscow": next((t.capitalize() for t in tags if t in ("must", "should", "could")), "–"),
+            "kano": next(({"basic": "Basis", "performance": "Leistung", "attractive": "Begeisterung"}[t.split("-")[1]] for t in tags if t.startswith("kano-")), "–"),
+            "criteria": body.count("**Gegeben**"),
+        })
+    us_link = lambda s: f"[{s['id']}](../epics/user_stories/{s['file']})"
+    fa_link = lambda r: f"[{r}](../requirements/{'nichtfunktionaleAnforderungen' if r.startswith('NFA') else 'funktionaleAnforderungen'}.md)"
+    lines = ["---", 'title: "Rückverfolgung – CredEx Phase 1"', 'linkTitle: "Rückverfolgungsmatrix"', "type: traceability-matrix",
+             'description: "Von jeder Geschäftsanforderung über die User Stories zu den funktionalen und nicht-funktionalen Anforderungen und Use Cases, mit allem, worauf nichts verweist."',
+             "weight: 1", "---", "", NOTE.format(source="the user stories and content/requirements/"), "",
+             "# Rückverfolgung – CredEx Phase 1", "",
+             "Diese Seite wird von `make generate` aus den User Stories und den Anforderungskatalogen erzeugt. Sie zeigt, dass jede Geschäftsanforderung bis zu Use Case und Abnahmekriterium durchgezogen ist, und listet alles, worauf nichts verweist.", "",
+             "---", "", "## Von der Geschäftsanforderung zur Umsetzung", "",
+             "| GA | Geschäftsanforderung | User Stories | FA / NFA | Use Cases |", "|---|---|---|---|---|"]
+    for g in ga:
+        st = [s for s in stories if g[0] in s["ga"]]
+        reqs = sorted({r for s in st for r in s["req"]}, key=lambda r: (r.startswith("N"), int(r.split("-")[1])))
+        uc_ids = sorted({s["uc"][0] for s in st})
+        lines.append(f"| **{g[0]}** | {g[1]} | {', '.join(us_link(s) for s in st) or '–'} | {', '.join(fa_link(r) for r in reqs) or '–'} | {', '.join(uc_ids) or '–'} |")
+    lines += ["", "---", "", "## User Stories", "",
+              "| Story | Titel | Release | MoSCoW | KANO | Use Case | GA | FA / NFA | Abnahmekriterien |", "|---|---|---|---|---|---|---|---|---|"]
+    for s in stories:
+        lines.append(f"| {us_link(s)} | {s['title']} | {s['release']} | {s['moscow']} | {s['kano']} | {s['uc'][1]} | {', '.join(s['ga']) or '–'} | {', '.join(fa_link(r) for r in s['req']) or '–'} | {s['criteria']} |")
+    lines += ["", "---", "", "## Use Cases und Qualitätsanforderungen", "",
+              "| Use Case | User Stories | Qualitätsanforderungen |", "|---|---|---|"]
+    for rel, (uc_id, label, quality) in ucs.items():
+        st = [s for s in stories if s["uc"][0] == uc_id]
+        lines.append(f"| [{label}](../{rel}) | {', '.join(us_link(s) for s in st) or '–'} | {', '.join(fa_link(r) for r in quality) or '–'} |")
+    referenced = {r for s in stories for r in s["req"]} | {r for _, _, q in ucs.values() for r in q}
+    gaps = []
+    gaps += [f"- **{g[0]}** {g[1]}: keine User Story" for g in ga if not any(g[0] in s["ga"] for s in stories)]
+    gaps += [f"- **{r[0]}** {r[1]}: keine User Story und kein Use Case" for r in fa + nfa if r[0] not in referenced]
+    gaps += [f"- **{uc_id}**: keine User Story" for uc_id, _, _ in ucs.values() if not any(s["uc"][0] == uc_id for s in stories)]
+    gaps += [f"- **{s['id']}**: keine Geschäftsanforderung" for s in stories if not s["ga"]]
+    lines += ["", "---", "", "## Lücken", "",
+              "Anforderungen, die nur auf Systemebene gelten (Betrieb, Sicherheit), haben oft keine eigene Story; sie werden mit ihrem Abnahmekriterium direkt geprüft.", ""]
+    lines += gaps or ["Keine."]
+    return "\n".join(lines) + "\n"
+
+
+def approvals(content: Path = CONTENT) -> str:
+    """content/traceability/freigaben.md — which artifact a person has approved, and which not yet."""
+    skip = {"section", "log", "traceability-matrix", "approval-status"}
+    rows, done = [], 0
+    for path in sorted(content.rglob("*.md")):
+        meta, _ = split(path.read_text(encoding="utf-8"))
+        if meta.get("type") in skip:
+            continue
+        events = meta.get("verified") or []
+        events = events if isinstance(events, list) else [events]
+        who = sorted({str(e.get("by", "")).removeprefix("human:") for e in events if isinstance(e, dict)})
+        done += bool(who)
+        gen = (meta.get("generated") or {}).get("at", "")
+        gen = gen.strftime("%Y-%m-%d") if hasattr(gen, "strftime") else str(gen)[:10]
+        rel = path.relative_to(content).as_posix()
+        rows.append(f"| [{meta.get('title', rel)}](../{rel}) | `{meta.get('type', '')}` | {gen or '–'} | {', '.join(who) if who else '**offen**'} |")
+    total = len(rows)
+    lines = ["---", 'title: "Freigaben – CredEx Phase 1"', 'linkTitle: "Freigaben"', "type: approval-status",
+             f'description: "Welche Artefakte ein Mensch aus der Gruppe geprüft und freigegeben hat: {done} von {total}."',
+             "weight: 2", "---", "", NOTE.format(source="the `verified:` keys (recorded with make verify)"), "",
+             "# Freigaben – CredEx Phase 1", "",
+             f"**{done} von {total} Artefakten freigegeben.** Jarvis schreibt Entwürfe (`generated`); freigegeben ist ein Artefakt erst, wenn ein Mensch aus der Gruppe es gelesen hat und das mit `make verify PAGES=\"…\" WHO=<name>` festhält – oder ohne Installation über GitHub: *Actions → Freigabe erfassen → Run workflow*.", "",
+             "| Artefakt | Typ | Zuletzt geschrieben | Freigegeben von |", "|---|---|---|---|", *rows]
+    return "\n".join(lines) + "\n"
+
+
 def main() -> int:
     check = "--check" in sys.argv[1:]
     wanted = copilot_files()
@@ -176,6 +286,8 @@ def main() -> int:
     wanted[AGENTS] = agents
     wanted[LANDING] = landing_page(LANDING.read_text(encoding="utf-8"), agents)
     wanted[LOG] = okf_log()
+    wanted[TRACE] = traceability()
+    wanted[APPROVALS] = approvals()
 
     stale = []
     for existing in sorted((COPILOT / "instructions").glob("*.md")) + sorted((COPILOT / "prompts").glob("*.md")):

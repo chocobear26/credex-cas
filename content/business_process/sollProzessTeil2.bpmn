@@ -13,7 +13,7 @@
 <bpmn:task id="t31" name="3.1 Übersicht im CredEx-Tool öffnen"><bpmn:incoming>F2_0</bpmn:incoming><bpmn:outgoing>F2_1</bpmn:outgoing></bpmn:task>
 <bpmn:exclusiveGateway id="m32" name=""><bpmn:incoming>F2_1</bpmn:incoming><bpmn:incoming>F2_5</bpmn:incoming><bpmn:outgoing>F2_2</bpmn:outgoing></bpmn:exclusiveGateway>
 <bpmn:exclusiveGateway id="g32" name="3.2 Zuordnung unsicher?"><bpmn:incoming>F2_2</bpmn:incoming><bpmn:outgoing>F2_3</bpmn:outgoing><bpmn:outgoing>F2_6</bpmn:outgoing></bpmn:exclusiveGateway>
-<bpmn:task id="t33" name="3.3 Dokument ansehen, bestätigen, umordnen oder verwerfen"><bpmn:incoming>F2_3</bpmn:incoming><bpmn:outgoing>F2_4</bpmn:outgoing></bpmn:task>
+<bpmn:task id="t33" name="3.3 Dokument ansehen; bestätigen, umordnen oder verwerfen (in der Übersicht oder per Auftrag an die KI)"><bpmn:incoming>F2_3</bpmn:incoming><bpmn:outgoing>F2_4</bpmn:outgoing></bpmn:task>
 <bpmn:task id="t34" name="3.4 Zuordnung und Status setzen, Protokolleintrag"><bpmn:incoming>F2_4</bpmn:incoming><bpmn:outgoing>F2_5</bpmn:outgoing></bpmn:task>
 <bpmn:exclusiveGateway id="m41" name=""><bpmn:incoming>F2_6</bpmn:incoming><bpmn:incoming>F2_10</bpmn:incoming><bpmn:outgoing>F2_7</bpmn:outgoing></bpmn:exclusiveGateway>
 <bpmn:exclusiveGateway id="g41" name="4.1 Alle Pflichtdokumente vorhanden?"><bpmn:incoming>F2_7</bpmn:incoming><bpmn:outgoing>F2_8</bpmn:outgoing><bpmn:outgoing>F2_11</bpmn:outgoing></bpmn:exclusiveGateway>

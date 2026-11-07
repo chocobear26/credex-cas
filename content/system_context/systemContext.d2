@@ -56,9 +56,9 @@ dritte: "CredEx und Dritte (Kontext)" {
 
 partner.dms -> partner.ki: Dateien des Kreditnehmers {class: fluss}
 partner.berater -> partner.ki: Auftrag {class: fluss}
-partner.ki <-> phase1.mcp: "Dokument mit Zuordnung /\nAntrag, Pflichtdokumente, Status" {class: fluss}
+partner.ki <-> phase1.mcp: "Dokument mit Zuordnung, Bestätigung im Auftrag /\nAntrag, Pflichtdokumente, Status" {class: fluss}
 partner.berater <-> phase1.uebersicht: "Bestätigung, Einreichen /\nStatus je Pflichtdokument" {class: fluss}
-phase1.mcp -> phase1.protokoll: Protokolleintrag KI {class: fluss}
+phase1.mcp -> phase1.protokoll: Protokolleintrag KI / via KI {class: fluss}
 phase1.uebersicht -> phase1.protokoll: Protokolleintrag Berater {class: fluss}
 phase1.mcp <-> dritte.idp: {class: fluss}
 phase1.mcp <-> dritte.plattform: "Dokument, Zuordnung /\nAntrag, Pflichtdokumente" {class: fluss}

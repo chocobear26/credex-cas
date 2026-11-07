@@ -2,7 +2,7 @@
 title: "Prüfer"
 type: entity
 description: "Eine Person bei der Glarner KB, die eingereichte Anträge prüft und freigibt."
-weight: 4
+weight: 5
 tags: [pruefer]
 sources:
   - id: domain-model
@@ -11,7 +11,7 @@ sources:
     resource: /sources/cr_1_0.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T11:15:00Z
 ---
 
 # Prüfer
