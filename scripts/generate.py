@@ -43,6 +43,8 @@ from pathlib import Path
 
 import yaml
 
+from okflib import latest_human_approval, okf_datetime, trust_tier
+
 ROOT = Path(__file__).resolve().parent.parent
 AGENTS = ROOT / "AGENTS.md"
 RULES = ROOT / ".claude" / "rules"
@@ -256,26 +258,36 @@ def traceability(content: Path = CONTENT) -> str:
 def approvals(content: Path = CONTENT) -> str:
     """content/traceability/freigaben.md — which artifact a person has approved, and which not yet."""
     skip = {"section", "log", "traceability-matrix", "approval-status"}
-    rows, done = [], 0
+    rows, done, outdated_n = [], 0, 0
     for path in sorted(content.rglob("*.md")):
         meta, _ = split(path.read_text(encoding="utf-8"))
         if meta.get("type") in skip:
             continue
         events = meta.get("verified") or []
         events = events if isinstance(events, list) else [events]
-        who = sorted({str(e.get("by", "")).removeprefix("human:") for e in events if isinstance(e, dict)})
-        done += bool(who)
-        gen = (meta.get("generated") or {}).get("at", "")
-        gen = gen.strftime("%Y-%m-%d") if hasattr(gen, "strftime") else str(gen)[:10]
+        who = sorted({str(e.get("by", "")).removeprefix("human:") for e in events
+                      if isinstance(e, dict) and str(e.get("by", "")).startswith("human:")})
+        tier = trust_tier(meta)
+        done += tier == "human-reviewed"
+        gen_at = okf_datetime((meta.get("generated") or {}).get("at"))
+        approved = latest_human_approval(meta)
+        outdated = bool(approved and gen_at and gen_at > approved)
+        outdated_n += outdated
         rel = path.relative_to(content).as_posix()
-        rows.append(f"| [{meta.get('title', rel)}](../{rel}) | `{meta.get('type', '')}` | {gen or '–'} | {', '.join(who) if who else '**offen**'} |")
+        state = {"unverified": "○ Entwurf", "machine-confirmed": "◐ maschinell bestätigt",
+                 "human-reviewed": "✔ freigegeben"}[tier] + (" · **seither geändert**" if outdated else "")
+        rows.append(f"| [{meta.get('title', rel)}](../{rel}) | `{meta.get('type', '')}` | "
+                    f"{gen_at.strftime('%Y-%m-%d') if gen_at else '–'} | {state} | "
+                    f"{', '.join(who) + ' (' + approved.strftime('%Y-%m-%d') + ')' if who and approved else '**offen**'} |")
     total = len(rows)
     lines = ["---", 'title: "Freigaben – CredEx Phase 1"', 'linkTitle: "Freigaben"', "type: approval-status",
              f'description: "Welche Artefakte ein Mensch aus der Gruppe geprüft und freigegeben hat: {done} von {total}."',
              "weight: 2", "---", "", NOTE.format(source="the `verified:` keys (recorded with make verify)"), "",
              "# Freigaben – CredEx Phase 1", "",
              f"**{done} von {total} Artefakten freigegeben.** Jarvis schreibt Entwürfe (`generated`); freigegeben ist ein Artefakt erst, wenn ein Mensch aus der Gruppe es gelesen hat und das mit `make verify PAGES=\"…\" WHO=<name>` festhält – oder ohne Installation über GitHub: *Actions → Freigabe erfassen → Run workflow*.", "",
-             "| Artefakt | Typ | Zuletzt geschrieben | Freigegeben von |", "|---|---|---|---|", *rows]
+             "Die **Vertrauensstufe** leitet sich aus `verified` ab, wie es das Open Knowledge Format vorsieht: ○ *Entwurf* ohne Freigabe, ◐ *maschinell bestätigt*, wenn nur ein Prozess bestätigt hat, ✔ *freigegeben*, sobald ein Mensch freigegeben hat. *Seither geändert* heisst, dass Jarvis das Artefakt nach der letzten Freigabe neu geschrieben hat; dann gilt die Freigabe nur für die frühere Fassung. Jede Seite zeigt ihre Stufe auch oben im Text.", "",
+             f"**Seither geändert:** {outdated_n}.", "",
+             "| Artefakt | Typ | Zuletzt geschrieben | Vertrauensstufe | Freigegeben von |", "|---|---|---|---|---|", *rows]
     return "\n".join(lines) + "\n"
 
 

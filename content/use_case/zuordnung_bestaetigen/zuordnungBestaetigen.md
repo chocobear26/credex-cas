@@ -20,7 +20,7 @@ sources:
     resource: /sources/cr_1_2.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T10:30:00Z
+  at: 2026-11-07T10:13:58Z
 ---
 
 # Use Case – UC-06 Zuordnung bestätigen oder ändern

@@ -22,7 +22,7 @@ sources:
     resource: /sources/cr_1_1.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T09:55:00Z
+  at: 2026-11-07T09:46:26Z
 ---
 
 # Zustandsdiagramm – Dokument

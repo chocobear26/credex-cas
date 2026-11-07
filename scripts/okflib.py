@@ -96,6 +96,30 @@ def verified_events(meta: dict):
     return [verified] if isinstance(verified, dict) else verified
 
 
+TIERS = ("unverified", "machine-confirmed", "human-reviewed")
+
+
+def trust_tier(meta: dict) -> str:
+    """The trust tier OKF v0.2 §5.3 derives from `verified` — advisory, never access control.
+
+    absent ⇒ unverified; only non-`human:` actors ⇒ machine-confirmed; any `human:<id>` ⇒ human-reviewed.
+    """
+    events = verified_events(meta)
+    actors = [str(e.get("by", "")) for e in events if isinstance(e, dict)] if isinstance(events, list) else []
+    if not actors:
+        return TIERS[0]
+    return TIERS[2] if any(a.startswith("human:") for a in actors) else TIERS[1]
+
+
+def latest_human_approval(meta: dict) -> datetime | None:
+    """When a person last approved the page, or None. Recency is the latest `at` (§5.2)."""
+    events = verified_events(meta)
+    stamps = [okf_datetime(e.get("at")) for e in events if isinstance(e, dict) and str(e.get("by", "")).startswith("human:")] \
+        if isinstance(events, list) else []
+    stamps = [s for s in stamps if s]
+    return max(stamps) if stamps else None
+
+
 def okf_datetime(value) -> datetime | None:
     """An OKF timestamp as an aware datetime, or None. YAML may already have parsed it."""
     if isinstance(value, datetime):

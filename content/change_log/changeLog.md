@@ -15,9 +15,11 @@ sources:
     resource: /sources/cr_1_3.md
   - id: cr-1-4
     resource: /sources/cr_1_4.md
+  - id: cr-1-5
+    resource: /sources/cr_1_5.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T11:15:00Z
+  at: 2026-11-07T10:22:19Z
 ---
 
 # Change Log – CredEx Phase 1
@@ -34,6 +36,27 @@ Jeder Versionsabschnitt nennt **jedes Artefakt, das erstellt oder geändert wurd
 | 🟡 `geändert` | Bestehendes Artefakt oder Element geändert |
 | 🔴 `veraltet` | Artefakt oder Element zur Entfernung vorgesehen |
 | ⚫ `entfernt` | Artefakt oder Element gelöscht |
+
+---
+
+## v1.5 – Befunde des OKF-Assessments behoben (2026-11-07)
+
+Fussnoten auf den Akteurseiten, ehrliche Zeitstempel, die Vertrauensstufe auf jeder Seite und der Grund für relative Links. Siehe [CR-1.5](../sources/cr_1_5.md).
+
+| Artefakt | Status | Beschreibung |
+|---|---|---|
+| [Berater/in](../use_case/actors/berater.md) | 🟡 geändert | Fussnote auf den Soll-Prozess |
+| [CredEx-System](../use_case/actors/credexSystem.md) | 🟡 geändert | Fussnote auf den Soll-Prozess |
+| [Glarner KB](../use_case/actors/glarnerKb.md) | 🟡 geändert | Fussnote auf den Soll-Prozess |
+| [Partner-IT](../use_case/actors/partnerIt.md) | 🟡 geändert | Fussnote auf den Soll-Prozess, Beschreibung als ganzer Satz |
+| [Partner-KI](../use_case/actors/partnerKi.md) | 🟡 geändert | Fussnote auf den Soll-Prozess, Beschreibung als ganzer Satz |
+| [Partnermanagement](../use_case/actors/partnermanagement.md) | 🟡 geändert | Fussnote auf den Soll-Prozess, Beschreibung als ganzer Satz |
+| [Freigaben – CredEx Phase 1](../traceability/freigaben.md) | 🟡 geändert | Vertrauensstufe pro Artefakt, erzeugt |
+| 69 Artefakte aus v1.0 bis v1.4 | 🟡 geändert | Nur `generated.at` auf die Commit-Zeit in UTC korrigiert |
+| [Produktdokumentation – CredEx Phase 1](../_index.md) | 🟡 geändert | Link auf das Assessment |
+| [CR-1.5 – Befunde des OKF-Assessments beheben](../sources/cr_1_5.md) | 🟢 neu | Der Change Request zu dieser Version |
+| [Change Log – CredEx Phase 1](../change_log/changeLog.md) | 🟡 geändert | Eintrag v1.5 |
+| [Log](../log.md) | 🟡 geändert | Neu erzeugt |
 
 ---
 

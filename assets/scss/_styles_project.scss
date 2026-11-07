@@ -58,3 +58,20 @@
     color: #64748B;
     text-align: right;
 }
+
+// Trust tier of a page (layouts/_partials/trust-tier.html), derived from `verified` — OKF v0.2 §5.3.
+.td-content .trust-tier {
+    margin: 0 0 1.5rem;
+    padding: 0.5rem 0.85rem;
+    border-left: 4px solid #94A3B8;
+    border-radius: 6px;
+    background: #F8FAFC;
+    font-size: 0.9rem;
+    color: #334155;
+    a { margin-left: 0.5rem; font-size: 0.85rem; }
+    code { font-size: 0.85em; }
+}
+.td-content .trust-tier.trust-machine-confirmed { border-left-color: #D69E2E; background: #FFFBEB; }
+.td-content .trust-tier.trust-human-reviewed   { border-left-color: #38A169; background: #F0FFF4; }
+.td-content .trust-tier.trust-outdated         { border-left-color: #DC2626; background: #FEF2F2; }
+@media print { .td-content .trust-tier a { display: none; } }

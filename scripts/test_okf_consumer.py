@@ -11,6 +11,7 @@ two consumers this repository has:
     OKF-CPT-05  an unknown `type` is consumed                         (§4.1, consumer MUST)
     OKF-CPT-10  an unknown frontmatter key is not rejected, and kept  (§4.1, consumer MUST / SHOULD)
     OKF-TRU-03  a bare `verified` mapping reads as one event          (§5.2, §11, consumer MUST)
+    OKF-TRU-04  the trust tier is derived from `verified`              (§5.3, consumer SHOULD)
     OKF-LNK-03  a broken link is not malformed input                  (§6.1, §11, consumer MUST)
     OKF-CNF-04  missing optional fields, unknown types and keys, broken links and a missing
                 index.md do not cause rejection                       (§11, consumer MUST)
@@ -28,7 +29,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from okflib import ROOT, Page
+from okflib import ROOT, Page, trust_tier
 
 UNKNOWN_TYPE = """---
 title: "A concept from the future"
@@ -47,6 +48,14 @@ type: Reference
 
 Nothing but a type.
 """
+
+TIERED = {
+    "unverified": '---\ntitle: "Tier unverified"\ntype: Reference\ngenerated: { by: jarvis/1.0, at: 2026-11-07T10:00:00Z }\n---\n',
+    "machine-confirmed": '---\ntitle: "Tier machine"\ntype: Reference\ngenerated: { by: jarvis/1.0, at: 2026-11-07T10:00:00Z }\n'
+                         'verified: { by: "process:ci", at: 2026-11-07T11:00:00Z }\n---\n',
+    "human-reviewed": '---\ntitle: "Tier human"\ntype: Reference\ngenerated: { by: jarvis/1.0, at: 2026-11-07T10:00:00Z }\n'
+                      'verified:\n  - { by: "process:ci", at: 2026-11-07T11:00:00Z }\n  - { by: "human:cem", at: 2026-11-07T12:00:00Z }\n---\n',
+}
 
 HOME = """---
 title: "Home"
@@ -88,6 +97,12 @@ class PythonReader(unittest.TestCase):
         self.assertEqual(len(bare.verified_events()), 1)
         self.assertEqual(bare.verified_events(), listed.verified_events())
 
+    def test_trust_tier_is_derived_from_verified(self) -> None:  # OKF-TRU-04
+        for tier, text in TIERED.items():
+            self.assertEqual(trust_tier(self.read(text).meta), tier)
+        bare = self.read('---\ntype: Reference\nverified: { by: "human:jessica", at: 2026-11-07T12:00:00Z }\n---\n')
+        self.assertEqual(trust_tier(bare.meta), "human-reviewed")
+
 
 @unittest.skipUnless(shutil.which("hugo") and (ROOT / "node_modules").is_dir(),
                      "needs hugo and `npm install`")
@@ -108,6 +123,8 @@ class HugoSiteBuild(unittest.TestCase):
         (content / "_index.md").write_text(HOME, encoding="utf-8")
         (content / "future" / "concept.md").write_text(UNKNOWN_TYPE, encoding="utf-8")
         (content / "typeOnly.md").write_text(TYPE_ONLY, encoding="utf-8")
+        for tier, text in TIERED.items():
+            (content / f"tier-{tier}.md").write_text(text, encoding="utf-8")
         env = {**os.environ, "PATH": f"{ROOT / 'node_modules' / '.bin'}{os.pathsep}{os.environ.get('PATH', '')}"}
         cls.result = subprocess.run(["hugo", "--quiet", "--baseURL", "/", "-d", "out"], cwd=site,
                                     env=env, capture_output=True, text=True, timeout=300)
@@ -131,6 +148,11 @@ class HugoSiteBuild(unittest.TestCase):
 
     def test_concept_with_only_a_type_renders(self) -> None:  # OKF-CNF-04
         self.assertTrue((self.out / "typeonly" / "index.html").exists())
+
+    def test_every_page_shows_its_trust_tier(self) -> None:  # OKF-TRU-04
+        for tier in TIERED:
+            html = (self.out / f"tier-{tier}" / "index.html").read_text(encoding="utf-8")
+            self.assertIn(f'data-tier="{tier}"', html, f"the page does not show the tier {tier}")
 
 
 if __name__ == "__main__":

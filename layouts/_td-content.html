@@ -1,5 +1,5 @@
 {{/*
-  Docsy's content template, with one change: the page's own `# Heading` is not duplicated.
+  Docsy's content template, with two changes. The first: the page's own `# Heading` is not duplicated.
 
   Docsy renders `<h1>{{ .Title }}</h1>` and then the body below it. Every artifact here also opens
   with a `# Title` of its own, because the artifact conventions in `.claude/rules/` require it — the
@@ -8,6 +8,9 @@
 
   The body wins, since its heading carries the anchor id that links to it. The guard means a page
   with no heading of its own still gets one, so this cannot silently leave a page untitled.
+
+  The second change: below the header, every artifact shows its trust tier, derived from `verified`
+  (`_partials/trust-tier.html`, OKF v0.2 §5.3).
 
   Section pages are unaffected: they render through `list.html`, which has its own `<h1>`.
 
@@ -23,6 +26,7 @@
 			{{ partial "reading-time.html" . -}}
 		{{ end -}}
 	</header>
+	{{ partial "trust-tier.html" . -}}
 	{{ .Render "_td-content-after-header" -}}
 	{{ .Content }}
 	{{ partial "feedback.html" . -}}

@@ -15,9 +15,11 @@ sources:
     resource: /sources/cr_1_3.md
   - id: cr-1-4
     resource: /sources/cr_1_4.md
+  - id: cr-1-5
+    resource: /sources/cr_1_5.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T11:15:00Z
+  at: 2026-11-07T10:22:36Z
 ---
 
 # Produktdokumentation – CredEx Phase 1
@@ -79,7 +81,7 @@ Jede Seite ist ein Konzept mit Typ, den Artefakten, aus denen sie abgeleitet ist
 - [**Freigaben**](traceability/freigaben.md) – welche Artefakte die Gruppe geprüft hat, erzeugt
 - [**Glossar**](glossary/glossar.md) – alle Begriffe von A bis Z
 - [**Change Log**](change_log/changeLog.md) – Versionen mit vollständiger Rückverfolgung
-- [**Quellen**](sources/_index.md) – Change Requests und OKF-Assessments
+- [**Quellen**](sources/_index.md) – Change Requests und OKF-Assessments, zuletzt das [Assessment vom 2026-11-07](sources/okf_assessment_2026_11_07.md): konform mit OKF v0.2
 - [**Log**](log.md) – jede Version und jedes Assessment, neueste zuerst
 
 ## Wie die Artefakte zusammenhängen

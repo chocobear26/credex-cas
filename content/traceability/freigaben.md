@@ -2,7 +2,7 @@
 title: "Freigaben – CredEx Phase 1"
 linkTitle: "Freigaben"
 type: approval-status
-description: "Welche Artefakte ein Mensch aus der Gruppe geprüft und freigegeben hat: 0 von 83."
+description: "Welche Artefakte ein Mensch aus der Gruppe geprüft und freigegeben hat: 0 von 85."
 weight: 2
 ---
 
@@ -10,90 +10,96 @@ weight: 2
 
 # Freigaben – CredEx Phase 1
 
-**0 von 83 Artefakten freigegeben.** Jarvis schreibt Entwürfe (`generated`); freigegeben ist ein Artefakt erst, wenn ein Mensch aus der Gruppe es gelesen hat und das mit `make verify PAGES="…" WHO=<name>` festhält – oder ohne Installation über GitHub: *Actions → Freigabe erfassen → Run workflow*.
+**0 von 85 Artefakten freigegeben.** Jarvis schreibt Entwürfe (`generated`); freigegeben ist ein Artefakt erst, wenn ein Mensch aus der Gruppe es gelesen hat und das mit `make verify PAGES="…" WHO=<name>` festhält – oder ohne Installation über GitHub: *Actions → Freigabe erfassen → Run workflow*.
 
-| Artefakt | Typ | Zuletzt geschrieben | Freigegeben von |
-|---|---|---|---|
-| [Produktdokumentation – CredEx Phase 1](../_index.md) | `overview` | 2026-11-07 | **offen** |
-| [Architektur – Komponenten](../architecture/komponenten.md) | `architecture-view` | 2026-11-07 | **offen** |
-| [Architektur – Ablauf über MCP](../architecture/mcpAblauf.md) | `architecture-view` | 2026-11-07 | **offen** |
-| [Soll-Prozess – Dokumentenupload über die eigene KI des Partners](../business_process/businessProcess.md) | `business-process` | 2026-11-07 | **offen** |
-| [Change Log – CredEx Phase 1](../change_log/changeLog.md) | `change-log` | 2026-11-07 | **offen** |
-| [E01 – Zuerst MCP, dann integrierte CredEx-KI](../decisions/e01VarianteZuerstMcp.md) | `decision` | 2026-11-07 | **offen** |
-| [E02 – Das Detailkonzept umfasst nur Phase 1](../decisions/e02ScopeNurPhase1.md) | `decision` | 2026-11-07 | **offen** |
-| [E03 – Offener MCP-Server statt eingebetteter Copilot-Lösung](../decisions/e03OffenerMcpStattCopilot.md) | `decision` | 2026-11-07 | **offen** |
-| [E04 – Die KI kann nicht einreichen](../decisions/e04KeinEinreichenUeberMcp.md) | `decision` | 2026-11-07 | **offen** |
-| [E05 – Fehlende Unterlagen fordert der Berater selbst an](../decisions/e05NachfordernNichtImScope.md) | `decision` | 2026-11-07 | **offen** |
-| [E06 – Die Story «Kreditnehmer über KI-Verarbeitung informieren» entfällt](../decisions/e06Us09Gestrichen.md) | `decision` | 2026-11-07 | **offen** |
-| [E07 – Die Glarner KB sieht nicht, welche Zuordnung von der KI stammt](../decisions/e07KiHerkunftGlkbNichtImScope.md) | `decision` | 2026-11-07 | **offen** |
-| [E08 – CredEx baut den MCP-Server selbst](../decisions/e08McpServerIntern.md) | `decision` | 2026-11-07 | **offen** |
-| [E09 – Eingereicht wird nur ein vollständiger Antrag](../decisions/e09EinreichenNurVollstaendig.md) | `decision` | 2026-11-07 | **offen** |
-| [E10 – Der Berater darf per Auftrag an seine KI bestätigen, ändern oder verwerfen](../decisions/e10BestaetigenPerKiAuftrag.md) | `decision` | 2026-11-07 | **offen** |
-| [E11 – Kommt ein Mehrfach-Upload ohne KI (Option D) in den Pilot?](../decisions/e11OptionDragAndDrop.md) | `decision` | 2026-11-07 | **offen** |
-| [E12 – Der Berater sieht die Anträge seines Teams](../decisions/e12ZugriffTeam.md) | `decision` | 2026-11-07 | **offen** |
-| [Entscheide – CredEx Phase 1](../decisions/entscheide.md) | `decision-log` | 2026-11-07 | **offen** |
-| [Umsetzungsplan – CredEx Phase 1](../delivery/umsetzungsplan.md) | `delivery-plan` | 2026-11-07 | **offen** |
-| [Fachklassenmodell – CredEx Phase 1](../domain_model/domainModel.md) | `domain-model` | 2026-11-07 | **offen** |
-| [Antrag](../domain_model/entities/antrag.md) | `entity` | 2026-11-07 | **offen** |
-| [Berater](../domain_model/entities/berater.md) | `entity` | 2026-11-07 | **offen** |
-| [Dokument](../domain_model/entities/dokument.md) | `entity` | 2026-11-07 | **offen** |
-| [Dokumenttyp](../domain_model/entities/dokumenttyp.md) | `entity` | 2026-11-07 | **offen** |
-| [KiVerbindung](../domain_model/entities/kiVerbindung.md) | `entity` | 2026-11-07 | **offen** |
-| [Kreditnehmer](../domain_model/entities/kreditnehmer.md) | `entity` | 2026-11-07 | **offen** |
-| [Partner](../domain_model/entities/partner.md) | `entity` | 2026-11-07 | **offen** |
-| [Pflichtdokument](../domain_model/entities/pflichtdokument.md) | `entity` | 2026-11-07 | **offen** |
-| [Protokolleintrag](../domain_model/entities/protokolleintrag.md) | `entity` | 2026-11-07 | **offen** |
-| [Prüfer](../domain_model/entities/pruefer.md) | `entity` | 2026-11-07 | **offen** |
-| [Team](../domain_model/entities/team.md) | `entity` | 2026-11-07 | **offen** |
-| [Zuordnung](../domain_model/entities/zuordnung.md) | `entity` | 2026-11-07 | **offen** |
-| [Epics & Story Map – CredEx Phase 1](../epics/epics.md) | `story-map` | 2026-11-07 | **offen** |
-| [US-1.1 – KI einmalig mit CredEx verbinden](../epics/user_stories/us_1_1.md) | `user-story` | 2026-11-07 | **offen** |
-| [US-2.1 – Offenen Antrag ohne Antragsnummer finden](../epics/user_stories/us_2_1.md) | `user-story` | 2026-11-07 | **offen** |
-| [US-2.2 – Nur Anträge des eigenen Teams sehen](../epics/user_stories/us_2_2.md) | `user-story` | 2026-11-07 | **offen** |
-| [US-3.1 – Pflichtliste für die Zuordnung kennen](../epics/user_stories/us_3_1.md) | `user-story` | 2026-11-07 | **offen** |
-| [US-4.1 – Unterlagen per Auftrag an die eigene KI ablegen](../epics/user_stories/us_4_1.md) | `user-story` | 2026-11-07 | **offen** |
-| [US-4.2 – Sammel-PDF aufteilen lassen](../epics/user_stories/us_4_2.md) | `user-story` | 2026-11-07 | **offen** |
-| [US-5.1 – Erfahren, was fehlt oder unsicher ist](../epics/user_stories/us_5_1.md) | `user-story` | 2026-11-07 | **offen** |
-| [US-6.1 – Status je Pflichtdokument auf einen Blick](../epics/user_stories/us_6_1.md) | `user-story` | 2026-11-07 | **offen** |
-| [US-6.2 – Unsichere Zuordnung bestätigen, ändern oder verwerfen](../epics/user_stories/us_6_2.md) | `user-story` | 2026-11-07 | **offen** |
-| [US-6.3 – Zuordnung per Auftrag an die eigene KI bestätigen](../epics/user_stories/us_6_3.md) | `user-story` | 2026-11-07 | **offen** |
-| [US-7.1 – Nur vollständig und nur selbst einreichen](../epics/user_stories/us_7_1.md) | `user-story` | 2026-11-07 | **offen** |
-| [US-9.1 – Nutzung und Zeitersparnis pro Partner sehen](../epics/user_stories/us_9_1.md) | `user-story` | 2026-11-07 | **offen** |
-| [Nutzwertanalyse – CredEx Phase 1](../evaluation/nutzwertanalyse.md) | `option-evaluation` | 2026-11-07 | **offen** |
-| [Glossar – CredEx Phase 1](../glossary/glossar.md) | `glossary` | 2026-11-07 | **offen** |
-| [Schnittstelle – CredEx MCP-Server](../interface/mcpSchnittstelle.md) | `interface-spec` | 2026-11-07 | **offen** |
-| [Benutzerrollenmodell – CredEx Phase 1](../personas/benutzerrollen.md) | `user-role-model` | 2026-11-07 | **offen** |
-| [Persona – Reto Frei](../personas/retoFrei.md) | `persona` | 2026-11-07 | **offen** |
-| [Persona – Sandra Keller](../personas/sandraKeller.md) | `persona` | 2026-11-07 | **offen** |
-| [Ausgangslage – CredEx Phase 1](../problem/ausgangslage.md) | `problem-statement` | 2026-11-07 | **offen** |
-| [Prototyp – Klickprototyp MCP-Upload](../prototype/klickprototyp.md) | `prototype` | 2026-11-07 | **offen** |
-| [Prototyp – PoC MCP-Server](../prototype/pocMcpServer.md) | `prototype` | 2026-11-07 | **offen** |
-| [Funktionale Anforderungen – CredEx Phase 1](../requirements/funktionaleAnforderungen.md) | `requirement-catalog` | 2026-11-07 | **offen** |
-| [Geschäftsanforderungen – CredEx Phase 1](../requirements/geschaeftsanforderungen.md) | `requirement-catalog` | 2026-11-07 | **offen** |
-| [Nicht-funktionale Anforderungen – CredEx Phase 1](../requirements/nichtfunktionaleAnforderungen.md) | `requirement-catalog` | 2026-11-07 | **offen** |
-| [CR-1.0 – Erstfassung der Produktdokumentation Phase 1](../sources/cr_1_0.md) | `change-request` | 2026-11-07 | **offen** |
-| [CR-1.1 – Lesbarere Diagramme](../sources/cr_1_1.md) | `change-request` | 2026-11-07 | **offen** |
-| [CR-1.2 – Teamentscheide vom 7. November](../sources/cr_1_2.md) | `change-request` | 2026-11-07 | **offen** |
-| [CR-1.3 – Vollständigkeit nach CAS Modul 2](../sources/cr_1_3.md) | `change-request` | 2026-11-07 | **offen** |
-| [CR-1.4 – Website und Freigabe-Workflow](../sources/cr_1_4.md) | `change-request` | 2026-11-07 | **offen** |
-| [Zustandsdiagramm – Antrag](../state_chart/antragStateChart.md) | `state-chart` | 2026-11-07 | **offen** |
-| [Zustandsdiagramm – Dokument](../state_chart/dokumentStateChart.md) | `state-chart` | 2026-11-07 | **offen** |
-| [Systemkontext – CredEx Phase 1](../system_context/systemContext.md) | `system-context` | 2026-11-07 | **offen** |
-| [Akteurbeschreibungen – CredEx Phase 1](../use_case/actorDescriptions.md) | `actor-descriptions` | 2026-11-07 | **offen** |
-| [Berater/in](../use_case/actors/berater.md) | `actor` | 2026-11-07 | **offen** |
-| [CredEx-System](../use_case/actors/credexSystem.md) | `actor` | 2026-11-07 | **offen** |
-| [Glarner KB](../use_case/actors/glarnerKb.md) | `actor` | 2026-11-07 | **offen** |
-| [Partner-IT](../use_case/actors/partnerIt.md) | `actor` | 2026-11-07 | **offen** |
-| [Partner-KI](../use_case/actors/partnerKi.md) | `actor` | 2026-11-07 | **offen** |
-| [Partnermanagement](../use_case/actors/partnermanagement.md) | `actor` | 2026-11-07 | **offen** |
-| [Use Case – UC-07 Antrag einreichen](../use_case/antrag_einreichen/antragEinreichen.md) | `use-case` | 2026-11-07 | **offen** |
-| [Use Case – UC-04 Dokument ablegen](../use_case/dokument_ablegen/dokumentAblegen.md) | `use-case` | 2026-11-07 | **offen** |
-| [Use Case – UC-01 KI mit CredEx verbinden](../use_case/ki_verbinden/kiVerbinden.md) | `use-case` | 2026-11-07 | **offen** |
-| [Use Case – UC-09 Nutzung auswerten](../use_case/nutzung_auswerten/nutzungAuswerten.md) | `use-case` | 2026-11-07 | **offen** |
-| [Use Case – UC-02 Offene Anträge abrufen](../use_case/offene_antraege_abrufen/offeneAntraegeAbrufen.md) | `use-case` | 2026-11-07 | **offen** |
-| [Use Case – UC-03 Pflichtliste abfragen](../use_case/pflichtliste_abfragen/pflichtlisteAbfragen.md) | `use-case` | 2026-11-07 | **offen** |
-| [Use-Case-Diagramm – CredEx Phase 1](../use_case/useCaseDiagram.md) | `use-case-diagram` | 2026-11-07 | **offen** |
-| [Use Case – UC-05 Vollständigkeit prüfen](../use_case/vollstaendigkeit_pruefen/vollstaendigkeitPruefen.md) | `use-case` | 2026-11-07 | **offen** |
-| [Use Case – UC-06 Zuordnung bestätigen oder ändern](../use_case/zuordnung_bestaetigen/zuordnungBestaetigen.md) | `use-case` | 2026-11-07 | **offen** |
-| [Validierung – PoC-Test heute gegen neu](../validation/pocTest.md) | `validation` | 2026-11-07 | **offen** |
-| [Validierung – Gespräche mit CTO und Beratenden](../validation/validierung.md) | `validation` | 2026-11-07 | **offen** |
+Die **Vertrauensstufe** leitet sich aus `verified` ab, wie es das Open Knowledge Format vorsieht: ○ *Entwurf* ohne Freigabe, ◐ *maschinell bestätigt*, wenn nur ein Prozess bestätigt hat, ✔ *freigegeben*, sobald ein Mensch freigegeben hat. *Seither geändert* heisst, dass Jarvis das Artefakt nach der letzten Freigabe neu geschrieben hat; dann gilt die Freigabe nur für die frühere Fassung. Jede Seite zeigt ihre Stufe auch oben im Text.
+
+**Seither geändert:** 0.
+
+| Artefakt | Typ | Zuletzt geschrieben | Vertrauensstufe | Freigegeben von |
+|---|---|---|---|---|
+| [Produktdokumentation – CredEx Phase 1](../_index.md) | `overview` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Architektur – Komponenten](../architecture/komponenten.md) | `architecture-view` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Architektur – Ablauf über MCP](../architecture/mcpAblauf.md) | `architecture-view` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Soll-Prozess – Dokumentenupload über die eigene KI des Partners](../business_process/businessProcess.md) | `business-process` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Change Log – CredEx Phase 1](../change_log/changeLog.md) | `change-log` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E01 – Zuerst MCP, dann integrierte CredEx-KI](../decisions/e01VarianteZuerstMcp.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E02 – Das Detailkonzept umfasst nur Phase 1](../decisions/e02ScopeNurPhase1.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E03 – Offener MCP-Server statt eingebetteter Copilot-Lösung](../decisions/e03OffenerMcpStattCopilot.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E04 – Die KI kann nicht einreichen](../decisions/e04KeinEinreichenUeberMcp.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E05 – Fehlende Unterlagen fordert der Berater selbst an](../decisions/e05NachfordernNichtImScope.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E06 – Die Story «Kreditnehmer über KI-Verarbeitung informieren» entfällt](../decisions/e06Us09Gestrichen.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E07 – Die Glarner KB sieht nicht, welche Zuordnung von der KI stammt](../decisions/e07KiHerkunftGlkbNichtImScope.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E08 – CredEx baut den MCP-Server selbst](../decisions/e08McpServerIntern.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E09 – Eingereicht wird nur ein vollständiger Antrag](../decisions/e09EinreichenNurVollstaendig.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E10 – Der Berater darf per Auftrag an seine KI bestätigen, ändern oder verwerfen](../decisions/e10BestaetigenPerKiAuftrag.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E11 – Kommt ein Mehrfach-Upload ohne KI (Option D) in den Pilot?](../decisions/e11OptionDragAndDrop.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [E12 – Der Berater sieht die Anträge seines Teams](../decisions/e12ZugriffTeam.md) | `decision` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Entscheide – CredEx Phase 1](../decisions/entscheide.md) | `decision-log` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Umsetzungsplan – CredEx Phase 1](../delivery/umsetzungsplan.md) | `delivery-plan` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Fachklassenmodell – CredEx Phase 1](../domain_model/domainModel.md) | `domain-model` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Antrag](../domain_model/entities/antrag.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Berater](../domain_model/entities/berater.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Dokument](../domain_model/entities/dokument.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Dokumenttyp](../domain_model/entities/dokumenttyp.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [KiVerbindung](../domain_model/entities/kiVerbindung.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Kreditnehmer](../domain_model/entities/kreditnehmer.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Partner](../domain_model/entities/partner.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Pflichtdokument](../domain_model/entities/pflichtdokument.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Protokolleintrag](../domain_model/entities/protokolleintrag.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Prüfer](../domain_model/entities/pruefer.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Team](../domain_model/entities/team.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Zuordnung](../domain_model/entities/zuordnung.md) | `entity` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Epics & Story Map – CredEx Phase 1](../epics/epics.md) | `story-map` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-1.1 – KI einmalig mit CredEx verbinden](../epics/user_stories/us_1_1.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-2.1 – Offenen Antrag ohne Antragsnummer finden](../epics/user_stories/us_2_1.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-2.2 – Nur Anträge des eigenen Teams sehen](../epics/user_stories/us_2_2.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-3.1 – Pflichtliste für die Zuordnung kennen](../epics/user_stories/us_3_1.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-4.1 – Unterlagen per Auftrag an die eigene KI ablegen](../epics/user_stories/us_4_1.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-4.2 – Sammel-PDF aufteilen lassen](../epics/user_stories/us_4_2.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-5.1 – Erfahren, was fehlt oder unsicher ist](../epics/user_stories/us_5_1.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-6.1 – Status je Pflichtdokument auf einen Blick](../epics/user_stories/us_6_1.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-6.2 – Unsichere Zuordnung bestätigen, ändern oder verwerfen](../epics/user_stories/us_6_2.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-6.3 – Zuordnung per Auftrag an die eigene KI bestätigen](../epics/user_stories/us_6_3.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-7.1 – Nur vollständig und nur selbst einreichen](../epics/user_stories/us_7_1.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [US-9.1 – Nutzung und Zeitersparnis pro Partner sehen](../epics/user_stories/us_9_1.md) | `user-story` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Nutzwertanalyse – CredEx Phase 1](../evaluation/nutzwertanalyse.md) | `option-evaluation` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Glossar – CredEx Phase 1](../glossary/glossar.md) | `glossary` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Schnittstelle – CredEx MCP-Server](../interface/mcpSchnittstelle.md) | `interface-spec` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Benutzerrollenmodell – CredEx Phase 1](../personas/benutzerrollen.md) | `user-role-model` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Persona – Reto Frei](../personas/retoFrei.md) | `persona` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Persona – Sandra Keller](../personas/sandraKeller.md) | `persona` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Ausgangslage – CredEx Phase 1](../problem/ausgangslage.md) | `problem-statement` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Prototyp – Klickprototyp MCP-Upload](../prototype/klickprototyp.md) | `prototype` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Prototyp – PoC MCP-Server](../prototype/pocMcpServer.md) | `prototype` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Funktionale Anforderungen – CredEx Phase 1](../requirements/funktionaleAnforderungen.md) | `requirement-catalog` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Geschäftsanforderungen – CredEx Phase 1](../requirements/geschaeftsanforderungen.md) | `requirement-catalog` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Nicht-funktionale Anforderungen – CredEx Phase 1](../requirements/nichtfunktionaleAnforderungen.md) | `requirement-catalog` | 2026-11-07 | ○ Entwurf | **offen** |
+| [CR-1.0 – Erstfassung der Produktdokumentation Phase 1](../sources/cr_1_0.md) | `change-request` | 2026-11-07 | ○ Entwurf | **offen** |
+| [CR-1.1 – Lesbarere Diagramme](../sources/cr_1_1.md) | `change-request` | 2026-11-07 | ○ Entwurf | **offen** |
+| [CR-1.2 – Teamentscheide vom 7. November](../sources/cr_1_2.md) | `change-request` | 2026-11-07 | ○ Entwurf | **offen** |
+| [CR-1.3 – Vollständigkeit nach CAS Modul 2](../sources/cr_1_3.md) | `change-request` | 2026-11-07 | ○ Entwurf | **offen** |
+| [CR-1.4 – Website und Freigabe-Workflow](../sources/cr_1_4.md) | `change-request` | 2026-11-07 | ○ Entwurf | **offen** |
+| [CR-1.5 – Befunde des OKF-Assessments beheben](../sources/cr_1_5.md) | `change-request` | 2026-11-07 | ○ Entwurf | **offen** |
+| [OKF v0.2 Conformance Assessment – 2026-11-07](../sources/okf_assessment_2026_11_07.md) | `assessment` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Zustandsdiagramm – Antrag](../state_chart/antragStateChart.md) | `state-chart` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Zustandsdiagramm – Dokument](../state_chart/dokumentStateChart.md) | `state-chart` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Systemkontext – CredEx Phase 1](../system_context/systemContext.md) | `system-context` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Akteurbeschreibungen – CredEx Phase 1](../use_case/actorDescriptions.md) | `actor-descriptions` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Berater/in](../use_case/actors/berater.md) | `actor` | 2026-11-07 | ○ Entwurf | **offen** |
+| [CredEx-System](../use_case/actors/credexSystem.md) | `actor` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Glarner KB](../use_case/actors/glarnerKb.md) | `actor` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Partner-IT](../use_case/actors/partnerIt.md) | `actor` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Partner-KI](../use_case/actors/partnerKi.md) | `actor` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Partnermanagement](../use_case/actors/partnermanagement.md) | `actor` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Use Case – UC-07 Antrag einreichen](../use_case/antrag_einreichen/antragEinreichen.md) | `use-case` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Use Case – UC-04 Dokument ablegen](../use_case/dokument_ablegen/dokumentAblegen.md) | `use-case` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Use Case – UC-01 KI mit CredEx verbinden](../use_case/ki_verbinden/kiVerbinden.md) | `use-case` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Use Case – UC-09 Nutzung auswerten](../use_case/nutzung_auswerten/nutzungAuswerten.md) | `use-case` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Use Case – UC-02 Offene Anträge abrufen](../use_case/offene_antraege_abrufen/offeneAntraegeAbrufen.md) | `use-case` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Use Case – UC-03 Pflichtliste abfragen](../use_case/pflichtliste_abfragen/pflichtlisteAbfragen.md) | `use-case` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Use-Case-Diagramm – CredEx Phase 1](../use_case/useCaseDiagram.md) | `use-case-diagram` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Use Case – UC-05 Vollständigkeit prüfen](../use_case/vollstaendigkeit_pruefen/vollstaendigkeitPruefen.md) | `use-case` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Use Case – UC-06 Zuordnung bestätigen oder ändern](../use_case/zuordnung_bestaetigen/zuordnungBestaetigen.md) | `use-case` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Validierung – PoC-Test heute gegen neu](../validation/pocTest.md) | `validation` | 2026-11-07 | ○ Entwurf | **offen** |
+| [Validierung – Gespräche mit CTO und Beratenden](../validation/validierung.md) | `validation` | 2026-11-07 | ○ Entwurf | **offen** |

@@ -14,7 +14,7 @@ sources:
     resource: /sources/cr_1_3.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T10:45:00Z
+  at: 2026-11-07T10:13:58Z
 ---
 
 # Validierung – Gespräche mit CTO und Beratenden

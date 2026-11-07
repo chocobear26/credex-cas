@@ -318,7 +318,11 @@ Request, der dieses Assessment zitiert.
 - Ein Unterordner pro Artefakttyp (`domain_model/`, `business_process/`, …).
 - Dateinamen in **camelCase** ohne Umlaute (`dokumentAblegen.md`, `pruefer.md`).
 - Verwandte Artefakte immer mit **relativen Pfaden** verlinken (`../domain_model/entities/antrag.md`).
-  Das Fachklassenmodell ist die zentrale Referenz.
+  Das Fachklassenmodell ist die zentrale Referenz. **Warum relativ:** Das Open Knowledge Format
+  empfiehlt bundle-absolute Links (`/use_case/…`), aber die Gruppe liest die Dateien auch direkt auf
+  GitHub, und dort löst ein Link mit `/` ab dem Repository auf statt ab `content/` und führt ins Leere.
+  Ein relativer Link funktioniert auf GitHub, im Editor und auf der Website. Bundle-absolut bleiben nur
+  die `resource`-Pfade in `sources:`, die das Format so verlangt (Abweichung `OKF-LNK-02`, bewusst).
 - **Diagrammsprachen:** **PlantUML** (`.puml`) für UML – Klassen, Use Cases, Aktivitäten, Zustände;
   **BPMN 2.0** (`.bpmn`, bearbeitbar in bpmn.io) für den Soll-Prozess; **D2** (`.d2`) für den
   Systemkontext; **Mermaid** nur für kleine Übersichten direkt im Markdown (Startseite).
@@ -428,7 +432,8 @@ umgebaut hat, zitiert auch diesen Change Request.
 ### `generated:` – deins; `verified:` – nie deins
 
 Wenn du ein Artefakt erstellst oder seinen Inhalt änderst, setz `generated.by` auf `jarvis/1.0` und
-`generated.at` auf die aktuelle UTC-Zeit (`YYYY-MM-DDTHH:MM:SSZ`). `1.0` ist die Version dieser
+`generated.at` auf die aktuelle UTC-Zeit (`YYYY-MM-DDTHH:MM:SSZ`), abgelesen mit `date -u`, nie
+geschätzt und nie eine Ortszeit mit `Z`. `1.0` ist die Version dieser
 Anweisungen, nicht eines Modells.
 
 **Schreib nie `verified:` und führ nie `make verify` aus.** `verified:` hält fest, dass ein Mensch aus

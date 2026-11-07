@@ -1,0 +1,48 @@
+{{/*
+  The trust tier of a page, derived from `verified` as OKF v0.2 §5.3 asks of a consumer (OKF-TRU-04).
+  Advisory only, never access control.
+
+    absent `verified`             ⇒ unverified         (written by Jarvis, not yet approved)
+    only non-`human:` actors      ⇒ machine-confirmed
+    at least one `human:<id>`     ⇒ human-reviewed     (approved by a person from the group)
+
+  A bare `verified` mapping counts as one event (§5.2). Recency is the latest `at`: if the latest
+  human approval is older than `generated.at`, the page changed after it was approved, and says so.
+  Shown only on artifacts, i.e. pages that carry `generated` or `verified`.
+*/ -}}
+{{ $p := .Params -}}
+{{ if or $p.generated $p.verified -}}
+  {{ $v := $p.verified -}}
+  {{ $events := slice -}}
+  {{ if reflect.IsMap $v }}{{ $events = slice $v }}{{ else if reflect.IsSlice $v }}{{ $events = $v }}{{ end -}}
+  {{ $tier := "unverified" -}}
+  {{ $humans := slice -}}
+  {{ $latest := time.AsTime "1970-01-01T00:00:00Z" -}}
+  {{ range $events -}}
+    {{ if reflect.IsMap . -}}
+      {{ $by := string (index . "by") -}}
+      {{ if hasPrefix $by "human:" -}}
+        {{ $tier = "human-reviewed" -}}
+        {{ $humans = $humans | append (strings.TrimPrefix "human:" $by) -}}
+        {{ with index . "at" }}{{ $at := time.AsTime . }}{{ if $at.After $latest }}{{ $latest = $at }}{{ end }}{{ end -}}
+      {{ else if and $by (ne $tier "human-reviewed") -}}
+        {{ $tier = "machine-confirmed" -}}
+      {{ end -}}
+    {{ end -}}
+  {{ end -}}
+  {{ $outdated := false -}}
+  {{ if and (eq $tier "human-reviewed") $p.generated -}}
+    {{ with index $p.generated "at" }}{{ if (time.AsTime .).After $latest }}{{ $outdated = true }}{{ end }}{{ end -}}
+  {{ end -}}
+  <div class="trust-tier trust-{{ $tier }}{{ if $outdated }} trust-outdated{{ end }}" data-tier="{{ $tier }}" role="note">
+    {{ if eq $tier "human-reviewed" -}}
+      <strong>✔ Freigegeben</strong> von {{ delimit (uniq $humans) ", " }}, zuletzt am {{ $latest.Format "02.01.2006" }}.
+      {{- if $outdated }} <strong>Seither geändert</strong>: Die Freigabe gilt für eine frühere Fassung.{{ end }}
+    {{- else if eq $tier "machine-confirmed" -}}
+      <strong>◐ Maschinell bestätigt</strong>, noch nicht von einem Menschen aus der Gruppe freigegeben.
+    {{- else -}}
+      <strong>○ Entwurf</strong> von {{ with $p.generated }}<code>{{ index . "by" }}</code>{{ else }}einem Agenten{{ end }}, noch nicht freigegeben.
+    {{- end }}
+    <a href="{{ "traceability/freigaben/" | relURL }}">Stand aller Freigaben</a>
+  </div>
+{{ end -}}

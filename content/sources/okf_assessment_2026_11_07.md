@@ -1,0 +1,161 @@
+---
+title: "OKF v0.2 Conformance Assessment – 2026-11-07"
+linkTitle: "OKF Assessment 2026-11-07"
+type: assessment
+description: "Conformant with OKF v0.2 on all three mandatory checks; of the 41 checks, 24 meets, 3 partial, 5 not adopted, 1 deviates, 8 n/a."
+weight: 6
+generated:
+  by: jarvis/1.0
+  at: 2026-11-07T10:19:04Z
+---
+
+# OKF v0.2 Conformance Assessment – 2026-11-07
+
+The CredEx Phase 1 documentation in `content/`, as released in v1.4, assessed on 2026-11-07 against
+all 41 checks of the Open Knowledge Format (OKF) v0.2 check register: **conformant**.
+
+## Scope
+
+| | |
+|---|---|
+| **Bundle** | `content/` — 109 Markdown files of 31 types, plus 17 diagram sources (14 `.puml`, 2 `.bpmn`, 1 `.d2`) and 4 screenshots that pages embed. The repository around it (scripts, instructions, the built site) is outside the bundle. |
+| **Commit** | `main` at v1.4, `00f7251` |
+| **Specification** | [OKF SPEC.md v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md), read at that URL on 2026-11-07 |
+| **Register** | `.claude/skills/okf-check/okf-v0-2-checks.md`, version 2026-09-13 — all 41 IDs |
+| **Validation** | `make lint --strict` → 0 errors, 0 warnings, 109 files · tests → 18 OK, of which the 4 Hugo consumer tests run in CI (`deploy-docs.yml`, Hugo 0.166.0, `--panicOnWarning`), where the build for `00f7251` passed |
+
+## Result
+
+**Conformant with OKF v0.2 as of 2026-11-07**, on the three mandatory checks `OKF-CNF-01`,
+`OKF-CNF-02` and `OKF-CNF-03` alone.
+
+| Family | meets | partial | not adopted | deviates | n/a |
+|---|---|---|---|---|---|
+| Mandatory checks | 3 | 0 | 0 | 0 | 0 |
+| Bundle structure | 2 | 0 | 0 | 0 | 0 |
+| Concept documents | 9 | 0 | 0 | 0 | 2 |
+| Provenance | 2 | 1 | 2 | 0 | 1 |
+| Trust | 2 | 2 | 1 | 0 | 0 |
+| Lifecycle | 1 | 0 | 1 | 0 | 0 |
+| Cross-linking and paths | 3 | 0 | 0 | 1 | 1 |
+| Reserved files | 1 | 0 | 0 | 0 | 1 |
+| Attested computations | 0 | 0 | 0 | 0 | 2 |
+| Consumer floor | 1 | 0 | 0 | 0 | 0 |
+| Versioning | 0 | 0 | 1 | 0 | 1 |
+| **Total** | **24** | **3** | **5** | **1** | **8** |
+
+## Needs attention
+
+- `OKF-SRC-02` Footnotes cite source IDs — **partial.** Add a footnote labelled `business-process` to the «Entspricht …» sentence on the 6 actor pages in `use_case/actors/`, with the footnote definition at the end of each. It edits artifacts, so it is a change request.
+- `OKF-TRU-01` `generated` well-formed — **partial.** Set the 69 `generated.at` stamps that lie after their page's last commit to that commit's time in UTC, and stamp from the clock from now on.
+- `OKF-TRU-04` Trust tiers derived — **partial.** Derive the tier (unverified, machine-confirmed, human-reviewed) from `verified` in the Python reader and show it on every page, not only on the generated approvals page.
+- `OKF-LNK-02` Bundle-absolute links preferred — **deviates.** Add the reason to the relative-paths rule in `AGENTS.md`, so the deviation is a recorded decision rather than an unexplained habit.
+
+## Mandatory checks
+
+The three §11 conformance criteria. Together they decide whether the bundle conforms; nothing else does.
+
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-CNF-01`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#11-conformance) | Parseable frontmatter everywhere | meets | All 109 Markdown files in `content/` open with a YAML frontmatter block that parses. `make lint` walks every `.md` file in the tree, not only the types it knows, and fails with E1 on one that does not parse. |  |
+| [`OKF-CNF-02`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#11-conformance) | `type` everywhere | meets | `type` is non-empty on 109 of 109, the generated `content/log.md`, traceability matrix and approvals page included. E2 fails on an empty or undeclared type. |  |
+| [`OKF-CNF-03`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#11-conformance) | Reserved files well-formed | meets | The one reserved file present, `content/log.md`, follows §9 (`OKF-RSV-02`). There is no `index.md`, so §8 has nothing to apply to. |  |
+
+## Bundle structure
+
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-BUN-01`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#3-bundle-structure) | Markdown directory tree | meets | `content/` is a directory tree of 109 Markdown files, one folder per artifact type, plus the diagram sources and screenshots that pages embed. |  |
+| [`OKF-BUN-02`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#31-reserved-filenames) | Reserved names hold no concepts | meets | The only reserved name in use is `content/log.md`, generated from the change log and the assessments. No `index.md` exists; E3 rejects one anywhere, and a `log.md` anywhere but the root. Each folder's page is `_index.md` of type `section`. |  |
+
+## Concept documents
+
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-CPT-01`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#4-concept-documents) | Frontmatter, then body | meets | 109 of 109 parse as UTF-8 with a `---`-delimited frontmatter block followed by a body (E1). |  |
+| [`OKF-CPT-02`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#2-terminology) | One concept per file | meets | Each of the 12 entities, 6 actors, 8 use cases, 12 user stories, 12 decisions, 2 personas and 5 change requests has its own page. The story map keeps its epics as columns, each realising one use case that has its own page, so the map is one concept by design; the decision log and the glossary list concepts that live elsewhere. |  |
+| [`OKF-CPT-03`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#41-frontmatter) | Non-empty `type` | meets | Non-empty `type` on 109 of 109 (see `OKF-CNF-02`). |  |
+| [`OKF-CPT-04`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#41-frontmatter) | Self-explanatory types | meets | 31 values in use — `entity`, `use-case`, `user-story`, `decision`, `persona`, `traceability-matrix`, … — each declared in `schema.yml` (32 types) with a one-line `holds`, and each naming what the file is. E2 rejects an undeclared value. |  |
+| [`OKF-CPT-05`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#41-frontmatter) | Unknown type tolerated | meets | Two consumers, two tests in `scripts/test_okf_consumer.py`: the Python reader (`test_unknown_type_is_consumed_and_unknown_key_kept`) and a real Hugo build (`test_unknown_type_renders_with_the_site_chrome`) both load `type: Future Concept`. |  |
+| [`OKF-CPT-06`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#41-frontmatter) | `title` present | meets | `title` on 109 of 109; E4 requires it, W1 warns when it differs from the page's `# Heading` and reports none. |  |
+| [`OKF-CPT-07`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#41-frontmatter) | One-sentence `description` | meets | `description` on 109 of 109, each a single line; E4 fails on a missing or multi-line one. |  |
+| [`OKF-CPT-08`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#41-frontmatter) | `resource` on asset concepts | n/a | No concept describes an external asset with a URI of its own: the artifacts are the documentation itself. The MCP interface is specified, not catalogued as an asset. |  |
+| [`OKF-CPT-09`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#41-frontmatter) | `tags` is a list | meets | `tags` on 63 pages, every type whose `requires` names it, each a YAML list of lowercase-kebab strings — the domain classes named, plus release row, KANO class and MoSCoW on user stories. E8 validates the shape. |  |
+| [`OKF-CPT-10`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#41-frontmatter) | Extra keys kept | meets | Producer keys `linkTitle` and `weight` are in use. Both consumers keep an unknown key: the Python reader returns `custom_extension` (`test_unknown_type_is_consumed_and_unknown_key_kept`), and Hugo builds the page carrying it. |  |
+| [`OKF-CPT-11`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#42-body) | Conventional body headings | n/a | No concept has an asset schema, usage examples or a computation. An entity's attribute table describes a business concept, and the MCP tool tables specify an interface, not a data asset. |  |
+
+## Provenance
+
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-SRC-01`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#51-provenance-sources) | Every source has `resource` | meets | 78 pages carry `sources`, 265 entries in all, every one a mapping with `id` and `resource`. E6 rejects a bare string, a missing `resource` and a resource that does not exist. |  |
+| [`OKF-SRC-02`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#51-provenance-sources) | Footnotes cite source IDs | partial | 21 of 27 pages with a traceability reference cite their source with a footnote labelled by its `sources[].id`: the use-case diagram, the 8 use cases and the 12 user stories; E6 fails on a label that names no source. The 6 actor pages say «Entspricht … im Soll-Prozess» without one, though each lists `business-process` in `sources`. | Add a footnote labelled `business-process` to the «Entspricht …» sentence on the 6 actor pages in `use_case/actors/`, with the footnote definition at the end of each. It edits artifacts, so it is a change request. |
+| [`OKF-SRC-03`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#51-provenance-sources) | Source titles | not adopted | No `sources` entry has a `title`; ids such as `business-process` and `cr-1-4` name their source well enough. | Add `title` only where an id stops describing its source. |
+| [`OKF-SRC-04`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#51-provenance-sources) | Credibility signals | not adopted | No `author`, `usage_count` or `last_modified` on any entry. | Record a signal only if it is measured. An invented one is worse than none. |
+| [`OKF-SRC-05`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#51-provenance-sources) | `usage_window` frames usage counts | n/a | No `usage_count` exists to frame. |  |
+| [`OKF-SRC-06`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#51-provenance-sources) | Lineage through links | meets | Every `sources` resource is a bundle path to another concept, so the derivation chain domain model → business process → system context and use cases → state charts and story map → user stories → requirements → interface and architecture is walkable from frontmatter alone, and each artifact a change request created or restructured cites it. The generated traceability matrix walks the same chain from GA to UC. |  |
+
+## Trust
+
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-TRU-01`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#52-trust-generated-and-verified) | `generated` well-formed | partial | `generated` on all 83 pages whose type requires it, `by: jarvis/1.0` and `at` an explicit-UTC datetime; E7 validates the shape. But 69 stamps lie after the commit that last changed their page (up to 11:15Z for a commit made at 10:13Z): they were written as local time with a `Z`, so `at` is not the content's last meaningful change. | Set every `generated.at` that lies after its page's last commit to that commit's time in UTC, and stamp from the clock (`date -u`) from now on. |
+| [`OKF-TRU-02`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#52-trust-generated-and-verified) | `verified` events | not adopted | No page carries `verified` yet: the group has not approved any artifact of v1.4, and Jarvis never writes the key. The «Freigabe erfassen» workflow (`.github/workflows/verify.yml`) and `make verify` are ready to record events, and E7 would validate them. | The group approves each artifact it has read with the «Freigabe erfassen» workflow, so every event records an approval that actually happened. |
+| [`OKF-TRU-03`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#52-trust-generated-and-verified) | Bare `verified` read as a list | meets | Python reader: `Page.verified_events()` reads a bare mapping as one event, proven by `test_bare_verified_mapping_is_one_event`. The linter and `make verify` use the same function; `test_a_bare_mapping_becomes_a_list_and_survives` covers the writer. |  |
+| [`OKF-TRU-04`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#53-trust-tiers) | Trust tiers derived | partial | The generated page `traceability/freigaben.md` derives from `verified` whether each of the 80 artifacts is approved by a human (currently 0 of 80). It does not tell a machine-confirmed page from an unverified one, and a reader of an artifact does not see its tier on the page itself. | Derive all three tiers from `verified` in the Python reader with a test per tier, and show the tier with the latest approval in a layout partial on every page. |
+| [`OKF-TRU-05`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#7-actor-convention) | Actor convention | meets | One actor value in the bundle so far: `jarvis/1.0` (`<producer>/<version>`). `make verify` and the workflow write `human:<wer>` (`human:cem`, `human:jessica`, `human:marco`); E7 enforces the convention on `generated.by` and `verified[].by`, and `test_first_approval_is_a_valid_okf_event` checks the `human:` form. |  |
+
+## Lifecycle
+
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-LIF-01`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#54-lifecycle-status) | `status` values | meets | No page sets `status`, so every page reads as `stable`, which is true of released documentation. The open decision E11 keeps its state in its own body, not in `status`. |  |
+| [`OKF-LIF-02`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#55-lifecycle-stale_after) | `stale_after` is an instant | not adopted | No `stale_after`. Requirements do not expire on a date; they change through change requests. | Set it only on an artifact with a real review date. |
+
+## Cross-linking and paths
+
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-LNK-01`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#61-links-between-concepts) | Standard Markdown links | meets | 860 standard relative Markdown links and images, and 7 external URLs. None leaves the bundle; E5 checks each one resolves. |  |
+| [`OKF-LNK-02`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#61-links-between-concepts) | Bundle-absolute links preferred | deviates | Body links are relative, while `sources` resources are bundle-absolute. What is gained: a relative link works when the Markdown is browsed on GitHub, where `/use_case/…` would resolve from the repository root and fail. `AGENTS.md` prescribes relative links but does not say why. | Add the reason to the relative-paths rule in `AGENTS.md`, so the deviation is a recorded decision rather than an unexplained habit. |
+| [`OKF-LNK-03`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#61-links-between-concepts) | Broken links tolerated | meets | Both consumers: the Python reader keeps `missing.md` as a link (`test_broken_link_is_read_without_rejection`) and Hugo passes it through (`test_broken_link_is_passed_through`). `make build` failing on a broken link is producer policy, not consumer rejection. |  |
+| [`OKF-LNK-04`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#62-path-valued-fields) | Path-valued fields resolve | meets | All 265 `sources[].resource` values are bundle-absolute and resolve; E6 checks each one exists. No other path-valued field is used. |  |
+| [`OKF-LNK-05`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#63-the-references-convention) | `references/` for external material | n/a | No external material, run instructions or code are mirrored into the bundle. The PoC code and the Modul-1 material stay outside it and are described, not copied. |  |
+
+## Reserved files
+
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-RSV-01`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#8-index-files) | `index.md` structure | n/a | No `index.md` exists. `content/_index.md` is a concept of type `overview` and is checked as one. |  |
+| [`OKF-RSV-02`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#9-log-files) | `log.md` structure | meets | `content/log.md` groups list entries under `## YYYY-MM-DD` headings, newest first — the releases v1.0 to v1.4 from the change log and this assessment. E3 checks heading form, order and list items; `scripts/test_generate.py` tests the generator. |  |
+
+## Attested computations
+
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-CMP-01`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#102-contract-fields) | Attested computation contract | n/a | No concept has `type: Attested Computation`. The business case figures in the problem statement are quoted from the Modul-1 model, not computed in the bundle. |  |
+| [`OKF-CMP-02`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#11-conformance) | Deterministic attester | n/a | No computations exist. |  |
+
+## Consumer floor
+
+What every consumer must tolerate — the promise that lets a bundle be partial and still useful.
+
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-CNF-04`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#11-conformance) | The consumer floor | meets | One test per clause against both consumers in `scripts/test_okf_consumer.py`: missing optional fields (`test_missing_optional_fields_are_not_an_error`, `test_concept_with_only_a_type_renders`), unknown type and unknown key (`OKF-CPT-05`, `OKF-CPT-10`), broken link (`OKF-LNK-03`), and a Hugo bundle without any `index.md` that builds (`test_the_bundle_builds`). |  |
+
+## Versioning
+
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-VER-01`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#12-versioning) | `okf_version` declared | not adopted | No root `index.md` to declare `okf_version` in: the bundle's landing page is `_index.md`, which Hugo needs. | Revisit together with `OKF-RSV-01` if an OKF consumer needs the declaration. |
+| [`OKF-VER-02`](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md#12-versioning) | Unknown version consumed best-effort | n/a | No consumer in scope reads `okf_version`. |  |
+
+## Register notes
+
+- **First run on this bundle.** The repository was derived from the ATM example; its assessment
+  described a different bundle and was removed with the ATM content in CR-1.0. This run is the
+  baseline the next one compares with, check by check.
+- **Diagrams and images.** The 14 `.puml`, 2 `.bpmn` (BPMN 2.0 XML), 1 `.d2` file and 4 `.png`
+  screenshots are non-Markdown files inside the bundle. OKF says nothing about them and a consumer
+  can read the text sources, so no check is proposed.
