@@ -9,7 +9,7 @@ locale: de-ch
 defaultContentLanguage: de
 languages:
   de:
-    languageName: Deutsch
+    label: Deutsch
     weight: 1
 
 # Docsy's print view (`/_print/`) puts a whole section on one page – the way to a PDF of the
