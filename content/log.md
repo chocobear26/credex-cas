@@ -12,6 +12,7 @@ weight: 80
 ## 2026-11-07
 
 - **Assessment:** [OKF v0.2 Conformance Assessment – 2026-11-07](sources/okf_assessment_2026_11_07.md) — Conformant with OKF v0.2 on all three mandatory checks; of the 41 checks, 24 meets, 3 partial, 5 not adopted, 1 deviates, 8 n/a.
+- **Release:** [v1.6 – PoC und Excel auf den Stand der Teamentscheide](change_log/changeLog.md) — Der PoC folgt den Entscheiden E05, E09 und E10, das Anforderungs-Excel vom 07.11. ist gültig, und die Freigabe des Lehrbeispiels ist festgehalten. Siehe CR-1.6.
 - **Release:** [v1.5 – Befunde des OKF-Assessments behoben](change_log/changeLog.md) — Fussnoten auf den Akteurseiten, ehrliche Zeitstempel, die Vertrauensstufe auf jeder Seite und der Grund für relative Links. Siehe CR-1.5.
 - **Release:** [v1.4 – Website und Freigabe-Workflow](change_log/changeLog.md) — Deutsche Oberfläche, Druckfassung, Freigabe ohne lokale Installation und eine erzeugte Übersicht der Freigaben. Siehe CR-1.4.
 - **Release:** [v1.3 – Vollständigkeit nach CAS Modul 2](change_log/changeLog.md) — Alle Artefakte, die Modul 2 verlangt: Ausgangslage, Rollen und Personas, Restriktionen, Entscheide, Lösungsoptionen, Prototypen, Validierung, Architektur, Umsetzung, Rückverfolgung und Glossar. Siehe CR-1.3.

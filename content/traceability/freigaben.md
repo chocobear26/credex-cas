@@ -2,7 +2,7 @@
 title: "Freigaben – CredEx Phase 1"
 linkTitle: "Freigaben"
 type: approval-status
-description: "Welche Artefakte ein Mensch aus der Gruppe geprüft und freigegeben hat: 0 von 85."
+description: "Welche Artefakte ein Mensch aus der Gruppe geprüft und freigegeben hat: 0 von 86."
 weight: 2
 ---
 
@@ -10,7 +10,7 @@ weight: 2
 
 # Freigaben – CredEx Phase 1
 
-**0 von 85 Artefakten freigegeben.** Jarvis schreibt Entwürfe (`generated`); freigegeben ist ein Artefakt erst, wenn ein Mensch aus der Gruppe es gelesen hat und das mit `make verify PAGES="…" WHO=<name>` festhält – oder ohne Installation über GitHub: *Actions → Freigabe erfassen → Run workflow*.
+**0 von 86 Artefakten freigegeben.** Jarvis schreibt Entwürfe (`generated`); freigegeben ist ein Artefakt erst, wenn ein Mensch aus der Gruppe es gelesen hat und das mit `make verify PAGES="…" WHO=<name>` festhält – oder ohne Installation über GitHub: *Actions → Freigabe erfassen → Run workflow*.
 
 Die **Vertrauensstufe** leitet sich aus `verified` ab, wie es das Open Knowledge Format vorsieht: ○ *Entwurf* ohne Freigabe, ◐ *maschinell bestätigt*, wenn nur ein Prozess bestätigt hat, ✔ *freigegeben*, sobald ein Mensch freigegeben hat. *Seither geändert* heisst, dass Jarvis das Artefakt nach der letzten Freigabe neu geschrieben hat; dann gilt die Freigabe nur für die frühere Fassung. Jede Seite zeigt ihre Stufe auch oben im Text.
 
@@ -81,6 +81,7 @@ Die **Vertrauensstufe** leitet sich aus `verified` ab, wie es das Open Knowledge
 | [CR-1.3 – Vollständigkeit nach CAS Modul 2](../sources/cr_1_3.md) | `change-request` | 2026-11-07 | ○ Entwurf | **offen** |
 | [CR-1.4 – Website und Freigabe-Workflow](../sources/cr_1_4.md) | `change-request` | 2026-11-07 | ○ Entwurf | **offen** |
 | [CR-1.5 – Befunde des OKF-Assessments beheben](../sources/cr_1_5.md) | `change-request` | 2026-11-07 | ○ Entwurf | **offen** |
+| [CR-1.6 – PoC und Excel auf den Stand der Teamentscheide](../sources/cr_1_6.md) | `change-request` | 2026-11-07 | ○ Entwurf | **offen** |
 | [OKF v0.2 Conformance Assessment – 2026-11-07](../sources/okf_assessment_2026_11_07.md) | `assessment` | 2026-11-07 | ○ Entwurf | **offen** |
 | [Zustandsdiagramm – Antrag](../state_chart/antragStateChart.md) | `state-chart` | 2026-11-07 | ○ Entwurf | **offen** |
 | [Zustandsdiagramm – Dokument](../state_chart/dokumentStateChart.md) | `state-chart` | 2026-11-07 | ○ Entwurf | **offen** |

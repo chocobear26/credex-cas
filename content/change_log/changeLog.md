@@ -17,9 +17,11 @@ sources:
     resource: /sources/cr_1_4.md
   - id: cr-1-5
     resource: /sources/cr_1_5.md
+  - id: cr-1-6
+    resource: /sources/cr_1_6.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T10:22:19Z
+  at: 2026-11-07T11:01:17Z
 ---
 
 # Change Log – CredEx Phase 1
@@ -36,6 +38,22 @@ Jeder Versionsabschnitt nennt **jedes Artefakt, das erstellt oder geändert wurd
 | 🟡 `geändert` | Bestehendes Artefakt oder Element geändert |
 | 🔴 `veraltet` | Artefakt oder Element zur Entfernung vorgesehen |
 | ⚫ `entfernt` | Artefakt oder Element gelöscht |
+
+---
+
+## v1.6 – PoC und Excel auf den Stand der Teamentscheide (2026-11-07)
+
+Der PoC folgt den Entscheiden E05, E09 und E10, das Anforderungs-Excel vom 07.11. ist gültig, und die Freigabe des Lehrbeispiels ist festgehalten. Siehe [CR-1.6](../sources/cr_1_6.md).
+
+| Artefakt | Status | Beschreibung |
+|---|---|---|
+| [Prototyp – PoC MCP-Server](../prototype/pocMcpServer.md) | 🟡 geändert | Neue Screens (Übersicht, Protokoll), Abweichungen umgesetzt |
+| [Validierung – PoC-Test heute gegen neu](../validation/pocTest.md) | 🟡 geändert | Nachreichung im Ablauf, technischer Vorlauf wiederholt |
+| [Funktionale Anforderungen – CredEx Phase 1](../requirements/funktionaleAnforderungen.md) | 🟡 geändert | FA-07 und FA-11 im Excel erledigt |
+| [Nicht-funktionale Anforderungen – CredEx Phase 1](../requirements/nichtfunktionaleAnforderungen.md) | 🟡 geändert | NFA-04 im Excel erledigt |
+| [CR-1.6 – PoC und Excel auf den Stand der Teamentscheide](../sources/cr_1_6.md) | 🟢 neu | Der Change Request zu dieser Version |
+| [Change Log – CredEx Phase 1](../change_log/changeLog.md) | 🟡 geändert | Eintrag v1.6 |
+| [Log](../log.md) | 🟡 geändert | Neu erzeugt |
 
 ---
 

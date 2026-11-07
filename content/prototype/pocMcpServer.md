@@ -12,9 +12,11 @@ sources:
     resource: /interface/mcpSchnittstelle.md
   - id: cr-1-3
     resource: /sources/cr_1_3.md
+  - id: cr-1-6
+    resource: /sources/cr_1_6.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T10:13:58Z
+  at: 2026-11-07T11:00:54Z
 ---
 
 # Prototyp – PoC MCP-Server
@@ -32,9 +34,13 @@ Belegen, dass das Konversations-LLM die Arbeit wirklich erleichtert (Feedback Mo
 
 ## Screens
 
-![PoC-Übersicht nach der Ablage durch die KI: 14 von 18 vorhanden, 2 unsicher, 2 fehlen](img/pocUebersicht.png)
+![PoC-Übersicht nach der Ablage durch die KI: 15 von 18 vorhanden, 1 unsicher, 2 fehlen](img/pocUebersicht.png)
 
-*Übersicht nach einem Testlauf am 07.11.2026: Die KI hat das Sammel-PDF von Hans in Steuererklärung (S. 1–3) und Lohnausweis (S. 4) geteilt, Dokument_17 als Steuererklärung von Petra mit 72 % erkannt (unter der Schwelle, «bitte prüfen»). Lohnausweis Petra und Grundbuchauszug fehlen absichtlich. Einreichen ist gesperrt.*
+*Übersicht nach einem Testlauf am 07.11.2026: Die KI hat das Sammel-PDF von Hans in Steuererklärung (S. 1–3) und Lohnausweis (S. 4) geteilt und Dokument_17 als Steuererklärung von Petra mit 72 % erkannt, unter der Schwelle. Die Beraterin hat diese Zuordnung per Auftrag an die KI bestätigt («bestätigt via KI»). Das Foto Wohnzimmer ist noch unsicher; Lohnausweis Petra und Grundbuchauszug fehlen absichtlich. Einreichen bleibt gesperrt, bis alles vorhanden ist.*
+
+![Zuordnungsprotokoll des PoC mit den Akteuren KI und BERATER_VIA_KI und dem Auftrag an die KI im Wortlaut](img/pocProtokoll.png)
+
+*Das Zuordnungsprotokoll: Jeder Protokolleintrag nennt den Akteur wie im Fachklassenmodell (`KI`, `BERATER`, `BERATER_VIA_KI`). Bei `BERATER_VIA_KI` steht der Auftrag an die KI im Wortlaut darunter, auch im CSV-Export.*
 
 ## Abgedeckte Stories
 
@@ -42,12 +48,15 @@ Belegen, dass das Konversations-LLM die Arbeit wirklich erleichtert (Feedback Mo
 
 ## Stand und Abweichungen
 
-Stand 30.10.2026. Bewusste Vereinfachungen: keine Anmeldung (eine feste Testberaterin), Dateien per Dateiname statt echtem Upload, Speicherung in JSON statt in der Plattform, Konfidenz von der KI selbst geliefert.
+Stand 07.11.2026, auf dem Stand aller Entscheide. Bewusste Vereinfachungen: keine Anmeldung (eine feste Testberaterin), Dateien per Dateiname statt echtem Upload, Speicherung in JSON statt in der Plattform, Konfidenz von der KI selbst geliefert.
 
-Nachzuführen auf die Entscheide vom 30.10. und 07.11.:
+Am 07.11.2026 nachgeführt:
 
-| Abweichung im PoC | Entscheid | Massnahme |
+| Vorher im PoC | Entscheid | Jetzt |
 |---|---|---|
-| Schaltfläche «Beim Kunden anfordern» (im Screenshot sichtbar) | [E05](../decisions/e05NachfordernNichtImScope.md) | entfernen |
-| Einreichen mit Begründung bei fehlenden Pflichtdokumenten | [E09](../decisions/e09EinreichenNurVollstaendig.md) | Begründungsfeld entfernen, nur vollständig |
-| Protokoll schreibt «Beraterin (via KI)» | [E10](../decisions/e10BestaetigenPerKiAuftrag.md) | auf `BERATER_VIA_KI` vereinheitlichen |
+| Schaltfläche «Beim Kunden anfordern» und Status «angefordert» | [E05](../decisions/e05NachfordernNichtImScope.md) | entfernt; fehlende Dokumente beschafft die Beraterin selbst, die KI legt sie danach im selben Antrag ab |
+| Einreichen mit Begründung bei fehlenden Pflichtdokumenten | [E09](../decisions/e09EinreichenNurVollstaendig.md) | Begründungsfeld entfernt; Einreichen erst, wenn kein Pflichtdokument fehlt und keine Zuordnung unsicher ist, auch serverseitig geprüft |
+| Protokoll schreibt «Beraterin (via KI)», Auftrag gekürzt im Aktionstext | [E10](../decisions/e10BestaetigenPerKiAuftrag.md) | Akteur `KI`, `BERATER` oder `BERATER_VIA_KI` wie im [Protokolleintrag](../domain_model/entities/protokolleintrag.md); Auftrag im Wortlaut in einem eigenen Feld |
+| Werkzeuge geben deutsche Kurzformen als Status zurück | [MCP-Schnittstelle](../interface/mcpSchnittstelle.md) | Status wie in der Spezifikation: `FEHLT`, `UNSICHER`, `VORHANDEN` und `VON_KI_ZUGEORDNET`, `BESTAETIGT`, `VERWORFEN` |
+
+Für einen vollständigen Testlauf liegen die zwei absichtlich fehlenden Pflichtdokumente im Ordner `testdossier_nachreichung/` des PoC; die Testleitung legt sie als «Nachreichung des Kunden» ins Dossier. Die Vorversion des PoC ist im Gruppenordner archiviert.

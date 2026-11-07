@@ -16,9 +16,11 @@ sources:
     resource: /sources/cr_1_2.md
   - id: cr-1-3
     resource: /sources/cr_1_3.md
+  - id: cr-1-6
+    resource: /sources/cr_1_6.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T10:13:58Z
+  at: 2026-11-07T11:00:54Z
 ---
 
 # Nicht-funktionale Anforderungen – CredEx Phase 1
@@ -79,6 +81,5 @@ Restriktionen sind nicht verhandelbar und schränken den Lösungsraum ein (Einte
 ## Offene Punkte
 
 - Zielwerte für NFA-01 (Korrektheit) und NFA-02 (Zeitverhalten) nach dem PoC-Test festlegen.
-- NFA-04: «alle acht Werkzeuge» im Anforderungs-Excel nachtragen (dort noch «alle 4»).
 - NFA-12: Aufbewahrungsdauer der Protokolleinträge mit der Compliance der Glarner KB klären.
 - Das Detailkonzept (Kapitel 6.3) führt noch eine ältere Liste mit 9 NFA und anderen IDs; massgebend ist diese Liste.

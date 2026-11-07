@@ -28,9 +28,11 @@ sources:
     resource: /sources/cr_1_0.md
   - id: cr-1-2
     resource: /sources/cr_1_2.md
+  - id: cr-1-6
+    resource: /sources/cr_1_6.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T10:13:58Z
+  at: 2026-11-07T11:00:54Z
 ---
 
 # Funktionale Anforderungen – CredEx Phase 1
@@ -64,5 +66,4 @@ Die funktionalen Anforderungen beschreiben, was das System können muss. Quelle 
 
 ## Offene Punkte
 
-- **FA-07** ist gegenüber dem Excel vom 31.10.2026 geändert: kein Einreichen mit Begründung mehr (siehe [CR-1.0](../sources/cr_1_0.md)). Das Excel ist nachzuführen.
-- **FA-11** ist neu (Teamentscheid 07.11.2026) und im Anforderungs-Excel nachzutragen.
+- Keine. FA-07 (kein Einreichen mit Begründung mehr, siehe [CR-1.0](../sources/cr_1_0.md)) und FA-11 (neu, Teamentscheid 07.11.2026) stehen seit dem 07.11.2026 auch im Anforderungs-Excel, das die Gruppe als gültige Fassung bestätigt hat.

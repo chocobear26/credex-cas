@@ -15,7 +15,7 @@ und entwirft die User Stories. Die Gruppe entscheidet und gibt frei.
 
 Grundlage ist das Lehrbeispiel [okf-productdocumentation](https://github.com/marcelRonner/okf-productdocumentation)
 von Marcel Ronner (ATM-System). Alle ATM-Inhalte sind entfernt; Mechanik, Skripte und Prüfregister sind
-übernommen.
+übernommen. Marcel Ronner hat die Nutzung für diese Gruppenarbeit am 07.11.2026 ausdrücklich freigegeben.
 
 ## Wo anfangen
 
