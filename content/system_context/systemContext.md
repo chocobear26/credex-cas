@@ -12,9 +12,11 @@ sources:
     resource: /business_process/businessProcess.md
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-1
+    resource: /sources/cr_1_1.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T09:55:00Z
 ---
 
 # Systemkontext – CredEx Phase 1
@@ -27,40 +29,12 @@ Im Scope von Phase 1 (rot) liegen drei neue Teile von CredEx: der **MCP-Server**
 
 ## Diagramm
 
-**Legende:** rot umrandet = Scope Phase 1 &nbsp; gestrichelt = Kontext &nbsp; Pfeil = gerichteter Informationsfluss
+> [!NOTE] v1.1 – Geändert 2026-11-07
+> Das Diagramm ist neu in D2 gezeichnet, gruppiert wie im Original der Gruppe; Hin- und Rückfluss eines Paars teilen sich einen Doppelpfeil.
 
-```mermaid
-flowchart LR
-    classDef scope fill:#FFFFFF,stroke:#DC2626,stroke-width:2px,color:#7F1D1D
-    classDef kontext fill:#F9FAFB,stroke:#6B7280,stroke-dasharray:4 3,color:#1F2937
-    classDef person fill:#DBEAFE,stroke:#2563EB,color:#1E3A5F
+**Legende:** rot = Scope Phase 1 (neu) &nbsp; gestrichelt = Kontext &nbsp; Doppelpfeil «hin / zurück» = Informationsfluss in beide Richtungen
 
-    berater["Berater/in"]:::person
-    dms["Partner-DMS\n(z.B. SharePoint)"]:::kontext
-    ki["Partner-KI\n(z.B. Copilot, ChatGPT, Claude)"]:::kontext
-    mcp["CredEx MCP-Server\n(neu)"]:::scope
-    uebersicht["Übersicht im CredEx-Tool\n(neu)"]:::scope
-    protokoll["Protokoll\n(neu)"]:::scope
-    idp["Identity Provider\n(OAuth)"]:::kontext
-    plattform["CredEx-Plattform\n(Antrag, Dokumentenablage)"]:::kontext
-    glkb["Glarner KB\n(Prüfung, Abschluss)"]:::kontext
-
-    berater -->|Auftrag| ki
-    dms -->|Dateien des Kreditnehmers| ki
-    ki -->|Dokument mit Zuordnung| mcp
-    mcp -->|Antrag, Pflichtdokumente, Status| ki
-    mcp -->|Token| idp
-    idp -->|Identität, Berechtigung| mcp
-    mcp -->|Dokument, Zuordnung| plattform
-    plattform -->|Antrag, Pflichtdokumente| mcp
-    mcp -->|Protokolleintrag KI| protokoll
-    plattform -->|Status je Pflichtdokument| uebersicht
-    uebersicht -->|Status je Pflichtdokument| berater
-    berater -->|Bestätigung, Einreichen| uebersicht
-    uebersicht -->|bestätigte Zuordnung, Einreichung| plattform
-    uebersicht -->|Protokolleintrag Berater| protokoll
-    plattform -->|vollständiges Dossier| glkb
-```
+![Systemkontext – CredEx Phase 1](systemContext.d2)
 
 ---
 

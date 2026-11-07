@@ -8,12 +8,17 @@ tags: [partner, berater, ki-verbindung, pruefer, antrag, kreditnehmer, dokument,
 sources:
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-1
+    resource: /sources/cr_1_1.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T09:55:00Z
 ---
 
 # Fachklassenmodell – CredEx Phase 1
+
+> [!NOTE] v1.1 – Geändert 2026-11-07
+> Klassendiagramm im gemeinsamen Diagrammstil, rechtwinklige Linien.
 
 ## Überblick
 

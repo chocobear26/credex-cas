@@ -1,10 +1,9 @@
 @startuml vollstaendigkeitPruefen
-!theme plain
 title Aktivitätsdiagramm – UC-05 Vollständigkeit prüfen
-|Partner-KI|
+|#F5F3FF|Partner-KI|
 start
 :credex_vollstaendigkeit_pruefen aufrufen;
-|CredEx-System|
+|#FEFCE8|CredEx-System|
 if (Antrag bekannt?) then (ja)
   :Status jedes Pflichtdokuments\naus den Zuordnungen ableiten;
   :Fehlende und unsichere Pflichtdokumente\nmit Link zur Übersicht melden;

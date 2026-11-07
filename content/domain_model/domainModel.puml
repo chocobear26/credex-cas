@@ -1,13 +1,6 @@
 @startuml Fachklassenmodell
-!theme plain
 skinparam classAttributeIconSize 0
-skinparam classFontStyle bold
-hide methods
-hide circle
-skinparam class<<neu>> {
-  BackgroundColor #FDE2E2
-  BorderColor #DC2626
-}
+skinparam linetype ortho
 
 title Fachklassenmodell – CredEx Phase 1
 

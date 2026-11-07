@@ -1,33 +1,28 @@
 @startuml zuordnungBestaetigen
-!theme plain
 title Aktivitätsdiagramm – UC-06 Zuordnung bestätigen oder ändern
-|Berater/in|
+|#EFF6FF|Berater/in|
 start
 :Übersicht des Antrags öffnen;
-|CredEx-System|
+|#FEFCE8|CredEx-System|
 :Unsichere Zuordnungen hervorheben,\nmit Dateiname und Konfidenz;
 |Berater/in|
 repeat
   :Dokument ansehen;
-  if (Zuordnung richtig?) then (ja)
+  switch (Entscheid der Berater/in?)
+  case (richtig)
     :Zuordnung bestätigen;
-    |CredEx-System|
-    :CredEx-System setzt Dokument\n(status = BESTAETIGT);
-  else (nein)
-    |Berater/in|
-    if (Anderes Pflichtdokument passt?) then (ja)
-      :Anderes Pflichtdokument wählen (3a);
-      |CredEx-System|
-      :Zuordnung ändern (quelle = MENSCH);
-      :CredEx-System setzt Dokument\n(status = BESTAETIGT);
-    else (nein)
-      |Berater/in|
-      :Dokument verwerfen (3b);
-      |CredEx-System|
-      :CredEx-System setzt Dokument\n(status = VERWORFEN);
-    endif
-  endif
+  case (anderes Pflichtdokument)
+    :Anderes Pflichtdokument wählen (3a);
+  case (passt nicht)
+    :Dokument verwerfen (3b);
+  endswitch
   |CredEx-System|
+  if (Dokument verworfen?) then (nein)
+    :Zuordnung setzen (quelle = MENSCH);
+    :CredEx-System setzt Dokument\n(status = BESTAETIGT);
+  else (ja)
+    :CredEx-System setzt Dokument\n(status = VERWORFEN);
+  endif
   :Protokolleintrag schreiben (akteur = BERATER);
   |Berater/in|
 repeat while (Weitere unsichere Zuordnung?) is (ja) not (nein)

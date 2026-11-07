@@ -1,5 +1,12 @@
 {{- /*
-  Render PlantUML diagrams at build time, straight from their `.puml` source.
+  Render diagrams at build time, straight from their source file:
+
+      .puml  → Kroki plantuml  (UML: classes, use cases, activities, states)
+      .bpmn  → Kroki bpmn      (BPMN 2.0 with diagram interchange, drawn by bpmn-js)
+      .d2    → Kroki d2        (system context)
+
+  Every PlantUML source gets the shared style in assets/diagrams/style.puml inserted right after
+  its @startuml line, so all UML diagrams look alike and no .puml file carries styling of its own.
 
   An artifact embeds its diagram by pointing an image at the source file next to it:
 
@@ -24,18 +31,27 @@
 {{- with .Page.File -}}{{- $abs = path.Join (path.Dir .Path) $dest -}}{{- end -}}
 {{- $file := path.Join "content" $abs -}}
 
-{{- if and (not $isRemote) (strings.HasSuffix $dest ".puml") -}}
+{{- $kinds := dict ".puml" "plantuml" ".bpmn" "bpmn" ".d2" "d2" -}}
+{{- $ext := path.Ext $dest -}}
+{{- $kind := index $kinds $ext -}}
+{{- if and (not $isRemote) $kind -}}
   {{- $done := false -}}
   {{- if fileExists $file -}}
     {{- $source := os.ReadFile $file -}}
-    {{- $url := printf "%s/plantuml/svg" (strings.TrimSuffix "/" (site.Params.kroki_url | default "https://kroki.io")) -}}
+    {{- if eq $kind "plantuml" -}}
+      {{- with resources.Get "diagrams/style.puml" -}}
+        {{- $style := .Content -}}
+        {{- $source = replaceRE `(?m)^(@startuml.*)$` (printf "${1}\n%s" $style) $source 1 -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $url := printf "%s/%s/svg" (strings.TrimSuffix "/" (site.Params.kroki_url | default "https://kroki.io")) $kind -}}
     {{- $opts := dict "method" "post" "body" $source "headers" (dict "Content-Type" "text/plain") -}}
     {{- with try (resources.GetRemote $url $opts) -}}
       {{- with .Err -}}
         {{- warnf "render-image: %s in %q could not be rendered by %s: %s" $dest $.Page.File.Path $url . -}}
       {{- else with .Value -}}
-        {{- $svg := resources.Copy (printf "diagrams/%s.svg" (strings.TrimSuffix ".puml" $abs)) . -}}
-        <img src="{{ $svg.RelPermalink }}" alt="{{ $alt }}"{{ with $.Title }} title="{{ . }}"{{ end }} class="diagram">
+        {{- $svg := resources.Copy (printf "diagrams/%s.svg" (strings.TrimSuffix $ext $abs)) . -}}
+        <a class="diagram-link" href="{{ $svg.RelPermalink }}" target="_blank" title="Diagramm in voller Grösse öffnen"><img src="{{ $svg.RelPermalink }}" alt="{{ $alt }}"{{ with $.Title }} title="{{ . }}"{{ end }} class="diagram"><span class="diagram-hint">Klicken für volle Grösse</span></a>
         {{- $done = true -}}
       {{- else -}}
         {{- warnf "render-image: %s in %q — %s returned nothing" $dest $.Page.File.Path $url -}}
@@ -45,7 +61,7 @@
     {{- warnf "render-image: %q in %q does not exist" $dest $.Page.File.Path -}}
   {{- end -}}
   {{- if not $done -}}
-    <a href="{{ $dest }}">{{ $alt }} (PlantUML source)</a>
+    <a href="{{ $dest }}">{{ $alt }} (Quelle {{ $ext }})</a>
   {{- end -}}
 {{- else -}}
   {{- $src := $dest -}}

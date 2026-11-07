@@ -48,9 +48,14 @@ Request, der dieses Assessment zitiert.
 - Dateinamen in **camelCase** ohne Umlaute (`dokumentAblegen.md`, `pruefer.md`).
 - Verwandte Artefakte immer mit **relativen Pfaden** verlinken (`../domain_model/entities/antrag.md`).
   Das Fachklassenmodell ist die zentrale Referenz.
-- **Mermaid** für Diagramme im Markdown, **PlantUML** als separate `.puml`-Dateien.
-- Ein `.puml`-Diagramm wird über ein Bild eingebunden: `![Aktivitätsdiagramm – Dokument ablegen](dokumentAblegen.puml)`.
-  Der Build rendert es; nie ein erzeugtes SVG einchecken.
+- **Diagrammsprachen:** **PlantUML** (`.puml`) für UML – Klassen, Use Cases, Aktivitäten, Zustände;
+  **BPMN 2.0** (`.bpmn`, bearbeitbar in bpmn.io) für den Soll-Prozess; **D2** (`.d2`) für den
+  Systemkontext; **Mermaid** nur für kleine Übersichten direkt im Markdown (Startseite).
+- Ein Diagramm wird über ein Bild eingebunden: `![Aktivitätsdiagramm – Dokument ablegen](dokumentAblegen.puml)`.
+  Der Build rendert es über Kroki; nie ein erzeugtes SVG oder PNG einchecken.
+- **Diagrammstil:** Alle PlantUML-Diagramme erhalten beim Build das gemeinsame Stilblatt
+  `assets/diagrams/style.puml`. Eine `.puml`-Datei trägt deshalb kein `!theme` und keine
+  allgemeinen `skinparam`; erlaubt sind nur inhaltliche Farben (Swimlane eines Akteurs, Statusfarbe).
 - Information steht **an einem Ort** – ein Diagramm IST die Beschreibung; nie zusätzlich als Tabelle.
 - Markdown- und PlantUML-Dateien zum selben Modell bleiben synchron.
 
@@ -65,8 +70,8 @@ Datei bearbeiten und `make generate` ausführen.
 | `overview` | `content/_index.md` | — | Die Startseite – was die Dokumentation abdeckt, und ein Link auf jedes Artefakt. |
 | `domain-model` | `content/domain_model/domainModel.md` | `.claude/rules/domain-model.md` | Das Fachklassenmodell auf einen Blick – Klassendiagramm und ein Link auf jede Entität. |
 | `entity` | `content/domain_model/entities/<className>.md` | `.claude/rules/domain-model.md` | Eine Fachklasse – was sie darstellt und ihre Attribute. Die zentrale Referenz. |
-| `business-process` | `content/business_process/businessProcess.md` | `.claude/rules/business-process.md` | Der Soll-Prozess als eingebettetes Mermaid-Flussdiagramm mit nummerierten Schritten. |
-| `system-context` | `content/system_context/systemContext.md` | `.claude/rules/system-context.md` | Systemgrenze, Nachbarsysteme und gerichtete Informationsflüsse als Mermaid-Diagramm. |
+| `business-process` | `content/business_process/businessProcess.md` | `.claude/rules/business-process.md` | Der Soll-Prozess als BPMN-2.0-Modell in zwei Teilen mit nummerierten Schritten. |
+| `system-context` | `content/system_context/systemContext.md` | `.claude/rules/system-context.md` | Systemgrenze, Nachbarsysteme und gerichtete Informationsflüsse als D2-Diagramm. |
 | `use-case-diagram` | `content/use_case/useCaseDiagram.md` | `.claude/rules/use-cases.md` | Akteure, ihre Use Cases und die include-Beziehungen zwischen ihnen. |
 | `actor-descriptions` | `content/use_case/actorDescriptions.md` | `.claude/rules/use-cases.md` | Die Akteure auf einen Blick, mit einem Link auf jeden. |
 | `actor` | `content/use_case/actors/<actorName>.md` | `.claude/rules/use-cases.md` | Ein Akteur – Art, Rolle im Prozess und worauf er zugreifen kann. |

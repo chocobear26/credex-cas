@@ -18,11 +18,11 @@ rectangle "CredEx-Plattform · Phase 1" {
   usecase "UC-01\nKI mit CredEx verbinden" as UC01
   usecase "UC-06\nZuordnung bestätigen oder ändern" as UC06
   usecase "UC-07\nAntrag einreichen" as UC07
+  usecase "UC-09\nNutzung auswerten" as UC09
   usecase "UC-02\nOffene Anträge abrufen" as UC02
   usecase "UC-03\nPflichtliste abfragen" as UC03
   usecase "UC-04\nDokument ablegen" as UC04
   usecase "UC-05\nVollständigkeit prüfen" as UC05
-  usecase "UC-09\nNutzung auswerten" as UC09
 }
 
 partnerIt -- UC01
@@ -31,13 +31,19 @@ berater -- UC06
 berater -- UC07
 pm -- UC09
 
+' Spalte 2: Werkzeuge der Partner-KI (hidden: nur Layout)
+UC01 -[hidden]- UC02
+UC06 -[hidden]- UC04
+UC09 -[hidden]- UC03
+
+UC04 .> UC03 : <<include>>
+UC07 ..> UC05 : <<include>>
+
 UC02 -- ki
 UC03 -- ki
 UC04 -- ki
 UC05 -- ki
+UC05 -[hidden]- glkb
 UC07 -- glkb
-
-UC04 ..> UC03 : <<include>>
-UC07 ..> UC05 : <<include>>
 
 @enduml

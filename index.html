@@ -326,9 +326,14 @@ Request, der dieses Assessment zitiert.
 - Dateinamen in **camelCase** ohne Umlaute (`dokumentAblegen.md`, `pruefer.md`).
 - Verwandte Artefakte immer mit **relativen Pfaden** verlinken (`../domain_model/entities/antrag.md`).
   Das Fachklassenmodell ist die zentrale Referenz.
-- **Mermaid** für Diagramme im Markdown, **PlantUML** als separate `.puml`-Dateien.
-- Ein `.puml`-Diagramm wird über ein Bild eingebunden: `![Aktivitätsdiagramm – Dokument ablegen](dokumentAblegen.puml)`.
-  Der Build rendert es; nie ein erzeugtes SVG einchecken.
+- **Diagrammsprachen:** **PlantUML** (`.puml`) für UML – Klassen, Use Cases, Aktivitäten, Zustände;
+  **BPMN 2.0** (`.bpmn`, bearbeitbar in bpmn.io) für den Soll-Prozess; **D2** (`.d2`) für den
+  Systemkontext; **Mermaid** nur für kleine Übersichten direkt im Markdown (Startseite).
+- Ein Diagramm wird über ein Bild eingebunden: `![Aktivitätsdiagramm – Dokument ablegen](dokumentAblegen.puml)`.
+  Der Build rendert es über Kroki; nie ein erzeugtes SVG oder PNG einchecken.
+- **Diagrammstil:** Alle PlantUML-Diagramme erhalten beim Build das gemeinsame Stilblatt
+  `assets/diagrams/style.puml`. Eine `.puml`-Datei trägt deshalb kein `!theme` und keine
+  allgemeinen `skinparam`; erlaubt sind nur inhaltliche Farben (Swimlane eines Akteurs, Statusfarbe).
 - Information steht **an einem Ort** – ein Diagramm IST die Beschreibung; nie zusätzlich als Tabelle.
 - Markdown- und PlantUML-Dateien zum selben Modell bleiben synchron.
 
@@ -342,8 +347,8 @@ Datei bearbeiten und `make generate` ausführen.
 | `overview` | `content/_index.md` | — | Die Startseite – was die Dokumentation abdeckt, und ein Link auf jedes Artefakt. |
 | `domain-model` | `content/domain_model/domainModel.md` | `.claude/rules/domain-model.md` | Das Fachklassenmodell auf einen Blick – Klassendiagramm und ein Link auf jede Entität. |
 | `entity` | `content/domain_model/entities/<className>.md` | `.claude/rules/domain-model.md` | Eine Fachklasse – was sie darstellt und ihre Attribute. Die zentrale Referenz. |
-| `business-process` | `content/business_process/businessProcess.md` | `.claude/rules/business-process.md` | Der Soll-Prozess als eingebettetes Mermaid-Flussdiagramm mit nummerierten Schritten. |
-| `system-context` | `content/system_context/systemContext.md` | `.claude/rules/system-context.md` | Systemgrenze, Nachbarsysteme und gerichtete Informationsflüsse als Mermaid-Diagramm. |
+| `business-process` | `content/business_process/businessProcess.md` | `.claude/rules/business-process.md` | Der Soll-Prozess als BPMN-2.0-Modell in zwei Teilen mit nummerierten Schritten. |
+| `system-context` | `content/system_context/systemContext.md` | `.claude/rules/system-context.md` | Systemgrenze, Nachbarsysteme und gerichtete Informationsflüsse als D2-Diagramm. |
 | `use-case-diagram` | `content/use_case/useCaseDiagram.md` | `.claude/rules/use-cases.md` | Akteure, ihre Use Cases und die include-Beziehungen zwischen ihnen. |
 | `actor-descriptions` | `content/use_case/actorDescriptions.md` | `.claude/rules/use-cases.md` | Die Akteure auf einen Blick, mit einem Link auf jeden. |
 | `actor` | `content/use_case/actors/<actorName>.md` | `.claude/rules/use-cases.md` | Ein Akteur – Art, Rolle im Prozess und worauf er zugreifen kann. |
@@ -567,46 +572,34 @@ change the register and say so in the assessment. Adding a check is normal; renu
 # Konventionen Soll-Prozess
 
 ## Dateien
-- `businessProcess.md` – Markdown mit eingebettetem Mermaid-Diagramm (keine separaten Diagrammdateien)
+- `businessProcess.md` – Überblick, eingebettete Diagramme und «Änderungen gegenüber heute»
+- `sollProzessTeil1.bpmn`, `sollProzessTeil2.bpmn` – BPMN 2.0 mit Diagram Interchange (DI), je ein Pool
 
-## Aufbau
+## Aufbau `businessProcess.md`
 ```
 # Soll-Prozess – {Prozessname}
-## Überblick          → Ein Absatz + Link aufs Fachklassenmodell
-## Prozessdiagramm    → Legende + eingebettetes Mermaid-Flussdiagramm
+## Überblick          → Ein Absatz + Links auf Fachklassenmodell und Systemkontext
+## Prozessdiagramm    → Ein H3 pro Teil mit ![Soll-Prozess Teil N – …](sollProzessTeilN.bpmn)
 ## Änderungen gegenüber heute → kurze Liste, was wegfällt und was neu ist
 ```
 
-## Mermaid-Regeln
-
-**Layout:** `flowchart TD` (von oben nach unten). Nie `LR` bei komplexen Prozessen.
-
-**Akteure über Farbklassen** (keine Subgraphs – sie rendern schlecht). Die Farben entsprechen den
-Lanes im BPMN-Modell der Gruppe:
-
-| Akteur / Rolle          | classDef        | Fill      | Stroke    | Text      |
-|-------------------------|-----------------|-----------|-----------|-----------|
-| Berater/in              | `berater`       | `#DBEAFE` | `#2563EB` | `#1E3A5F` |
-| Partner-KI              | `partnerKi`     | `#EDE9FE` | `#7C3AED` | `#3B0764` |
-| CredEx-System           | `credex`        | `#FEF9C3` | `#CA8A04` | `#713F12` |
-| Glarner KB              | `glkb`          | `#DCFCE7` | `#16A34A` | `#14532D` |
-| Partner-IT, Partnermanagement | `support` | `#F3F4F6` | `#6B7280` | `#1F2937` |
-| Entscheidung            | `decision`      | `#FEE2E2` | `#DC2626` | `#7F1D1D` |
-
-Textlegende über dem Diagramm:
-`**Legende:** 🟦 Berater/in 🟪 Partner-KI 🟨 CredEx-System 🟩 Glarner KB ⬜ Partner-IT / Partnermanagement 🟥 Entscheidung`
-
-**Schrittnummern:** `{phase}.{schritt}` (z.B. `1.1`, `3.4`). Alternativpfade: `3.4a`.
-
-**Knotenformen:** Rechtecke `["..."]` für Tätigkeiten, Rauten `{"..."}` für Entscheidungen, Kreise
-`(("Start"))` / `(("Ende"))`.
-
-**Beschriftung:** Max. 2 Zeilen mit `\n`. Beschreibt WAS, nicht WER (die Farbe ist der Akteur).
-Klassennamen des Fachklassenmodells verwenden.
-
-**Kanten:** `-->` für Fluss, `-->|Bedingung|` für Bedingungen. Schleifen zurück zur auslösenden Entscheidung.
-
-**Allgemein:** Normalfall und Fehlerpfade. Jeder Endpfad endet in `(("Ende"))`. Knoten-IDs in camelCase.
+## BPMN-Regeln
+- **BPMN 2.0, bearbeitbar in bpmn.io** (Camunda Modeler geht auch). Der Build rendert die Datei über
+  Kroki mit bpmn-js; nie ein exportiertes Bild einchecken.
+- **Ein Pool pro Teil, eine Lane pro Akteur.** Lane-Namen exakt wie die Akteure: «Partner-IT»,
+  «Berater/in», «Partner-KI», «CredEx-System», «Glarner KB», «Partnermanagement».
+- **Zwei Teile**, damit das Diagramm auf einer Seite lesbar bleibt: Teil 1 Ablage (0.x – 2.x),
+  Teil 2 Prüfen und Einreichen (3.x – 6.x). Verbunden mit einem Link-Zwischenereignis
+  («weiter mit Teil 2» / «von Teil 1»).
+- **Schrittnummer vorne im Namen:** `{phase}.{schritt} Tätigkeit` (z.B. «2.4 Dokument speichern, …»).
+  Alternativpfade `4.1a`. Die Nummern sind Join-Schlüssel für Use Cases und Story Map.
+- **Gateways:** exklusive Gateways mit Frage als Name («2.3 Berechtigung, Format, Grösse gültig?»),
+  ausgehende Flüsse mit «Ja» / «Nein». Schleifen laufen über ein Merge-Gateway ohne Namen.
+- **Ereignisse:** Start mit Auslöser («Antrag in Schritt 5»), Timer-Start für Periodisches
+  («Monatsende»), Ende mit Ergebnis («Dossier geprüft»).
+- **Layout:** Fluss von links nach rechts; Aufgaben 130 × 80, Gateways 50 × 50; rechtwinklige
+  Kanten; keine Kante durch ein anderes Element. Gateway-Beschriftung oberhalb.
+- Klassennamen des Fachklassenmodells in den Beschriftungen verwenden.
 
 
 ---
@@ -712,7 +705,7 @@ nachführen (Checkliste in `AGENTS.md`).
 - Danach eine Tabelle: `Beziehung | Beschreibung`
 
 ## PlantUML
-- `@startuml` / `@enduml`, `!theme plain`, `skinparam classAttributeIconSize 0`
+- `@startuml` / `@enduml`, `skinparam classAttributeIconSize 0`, `skinparam linetype ortho`; kein eigenes Styling (siehe «Diagrammstil» in `AGENTS.md`)
 - Alle Attribute mit Typ in den `class`-Blöcken
 - Klassen, die neu in Phase 1 sind, tragen das Stereotyp `<<neu>>`
 - Beziehungen: `Antrag "1" -- "0..*" Dokument : enthält >`
@@ -990,7 +983,8 @@ Every check section is one table, with the rows in register order:
 - Jeder genannte Use Case ist in der Tabelle verlinkt
 
 ## PlantUML
-- `@startuml` / `@enduml`, `!theme plain`, `skinparam stateFontStyle bold`
+- `@startuml` / `@enduml`, `left to right direction`, `skinparam stateFontStyle bold`; kein eigenes Styling ausser der Statusfarbe
+- Statusfarbe nach Bedeutung: `#F0FDF4;line:16A34A` (von der KI sicher), `#FFFBEB;line:D97706` (unsicher / wartet auf Mensch), `#EFF6FF;line:2563EB` (vom Menschen bestätigt bzw. in Bearbeitung), `#F8FAFC;line:94A3B8` (verworfen), `#F1F5F9;line:334155` (abgeschlossen)
 - Titel: `title Zustandsdiagramm – {Entität}`
 - `[*] -->` für den Startübergang
 - Zustandsbeschreibung: `state ZUSTAND : kurze Beschreibung`
@@ -1004,23 +998,29 @@ Every check section is one table, with the rows in register order:
 # Konventionen Systemkontext
 
 ## Dateien
-- `systemContext.md` – Markdown mit eingebettetem Mermaid-Diagramm
+- `systemContext.md` – Überblick, eingebettetes Diagramm, Tabelle der Informationsflüsse, Abgrenzung
+- `systemContext.d2` – das Diagramm in [D2](https://d2lang.com), beim Build über Kroki gerendert
 
-## Aufbau
+## Aufbau `systemContext.md`
 ```
 # Systemkontext – {Systemname}
 ## Überblick          → Ein Absatz: was im Scope liegt, was Kontext ist; Links auf Soll-Prozess und Fachklassenmodell
-## Diagramm           → Legende + Mermaid `flowchart LR`
+## Diagramm           → Legende + ![Systemkontext – {Systemname}](systemContext.d2)
 ## Informationsflüsse → Tabelle: Von | Nach | Information
 ## Abgrenzung         → Liste, was ausdrücklich nicht im Scope liegt
 ```
 
-## Regeln
-- Systeme im Scope (neu in diesem Release) mit `classDef scope` rot umrandet (`stroke:#DC2626,stroke-width:2px`),
-  Kontextsysteme mit `classDef kontext` gestrichelt (`stroke-dasharray:4 3`).
-- Kanten sind **gerichtet** und beschriftet mit der fliessenden Information, nicht mit der Tätigkeit.
-- Jede Kante im Diagramm hat genau eine Zeile in der Tabelle *Informationsflüsse* – Ausnahme von der
-  Regel «Information an einem Ort», weil die Tabelle die Kanten lesbar macht, die im Diagramm gekürzt sind.
+## D2-Regeln
+- Layout-Engine **ELK** (`vars: d2-config: layout-engine: elk`), Hauptrichtung `right`, in den
+  Gruppen `down`.
+- **Drei Gruppen** wie im Original der Gruppe: «Distributionspartner (Kontext)», «Scope Phase 1
+  (neu)», «CredEx und Dritte (Kontext)».
+- Klassen `scope` (rot umrandet) für Neues, `kontext` (gestrichelt) für Bestehendes, `gruppe` für die
+  drei Rahmen, `fluss` für Kanten. Farben nur über diese Klassen.
+- Kanten sind **gerichtet** und mit der fliessenden Information beschriftet. Fliesst zwischen zwei
+  Systemen in beide Richtungen etwas, ein Doppelpfeil `<->` mit «hin / zurück».
+- Die Tabelle *Informationsflüsse* führt jede Richtung einzeln – sie ist die vollständige Liste; das
+  Diagramm darf Beschriftungen weglassen, wenn sie sich sonst überlagern.
 - Datenobjekte heissen wie im Fachklassenmodell (`Dokument`, `Zuordnung`, `Pflichtdokument`).
 
 
@@ -1111,9 +1111,10 @@ Jeder Use Case bekommt einen **Unterordner** in `use_case/` (snake_case, z.B. `u
 - `---` trennt die Hauptabschnitte
 
 ### PlantUML-Aktivitätsdiagramm
-- `@startuml` / `@enduml`, `!theme plain`
+- `@startuml` / `@enduml`; kein eigenes Styling (siehe «Diagrammstil» in `AGENTS.md`)
 - Titel: `title Aktivitätsdiagramm – UC-{nn} {Name}`
-- Swimlanes `|Berater/in|`, `|Partner-KI|`, `|CredEx-System|` wo mehrere Akteure handeln
+- Swimlanes mit Akteurfarbe beim ersten Auftreten: `|#EFF6FF|Berater/in|`, `|#F5F3FF|Partner-KI|`, `|#FEFCE8|CredEx-System|`, `|#F8FAFC|Partnermanagement|`; danach nur `|Berater/in|`
+- Entscheide eines Menschen mit mehreren Ausgängen als `switch` / `case`, nicht als verschachtelte `if`
 - `:aktion;` für Tätigkeiten, `if (...) then (...)` / `else (...)` für Entscheidungen
 - `repeat` / `repeat while (...)` für Schleifen
 - `stop` für jeden Endpfad

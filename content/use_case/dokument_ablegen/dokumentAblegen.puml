@@ -1,10 +1,9 @@
 @startuml dokumentAblegen
-!theme plain
 title Aktivitätsdiagramm – UC-04 Dokument ablegen
-|Berater/in|
+|#EFF6FF|Berater/in|
 start
 :Auftrag an die KI:\n"Lade die Unterlagen hoch";
-|Partner-KI|
+|#F5F3FF|Partner-KI|
 :Offene Anträge und Pflichtliste\nabrufen (UC-02, UC-03);
 repeat
   :Datei aus dem Partner-DMS lesen,\nPflichtdokument und Konfidenz bestimmen;
@@ -17,7 +16,7 @@ repeat
   else (ja)
   endif
   :credex_dokument_ablegen aufrufen;
-  |CredEx-System|
+  |#FEFCE8|CredEx-System|
   if (Berechtigung, Format und Grösse gültig?) then (ja)
     :CredEx-System legt Dokument an\n(status = ABGELEGT);
     if (Konfidenz ≥ Schwelle?) then (ja)

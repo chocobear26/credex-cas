@@ -7,9 +7,11 @@ weight: 1
 sources:
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-1
+    resource: /sources/cr_1_1.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T09:55:00Z
 ---
 
 # Produktdokumentation – CredEx Phase 1
@@ -26,7 +28,7 @@ Jede Seite ist ein Konzept mit Typ, den Artefakten, aus denen sie abgeleitet ist
 
 - [**Fachklassenmodell**](domain_model/domainModel.md) – Fachklassen und ihre Beziehungen
   - [Entitäten](domain_model/entities/_index.md) – eine Seite pro Fachklasse
-- [**Soll-Prozess**](business_process/businessProcess.md) – von der KiVerbindung bis zur Prüfung durch die Glarner KB
+- [**Soll-Prozess**](business_process/businessProcess.md) – BPMN in zwei Teilen, von der KiVerbindung bis zur Prüfung durch die Glarner KB
 - [**Systemkontext**](system_context/systemContext.md) – Scope, Nachbarsysteme, Informationsflüsse
 - [**Use-Case-Diagramm**](use_case/useCaseDiagram.md) – Akteure und Use Cases
   - [Akteurbeschreibungen](use_case/actorDescriptions.md) – Rollen und Systemzugriff
@@ -58,6 +60,7 @@ Jede Seite ist ein Konzept mit Typ, den Artefakten, aus denen sie abgeleitet ist
 Die Artefakte bilden eine Ableitungskette: Jedes ist aus dem vorherigen abgeleitet, eine Änderung wandert deshalb immer *flussabwärts*. Gearbeitet wird vom Fachklassenmodell nach aussen. Jede Seite hält ihre Pfeile auch im Frontmatter `sources:` fest.
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Helvetica, Arial, sans-serif", "fontSize": "14px", "primaryColor": "#F8FAFC", "primaryBorderColor": "#94A3B8", "primaryTextColor": "#0F172A", "lineColor": "#64748B"}, "flowchart": {"curve": "basis", "nodeSpacing": 30, "rankSpacing": 45}}}%%
 flowchart LR
     oa["OKF-Assessment"] -.-> cr
     cr["Change Request"] -.-> dm
@@ -80,6 +83,10 @@ flowchart LR
     us --> cl
     mcp --> cl
     cl --> log["Log"]
+    classDef src fill:#FEF2F2,stroke:#DC2626,color:#7F1D1D
+    classDef req fill:#EFF6FF,stroke:#2563EB,color:#1E3A8A
+    class oa,cr src
+    class ga,fa,nfa,mcp req
 ```
 
 ### Schlüssel

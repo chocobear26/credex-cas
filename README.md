@@ -33,8 +33,8 @@ von Marcel Ronner (ATM-System). Alle ATM-Inhalte sind entfernt; Mechanik, Skript
 content/                  die Dokumentation – das OKF-Bundle und das Hugo-Content-Verzeichnis
   _index.md               Startseite: Fall, Artefaktliste, Ableitungskette
   domain_model/           domainModel.md + .puml, und entities/ – eine Seite pro Fachklasse
-  business_process/       businessProcess.md mit eingebettetem Mermaid-Diagramm
-  system_context/         systemContext.md mit eingebettetem Mermaid-Diagramm
+  business_process/       businessProcess.md und der Soll-Prozess als BPMN in zwei Teilen (.bpmn)
+  system_context/         systemContext.md und das Kontextdiagramm in D2 (.d2)
   use_case/               useCaseDiagram, actorDescriptions, actors/, ein Ordner pro Use Case (.md + .puml)
   state_chart/            Dokument und Antrag (.md + .puml)
   epics/                  Story Map und user_stories/ – eine Datei pro Story
@@ -201,17 +201,24 @@ Re-check the mounts against Docsy's own `hugo.yaml` after `hugo mod get -u`.
 
 ## Diagrams
 
-Business processes are Mermaid, embedded in the Markdown and drawn in the browser by Docsy.
-Everything else is PlantUML, kept as `.puml` files beside the page, and embedded by pointing an image
-at the source:
+Jedes Diagramm liegt als Quelltext neben seiner Seite und wird über ein Bild eingebunden:
+
+| Diagramm | Format | Werkzeug |
+|---|---|---|
+| Klassen, Use Cases, Aktivitäten, Zustände | `.puml` | [PlantUML](https://plantuml.com), mit dem gemeinsamen Stilblatt `assets/diagrams/style.puml` |
+| Soll-Prozess | `.bpmn` | BPMN 2.0, gezeichnet von [bpmn-js](https://bpmn.io); in bpmn.io oder Camunda Modeler bearbeitbar |
+| Systemkontext | `.d2` | [D2](https://d2lang.com) mit ELK-Layout |
+| Übersicht auf der Startseite | Mermaid im Markdown | Docsy im Browser |
 
 ```markdown
 ![Aktivitätsdiagramm – UC-04 Dokument ablegen](dokumentAblegen.puml)
 ```
 
+Im Site-Build öffnet ein Klick auf ein Diagramm das SVG in voller Grösse.
+
 There is no PlantUML installation and no generated SVG in the repository. During the build,
-`render-image.html` posts each `.puml` file to Kroki and publishes the SVG it returns — a diagram
-cannot drift from its source, and a PlantUML syntax error fails the build. Hugo caches each response
+`render-image.html` posts each `.puml`, `.bpmn` and `.d2` file to Kroki (PlantUML with the shared style inserted after `@startuml`) and publishes the SVG it returns — a diagram
+cannot drift from its source, and a syntax error fails the build. Hugo caches each response
 by its source. To keep diagram source off the public service, run Kroki yourself
 (`docker run -p 8000:8000 yuzutech/kroki`) and set `HUGO_PARAMS_KROKI_URL=http://localhost:8000`.
 On GitHub, a page shows a broken image where its diagram would be; the site renders it.

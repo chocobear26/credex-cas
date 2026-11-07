@@ -34,7 +34,8 @@ paths:
 - Jeder genannte Use Case ist in der Tabelle verlinkt
 
 ## PlantUML
-- `@startuml` / `@enduml`, `!theme plain`, `skinparam stateFontStyle bold`
+- `@startuml` / `@enduml`, `left to right direction`, `skinparam stateFontStyle bold`; kein eigenes Styling ausser der Statusfarbe
+- Statusfarbe nach Bedeutung: `#F0FDF4;line:16A34A` (von der KI sicher), `#FFFBEB;line:D97706` (unsicher / wartet auf Mensch), `#EFF6FF;line:2563EB` (vom Menschen bestätigt bzw. in Bearbeitung), `#F8FAFC;line:94A3B8` (verworfen), `#F1F5F9;line:334155` (abgeschlossen)
 - Titel: `title Zustandsdiagramm – {Entität}`
 - `[*] -->` für den Startübergang
 - Zustandsbeschreibung: `state ZUSTAND : kurze Beschreibung`

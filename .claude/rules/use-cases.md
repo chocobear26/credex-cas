@@ -86,9 +86,10 @@ Jeder Use Case bekommt einen **Unterordner** in `use_case/` (snake_case, z.B. `u
 - `---` trennt die Hauptabschnitte
 
 ### PlantUML-Aktivitätsdiagramm
-- `@startuml` / `@enduml`, `!theme plain`
+- `@startuml` / `@enduml`; kein eigenes Styling (siehe «Diagrammstil» in `AGENTS.md`)
 - Titel: `title Aktivitätsdiagramm – UC-{nn} {Name}`
-- Swimlanes `|Berater/in|`, `|Partner-KI|`, `|CredEx-System|` wo mehrere Akteure handeln
+- Swimlanes mit Akteurfarbe beim ersten Auftreten: `|#EFF6FF|Berater/in|`, `|#F5F3FF|Partner-KI|`, `|#FEFCE8|CredEx-System|`, `|#F8FAFC|Partnermanagement|`; danach nur `|Berater/in|`
+- Entscheide eines Menschen mit mehreren Ausgängen als `switch` / `case`, nicht als verschachtelte `if`
 - `:aktion;` für Tätigkeiten, `if (...) then (...)` / `else (...)` für Entscheidungen
 - `repeat` / `repeat while (...)` für Schleifen
 - `stop` für jeden Endpfad

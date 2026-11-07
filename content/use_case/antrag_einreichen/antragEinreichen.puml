@@ -1,10 +1,9 @@
 @startuml antragEinreichen
-!theme plain
 title Aktivitätsdiagramm – UC-07 Antrag einreichen
-|Berater/in|
+|#EFF6FF|Berater/in|
 start
 :In der Übersicht "Einreichen" wählen;
-|CredEx-System|
+|#FEFCE8|CredEx-System|
 :Vollständigkeit prüfen (UC-05);
 if (Zuordnung unsicher?) then (ja)
   :Einreichen sperren,\nHinweis auf unsichere Zuordnung (1x);

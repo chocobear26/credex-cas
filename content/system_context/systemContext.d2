@@ -1,0 +1,66 @@
+# Systemkontext – CredEx Phase 1
+# Quelle des Diagramms; wird beim Build über Kroki (D2) gerendert.
+# Rot = Scope Phase 1 (neu), gestrichelt = Kontext. Pfeile = gerichtete Informationsflüsse;
+# ein Doppelpfeil trägt beide Richtungen als «hin / zurück».
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+
+direction: right
+
+classes: {
+  kontext: {
+    style: {fill: "#F8FAFC"; stroke: "#94A3B8"; stroke-dash: 4; border-radius: 8; font-color: "#334155"; font-size: 15}
+  }
+  scope: {
+    style: {fill: "#FFFFFF"; stroke: "#DC2626"; stroke-width: 2; border-radius: 8; font-color: "#7F1D1D"; bold: true; font-size: 15}
+  }
+  gruppe: {
+    style: {fill: "#FFFFFF"; stroke: "#CBD5E1"; border-radius: 14; font-color: "#475569"; font-size: 16}
+  }
+  fluss: {
+    style: {stroke: "#64748B"; font-color: "#334155"; font-size: 13; italic: false}
+  }
+}
+
+partner: "Distributionspartner (Kontext)" {
+  class: gruppe
+  direction: down
+  dms: "Partner-DMS\n(z.B. SharePoint)" {class: kontext; shape: cylinder}
+  ki: "Partner-KI\n(Copilot, ChatGPT, Claude)" {class: kontext}
+  berater: "Berater/in" {
+    shape: person
+    style: {fill: "#DBEAFE"; stroke: "#2563EB"; font-color: "#1E3A5F"; font-size: 15}
+  }
+}
+
+phase1: "Scope Phase 1 (neu)" {
+  class: gruppe
+  style: {stroke: "#DC2626"; fill: "#FEF2F2"}
+  direction: down
+  mcp: "CredEx MCP-Server" {class: scope}
+  protokoll: "Protokoll" {class: scope; shape: cylinder}
+  uebersicht: "Übersicht im CredEx-Tool" {class: scope}
+}
+
+dritte: "CredEx und Dritte (Kontext)" {
+  class: gruppe
+  direction: down
+  idp: "Identity Provider\n(OAuth)" {class: kontext}
+  plattform: "CredEx-Plattform\n(Antrag, Dokumentenablage)" {class: kontext}
+  glkb: "Glarner KB\n(Prüfung, Abschluss)" {class: kontext}
+}
+
+partner.dms -> partner.ki: Dateien des Kreditnehmers {class: fluss}
+partner.berater -> partner.ki: Auftrag {class: fluss}
+partner.ki <-> phase1.mcp: "Dokument mit Zuordnung /\nAntrag, Pflichtdokumente, Status" {class: fluss}
+partner.berater <-> phase1.uebersicht: "Bestätigung, Einreichen /\nStatus je Pflichtdokument" {class: fluss}
+phase1.mcp -> phase1.protokoll: Protokolleintrag KI {class: fluss}
+phase1.uebersicht -> phase1.protokoll: Protokolleintrag Berater {class: fluss}
+phase1.mcp <-> dritte.idp: {class: fluss}
+phase1.mcp <-> dritte.plattform: "Dokument, Zuordnung /\nAntrag, Pflichtdokumente" {class: fluss}
+phase1.uebersicht <-> dritte.plattform: "Bestätigung, Einreichung /\nStatus je Pflichtdokument" {class: fluss}
+dritte.plattform -> dritte.glkb: vollständiges Dossier {class: fluss}

@@ -28,12 +28,12 @@ types:
     where: business_process/businessProcess.md
     rules: business-process.md
     requires: [sources, generated, tags]
-    holds: Der Soll-Prozess als eingebettetes Mermaid-Flussdiagramm mit nummerierten Schritten.
+    holds: Der Soll-Prozess als BPMN-2.0-Modell in zwei Teilen mit nummerierten Schritten.
   system-context:
     where: system_context/systemContext.md
     rules: system-context.md
     requires: [sources, generated, tags]
-    holds: Systemgrenze, Nachbarsysteme und gerichtete Informationsflüsse als Mermaid-Diagramm.
+    holds: Systemgrenze, Nachbarsysteme und gerichtete Informationsflüsse als D2-Diagramm.
   use-case-diagram:
     where: use_case/useCaseDiagram.md
     rules: use-cases.md

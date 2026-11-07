@@ -18,12 +18,17 @@ sources:
     resource: /use_case/antrag_einreichen/antragEinreichen.md
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-1
+    resource: /sources/cr_1_1.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T09:55:00Z
 ---
 
 # Zustandsdiagramm – Dokument
+
+> [!NOTE] v1.1 – Geändert 2026-11-07
+> Diagramm waagrecht, Status farblich markiert wie im Original der Gruppe.
 
 ## Überblick
 

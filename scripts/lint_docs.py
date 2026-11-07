@@ -15,7 +15,7 @@ Errors fail; warnings are reported. `--strict` makes warnings fail too.
         the convention, or a datetime without an explicit UTC offset  (OKF v0.2 §5.2, §7)
     E8  `tags:` is not a list of lowercase-kebab strings            (OKF v0.2 §4.1)
     W1  the page's first `# Heading` does not match its `title:`
-    W2  a .puml diagram that no page embeds or links
+    W2  a diagram source (.puml, .bpmn, .d2) that no page embeds or links
     W3  an artifact with no `sources:` or no `generated:`, where its type requires them
 """
 
@@ -179,7 +179,7 @@ def main() -> int:
             if not resolved.exists():
                 report(errors, path, line, "E5", f"{target} does not exist")
 
-    for diagram in sorted(CONTENT.rglob("*.puml")):
+    for diagram in sorted(p for ext in ("*.puml", "*.bpmn", "*.d2") for p in CONTENT.rglob(ext)):
         if diagram.resolve() not in referenced:
             report(warnings, diagram, 1, "W2", "no page embeds or links this diagram")
 

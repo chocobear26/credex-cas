@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs_1" targetNamespace="https://github.com/chocobear26/credex-cas">
+<!-- Soll-Prozess Teil 1 – Ablage durch die Partner-KI · Quelle des Diagramms; wird beim Build über Kroki (bpmn-js) gerendert und lässt sich in bpmn.io bearbeiten. -->
+<bpmn:collaboration id="C_1"><bpmn:participant id="P_1" name="Soll-Prozess Teil 1 – Ablage durch die Partner-KI" processRef="Proc_1" /></bpmn:collaboration>
+<bpmn:process id="Proc_1" isExecutable="false">
+<bpmn:laneSet id="LS_1">
+<bpmn:lane id="L1_it" name="Partner-IT"><bpmn:flowNodeRef>t02</bpmn:flowNodeRef></bpmn:lane>
+<bpmn:lane id="L1_b" name="Berater/in"><bpmn:flowNodeRef>s1</bpmn:flowNodeRef><bpmn:flowNodeRef>g01</bpmn:flowNodeRef><bpmn:flowNodeRef>m1</bpmn:flowNodeRef><bpmn:flowNodeRef>t11</bpmn:flowNodeRef></bpmn:lane>
+<bpmn:lane id="L1_ki" name="Partner-KI"><bpmn:flowNodeRef>t12</bpmn:flowNodeRef><bpmn:flowNodeRef>t14</bpmn:flowNodeRef><bpmn:flowNodeRef>m21</bpmn:flowNodeRef><bpmn:flowNodeRef>t21</bpmn:flowNodeRef><bpmn:flowNodeRef>t22</bpmn:flowNodeRef><bpmn:flowNodeRef>g25</bpmn:flowNodeRef></bpmn:lane>
+<bpmn:lane id="L1_cx" name="CredEx-System"><bpmn:flowNodeRef>t13</bpmn:flowNodeRef><bpmn:flowNodeRef>t15</bpmn:flowNodeRef><bpmn:flowNodeRef>g23</bpmn:flowNodeRef><bpmn:flowNodeRef>t24</bpmn:flowNodeRef><bpmn:flowNodeRef>t23a</bpmn:flowNodeRef><bpmn:flowNodeRef>m25</bpmn:flowNodeRef><bpmn:flowNodeRef>t26</bpmn:flowNodeRef><bpmn:flowNodeRef>lt</bpmn:flowNodeRef></bpmn:lane>
+</bpmn:laneSet>
+<bpmn:startEvent id="s1" name="Antrag in Schritt 5"><bpmn:outgoing>F1_0</bpmn:outgoing></bpmn:startEvent>
+<bpmn:exclusiveGateway id="g01" name="0.1 KiVerbindung vorhanden?"><bpmn:incoming>F1_0</bpmn:incoming><bpmn:outgoing>F1_1</bpmn:outgoing><bpmn:outgoing>F1_2</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:task id="t02" name="0.2 KiVerbindung einrichten (einmalig)"><bpmn:incoming>F1_2</bpmn:incoming><bpmn:outgoing>F1_3</bpmn:outgoing></bpmn:task>
+<bpmn:exclusiveGateway id="m1" name=""><bpmn:incoming>F1_1</bpmn:incoming><bpmn:incoming>F1_3</bpmn:incoming><bpmn:outgoing>F1_4</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:task id="t11" name="1.1 Auftrag an eigene KI geben"><bpmn:incoming>F1_4</bpmn:incoming><bpmn:outgoing>F1_5</bpmn:outgoing></bpmn:task>
+<bpmn:task id="t12" name="1.2 Offene Anträge abrufen"><bpmn:incoming>F1_5</bpmn:incoming><bpmn:outgoing>F1_6</bpmn:outgoing></bpmn:task>
+<bpmn:task id="t13" name="1.3 Berechtigung prüfen, offene Anträge liefern"><bpmn:incoming>F1_6</bpmn:incoming><bpmn:outgoing>F1_7</bpmn:outgoing></bpmn:task>
+<bpmn:task id="t14" name="1.4 Pflichtliste des Antrags abfragen"><bpmn:incoming>F1_7</bpmn:incoming><bpmn:outgoing>F1_8</bpmn:outgoing></bpmn:task>
+<bpmn:task id="t15" name="1.5 Pflichtdokumente mit Status liefern"><bpmn:incoming>F1_8</bpmn:incoming><bpmn:outgoing>F1_9</bpmn:outgoing></bpmn:task>
+<bpmn:exclusiveGateway id="m21" name=""><bpmn:incoming>F1_9</bpmn:incoming><bpmn:incoming>F1_18</bpmn:incoming><bpmn:outgoing>F1_10</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:task id="t21" name="2.1 Datei aus Partner-DMS lesen, Pflichtdokument und Konfidenz bestimmen"><bpmn:incoming>F1_10</bpmn:incoming><bpmn:outgoing>F1_11</bpmn:outgoing></bpmn:task>
+<bpmn:task id="t22" name="2.2 Dokument mit Zuordnung ablegen"><bpmn:incoming>F1_11</bpmn:incoming><bpmn:outgoing>F1_12</bpmn:outgoing></bpmn:task>
+<bpmn:exclusiveGateway id="g23" name="2.3 Berechtigung, Format, Grösse gültig?"><bpmn:incoming>F1_12</bpmn:incoming><bpmn:outgoing>F1_13</bpmn:outgoing><bpmn:outgoing>F1_14</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:task id="t24" name="2.4 Dokument speichern, Status setzen, Protokolleintrag"><bpmn:incoming>F1_13</bpmn:incoming><bpmn:outgoing>F1_15</bpmn:outgoing></bpmn:task>
+<bpmn:task id="t23a" name="2.3a Ablage ablehnen, Fehlermeldung an KI"><bpmn:incoming>F1_14</bpmn:incoming><bpmn:outgoing>F1_16</bpmn:outgoing></bpmn:task>
+<bpmn:exclusiveGateway id="m25" name=""><bpmn:incoming>F1_15</bpmn:incoming><bpmn:incoming>F1_16</bpmn:incoming><bpmn:outgoing>F1_17</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:exclusiveGateway id="g25" name="2.5 Weitere Datei im Dossier?"><bpmn:incoming>F1_17</bpmn:incoming><bpmn:outgoing>F1_18</bpmn:outgoing><bpmn:outgoing>F1_19</bpmn:outgoing></bpmn:exclusiveGateway>
+<bpmn:task id="t26" name="2.6 Vollständigkeit prüfen, fehlende und unsichere melden"><bpmn:incoming>F1_19</bpmn:incoming><bpmn:outgoing>F1_20</bpmn:outgoing></bpmn:task>
+<bpmn:intermediateThrowEvent id="lt" name="weiter mit Teil 2"><bpmn:incoming>F1_20</bpmn:incoming><bpmn:linkEventDefinition id="L_lt" name="Teil 2" /></bpmn:intermediateThrowEvent>
+<bpmn:sequenceFlow id="F1_0" sourceRef="s1" targetRef="g01" />
+<bpmn:sequenceFlow id="F1_1" sourceRef="g01" targetRef="m1" name="Ja" />
+<bpmn:sequenceFlow id="F1_2" sourceRef="g01" targetRef="t02" name="Nein" />
+<bpmn:sequenceFlow id="F1_3" sourceRef="t02" targetRef="m1" />
+<bpmn:sequenceFlow id="F1_4" sourceRef="m1" targetRef="t11" />
+<bpmn:sequenceFlow id="F1_5" sourceRef="t11" targetRef="t12" />
+<bpmn:sequenceFlow id="F1_6" sourceRef="t12" targetRef="t13" />
+<bpmn:sequenceFlow id="F1_7" sourceRef="t13" targetRef="t14" />
+<bpmn:sequenceFlow id="F1_8" sourceRef="t14" targetRef="t15" />
+<bpmn:sequenceFlow id="F1_9" sourceRef="t15" targetRef="m21" />
+<bpmn:sequenceFlow id="F1_10" sourceRef="m21" targetRef="t21" />
+<bpmn:sequenceFlow id="F1_11" sourceRef="t21" targetRef="t22" />
+<bpmn:sequenceFlow id="F1_12" sourceRef="t22" targetRef="g23" />
+<bpmn:sequenceFlow id="F1_13" sourceRef="g23" targetRef="t24" name="Ja" />
+<bpmn:sequenceFlow id="F1_14" sourceRef="g23" targetRef="t23a" name="Nein" />
+<bpmn:sequenceFlow id="F1_15" sourceRef="t24" targetRef="m25" />
+<bpmn:sequenceFlow id="F1_16" sourceRef="t23a" targetRef="m25" />
+<bpmn:sequenceFlow id="F1_17" sourceRef="m25" targetRef="g25" />
+<bpmn:sequenceFlow id="F1_18" sourceRef="g25" targetRef="m21" name="Ja" />
+<bpmn:sequenceFlow id="F1_19" sourceRef="g25" targetRef="t26" name="Nein" />
+<bpmn:sequenceFlow id="F1_20" sourceRef="t26" targetRef="lt" />
+</bpmn:process>
+<bpmndi:BPMNDiagram id="D_1"><bpmndi:BPMNPlane id="Pl_1" bpmnElement="C_1">
+<bpmndi:BPMNShape id="P_1_di" bpmnElement="P_1" isHorizontal="true"><dc:Bounds x="0" y="0" width="2470" height="650" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="L1_it_di" bpmnElement="L1_it" isHorizontal="true"><dc:Bounds x="30" y="0" width="2440" height="130" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="L1_b_di" bpmnElement="L1_b" isHorizontal="true"><dc:Bounds x="30" y="130" width="2440" height="130" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="L1_ki_di" bpmnElement="L1_ki" isHorizontal="true"><dc:Bounds x="30" y="260" width="2440" height="130" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="L1_cx_di" bpmnElement="L1_cx" isHorizontal="true"><dc:Bounds x="30" y="390" width="2440" height="260" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="s1_di" bpmnElement="s1"><dc:Bounds x="184.5" y="177.0" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="152.5" y="217.0" width="100" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="g01_di" bpmnElement="g01" isMarkerVisible="true"><dc:Bounds x="342.5" y="170.0" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="220.5" y="146.0" width="118" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="t02_di" bpmnElement="t02"><dc:Bounds x="467.5" y="25.0" width="130" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="m1_di" bpmnElement="m1" isMarkerVisible="true"><dc:Bounds x="672.5" y="170.0" width="50" height="50" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="t11_di" bpmnElement="t11"><dc:Bounds x="797.5" y="155.0" width="130" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="t12_di" bpmnElement="t12"><dc:Bounds x="962.5" y="285.0" width="130" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="t13_di" bpmnElement="t13"><dc:Bounds x="962.5" y="415.0" width="130" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="t14_di" bpmnElement="t14"><dc:Bounds x="1127.5" y="285.0" width="130" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="t15_di" bpmnElement="t15"><dc:Bounds x="1127.5" y="415.0" width="130" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="m21_di" bpmnElement="m21" isMarkerVisible="true"><dc:Bounds x="1332.5" y="300.0" width="50" height="50" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="t21_di" bpmnElement="t21"><dc:Bounds x="1457.5" y="285.0" width="130" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="t22_di" bpmnElement="t22"><dc:Bounds x="1622.5" y="285.0" width="130" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="g23_di" bpmnElement="g23" isMarkerVisible="true"><dc:Bounds x="1662.5" y="430.0" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="1540.5" y="406.0" width="118" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="t24_di" bpmnElement="t24"><dc:Bounds x="1787.5" y="415.0" width="130" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="t23a_di" bpmnElement="t23a"><dc:Bounds x="1787.5" y="545.0" width="130" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="m25_di" bpmnElement="m25" isMarkerVisible="true"><dc:Bounds x="1992.5" y="430.0" width="50" height="50" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="g25_di" bpmnElement="g25" isMarkerVisible="true"><dc:Bounds x="1992.5" y="300.0" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="2046.5" y="268.0" width="118" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="t26_di" bpmnElement="t26"><dc:Bounds x="2117.5" y="415.0" width="130" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="lt_di" bpmnElement="lt"><dc:Bounds x="2329.5" y="437.0" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="2297.5" y="477.0" width="100" height="27" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+<bpmndi:BPMNEdge id="F1_0_di" bpmnElement="F1_0"><di:waypoint x="220" y="195" /><di:waypoint x="342" y="195" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_1_di" bpmnElement="F1_1"><di:waypoint x="392" y="195" /><di:waypoint x="672" y="195" /><bpmndi:BPMNLabel><dc:Bounds x="402" y="200" width="40" height="14" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_2_di" bpmnElement="F1_2"><di:waypoint x="368" y="170" /><di:waypoint x="368" y="65" /><di:waypoint x="468" y="65" /><bpmndi:BPMNLabel><dc:Bounds x="374" y="152" width="40" height="14" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_3_di" bpmnElement="F1_3"><di:waypoint x="598" y="65" /><di:waypoint x="698" y="65" /><di:waypoint x="698" y="170" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_4_di" bpmnElement="F1_4"><di:waypoint x="722" y="195" /><di:waypoint x="798" y="195" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_5_di" bpmnElement="F1_5"><di:waypoint x="928" y="195" /><di:waypoint x="940" y="195" /><di:waypoint x="940" y="325" /><di:waypoint x="962" y="325" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_6_di" bpmnElement="F1_6"><di:waypoint x="1028" y="365" /><di:waypoint x="1028" y="415" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_7_di" bpmnElement="F1_7"><di:waypoint x="1092" y="455" /><di:waypoint x="1106" y="455" /><di:waypoint x="1106" y="325" /><di:waypoint x="1128" y="325" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_8_di" bpmnElement="F1_8"><di:waypoint x="1192" y="365" /><di:waypoint x="1192" y="415" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_9_di" bpmnElement="F1_9"><di:waypoint x="1258" y="455" /><di:waypoint x="1358" y="455" /><di:waypoint x="1358" y="350" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_10_di" bpmnElement="F1_10"><di:waypoint x="1382" y="325" /><di:waypoint x="1458" y="325" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_11_di" bpmnElement="F1_11"><di:waypoint x="1588" y="325" /><di:waypoint x="1622" y="325" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_12_di" bpmnElement="F1_12"><di:waypoint x="1688" y="365" /><di:waypoint x="1688" y="430" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_13_di" bpmnElement="F1_13"><di:waypoint x="1712" y="455" /><di:waypoint x="1788" y="455" /><bpmndi:BPMNLabel><dc:Bounds x="1722" y="460" width="40" height="14" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_14_di" bpmnElement="F1_14"><di:waypoint x="1688" y="480" /><di:waypoint x="1688" y="585" /><di:waypoint x="1788" y="585" /><bpmndi:BPMNLabel><dc:Bounds x="1694" y="484" width="40" height="14" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_15_di" bpmnElement="F1_15"><di:waypoint x="1918" y="455" /><di:waypoint x="1992" y="455" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_16_di" bpmnElement="F1_16"><di:waypoint x="1918" y="585" /><di:waypoint x="2018" y="585" /><di:waypoint x="2018" y="480" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_17_di" bpmnElement="F1_17"><di:waypoint x="2018" y="430" /><di:waypoint x="2018" y="350" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_18_di" bpmnElement="F1_18"><di:waypoint x="2018" y="300" /><di:waypoint x="2018" y="272" /><di:waypoint x="1358" y="272" /><di:waypoint x="1358" y="300" /><bpmndi:BPMNLabel><dc:Bounds x="2024" y="282" width="40" height="14" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_19_di" bpmnElement="F1_19"><di:waypoint x="2042" y="325" /><di:waypoint x="2096" y="325" /><di:waypoint x="2096" y="455" /><di:waypoint x="2118" y="455" /><bpmndi:BPMNLabel><dc:Bounds x="2052" y="330" width="40" height="14" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="F1_20_di" bpmnElement="F1_20"><di:waypoint x="2248" y="455" /><di:waypoint x="2330" y="455" /></bpmndi:BPMNEdge>
+</bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>

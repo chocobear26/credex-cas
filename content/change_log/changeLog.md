@@ -7,9 +7,11 @@ weight: 1
 sources:
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-1
+    resource: /sources/cr_1_1.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T09:55:00Z
 ---
 
 # Change Log – CredEx Phase 1
@@ -26,6 +28,41 @@ Jeder Versionsabschnitt nennt **jedes Artefakt, das erstellt oder geändert wurd
 | 🟡 `geändert` | Bestehendes Artefakt oder Element geändert |
 | 🔴 `veraltet` | Artefakt oder Element zur Entfernung vorgesehen |
 | ⚫ `entfernt` | Artefakt oder Element gelöscht |
+
+---
+
+## v1.1 – Lesbarere Diagramme (2026-11-07)
+
+Alle Diagramme einheitlich und übersichtlich: gemeinsamer PlantUML-Stil, Soll-Prozess als BPMN in zwei Teilen, Systemkontext in D2; inhaltlich unverändert. Siehe [CR-1.1](../sources/cr_1_1.md).
+
+| Artefakt | Status | Beschreibung |
+|---|---|---|
+| [Soll-Prozess – Dokumentenupload über die eigene KI des Partners](../business_process/businessProcess.md) | 🟡 geändert | Diagramm als BPMN in zwei Teilen |
+| [sollProzessTeil1.bpmn](../business_process/sollProzessTeil1.bpmn) | 🟢 neu | BPMN Teil 1 – Ablage durch die Partner-KI |
+| [sollProzessTeil2.bpmn](../business_process/sollProzessTeil2.bpmn) | 🟢 neu | BPMN Teil 2 – Prüfen und Einreichen |
+| [Systemkontext – CredEx Phase 1](../system_context/systemContext.md) | 🟡 geändert | Diagramm in D2 |
+| [systemContext.d2](../system_context/systemContext.d2) | 🟢 neu | D2-Quelle |
+| [Fachklassenmodell – CredEx Phase 1](../domain_model/domainModel.md) | 🟡 geändert | Hinweis v1.1 |
+| [domainModel.puml](../domain_model/domainModel.puml) | 🟡 geändert | Gemeinsamer Stil, rechtwinklige Linien |
+| [Use-Case-Diagramm – CredEx Phase 1](../use_case/useCaseDiagram.md) | 🟡 geändert | Hinweis v1.1 |
+| [useCaseDiagram.puml](../use_case/useCaseDiagram.puml) | 🟡 geändert | Neue Anordnung |
+| [Use Case – UC-06 Zuordnung bestätigen oder ändern](../use_case/zuordnung_bestaetigen/zuordnungBestaetigen.md) | 🟡 geändert | Hinweis v1.1 |
+| [antragEinreichen.puml](../use_case/antrag_einreichen/antragEinreichen.puml) | 🟡 geändert | Gemeinsamer Stil, Swimlane-Farben |
+| [dokumentAblegen.puml](../use_case/dokument_ablegen/dokumentAblegen.puml) | 🟡 geändert | Gemeinsamer Stil, Swimlane-Farben |
+| [kiVerbinden.puml](../use_case/ki_verbinden/kiVerbinden.puml) | 🟡 geändert | Gemeinsamer Stil, Swimlane-Farben |
+| [nutzungAuswerten.puml](../use_case/nutzung_auswerten/nutzungAuswerten.puml) | 🟡 geändert | Gemeinsamer Stil, Swimlane-Farben |
+| [offeneAntraegeAbrufen.puml](../use_case/offene_antraege_abrufen/offeneAntraegeAbrufen.puml) | 🟡 geändert | Gemeinsamer Stil, Swimlane-Farben |
+| [pflichtlisteAbfragen.puml](../use_case/pflichtliste_abfragen/pflichtlisteAbfragen.puml) | 🟡 geändert | Gemeinsamer Stil, Swimlane-Farben |
+| [vollstaendigkeitPruefen.puml](../use_case/vollstaendigkeit_pruefen/vollstaendigkeitPruefen.puml) | 🟡 geändert | Gemeinsamer Stil, Swimlane-Farben |
+| [zuordnungBestaetigen.puml](../use_case/zuordnung_bestaetigen/zuordnungBestaetigen.puml) | 🟡 geändert | Gemeinsamer Stil, Swimlane-Farben; Entscheid als switch vereinfacht |
+| [Zustandsdiagramm – Dokument](../state_chart/dokumentStateChart.md) | 🟡 geändert | Hinweis v1.1 |
+| [dokumentStateChart.puml](../state_chart/dokumentStateChart.puml) | 🟡 geändert | Waagrecht, Statusfarben |
+| [Zustandsdiagramm – Antrag](../state_chart/antragStateChart.md) | 🟡 geändert | Hinweis v1.1 |
+| [antragStateChart.puml](../state_chart/antragStateChart.puml) | 🟡 geändert | Waagrecht, gemeinsamer Stil |
+| [Startseite](../_index.md) | 🟡 geändert | Mermaid-Übersicht gestaltet |
+| [Change Log – CredEx Phase 1](changeLog.md) | 🟡 geändert | Dieser Eintrag |
+| [Log](../log.md) | 🟡 geändert | Mit v1.1 neu erzeugt |
+| [CR-1.1](../sources/cr_1_1.md) | 🟢 neu | Der Change Request zu dieser Version |
 
 ---
 

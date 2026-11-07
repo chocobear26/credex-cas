@@ -1,26 +1,26 @@
 @startuml DokumentStateChart
-!theme plain
+left to right direction
 skinparam stateFontStyle bold
 
 title Zustandsdiagramm – Dokument
 
+state ABGELEGT : Datei gespeichert,\nZuordnung der KI liegt vor
+state VON_KI_ZUGEORDNET #F0FDF4;line:16A34A;text:14532D : Konfidenz auf oder\nüber der Schwelle
+state UNSICHER #FFFBEB;line:D97706;text:78350F : sperrt das Einreichen
+state BESTAETIGT #EFF6FF;line:2563EB;text:1E3A8A : quelle = MENSCH
+state VERWORFEN #F8FAFC;line:94A3B8;text:475569 : Pflichtdokument\nwieder FEHLT
+state EINGEREICHT #F1F5F9;line:334155 : Teil des Dossiers
+
 [*] --> ABGELEGT : CredEx-System legt\nDokument an
 ABGELEGT --> VON_KI_ZUGEORDNET : [Konfidenz ≥ Schwelle]
 ABGELEGT --> UNSICHER : [Konfidenz < Schwelle]
-UNSICHER --> BESTAETIGT : bestätigen\noder umordnen
 VON_KI_ZUGEORDNET --> BESTAETIGT : umordnen
+UNSICHER --> BESTAETIGT : bestätigen\noder umordnen
 UNSICHER --> VERWORFEN : verwerfen
 VON_KI_ZUGEORDNET --> EINGEREICHT : Antrag eingereicht
 BESTAETIGT --> EINGEREICHT : Antrag eingereicht
-VERWORFEN --> [*]
 EINGEREICHT --> [*]
-
-state ABGELEGT : Datei gespeichert,\nZuordnung der KI liegt vor
-state VON_KI_ZUGEORDNET : Konfidenz auf oder\nüber der Schwelle
-state UNSICHER : sperrt das Einreichen
-state BESTAETIGT : quelle = MENSCH
-state VERWORFEN : Pflichtdokument\nwieder FEHLT
-state EINGEREICHT : Teil des Dossiers
+VERWORFEN --> [*]
 
 note bottom of UNSICHER
   Schwelle: Startwert 0.80,

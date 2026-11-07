@@ -11,4 +11,5 @@ weight: 80
 
 ## 2026-11-07
 
+- **Release:** [v1.1 – Lesbarere Diagramme](change_log/changeLog.md) — Alle Diagramme einheitlich und übersichtlich: gemeinsamer PlantUML-Stil, Soll-Prozess als BPMN in zwei Teilen, Systemkontext in D2; inhaltlich unverändert. Siehe CR-1.1.
 - **Release:** [v1.0 – Erstfassung Phase 1](change_log/changeLog.md) — Erstfassung der Produktdokumentation CredEx Phase 1 aus dem Arbeitsstand der Gruppe 6, mit den Teamentscheiden bis 07.11.2026 und markierten Annahmen. Siehe CR-1.0.

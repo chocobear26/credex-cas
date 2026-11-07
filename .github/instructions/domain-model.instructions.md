@@ -41,7 +41,7 @@ applyTo: "content/domain_model/**"
 - Danach eine Tabelle: `Beziehung | Beschreibung`
 
 ## PlantUML
-- `@startuml` / `@enduml`, `!theme plain`, `skinparam classAttributeIconSize 0`
+- `@startuml` / `@enduml`, `skinparam classAttributeIconSize 0`, `skinparam linetype ortho`; kein eigenes Styling (siehe «Diagrammstil» in `AGENTS.md`)
 - Alle Attribute mit Typ in den `class`-Blöcken
 - Klassen, die neu in Phase 1 sind, tragen das Stereotyp `<<neu>>`
 - Beziehungen: `Antrag "1" -- "0..*" Dokument : enthält >`

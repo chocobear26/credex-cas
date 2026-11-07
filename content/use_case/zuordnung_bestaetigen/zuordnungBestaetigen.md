@@ -14,12 +14,17 @@ sources:
     resource: /domain_model/domainModel.md
   - id: cr-1-0
     resource: /sources/cr_1_0.md
+  - id: cr-1-1
+    resource: /sources/cr_1_1.md
 generated:
   by: jarvis/1.0
-  at: 2026-11-07T08:45:00Z
+  at: 2026-11-07T09:55:00Z
 ---
 
 # Use Case – UC-06 Zuordnung bestätigen oder ändern
+
+> [!NOTE] v1.1 – Geändert 2026-11-07
+> Aktivitätsdiagramm vereinfacht: ein Entscheid des Beraters, danach ein Block im CredEx-System. Inhalt und Aktivitätslabels unverändert.
 
 ## Überblick
 

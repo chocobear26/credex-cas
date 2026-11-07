@@ -1,12 +1,11 @@
 @startuml kiVerbinden
-!theme plain
 title Aktivitätsdiagramm – UC-01 KI mit CredEx verbinden
-|Partner-IT oder Berater/in|
+|#F8FAFC|Partner-IT oder Berater/in|
 start
 :Adresse des MCP-Servers\nim KI-Client eintragen;
-|Berater/in|
+|#EFF6FF|Berater/in|
 :Beim Identity Provider anmelden;
-|CredEx-System|
+|#FEFCE8|CredEx-System|
 if (Anmeldung gültig?) then (ja)
   :CredEx-System legt KiVerbindung an;
   :Werkzeuge für die Partner-KI freigeben;
