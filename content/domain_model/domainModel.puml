@@ -1,0 +1,90 @@
+@startuml Fachklassenmodell
+!theme plain
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+hide methods
+hide circle
+skinparam class<<neu>> {
+  BackgroundColor #FDE2E2
+  BorderColor #DC2626
+}
+
+title Fachklassenmodell – CredEx Phase 1
+
+class Partner {
+  name : String
+  typ : Enum {BANK, VERSICHERUNG, BROKER}
+}
+
+class Berater {
+  name : String
+  eMail : String
+}
+
+class KiVerbindung <<neu>> {
+  kiClient : String
+  berechtigungen : String
+  gültigBis : DateTime
+}
+
+class "Prüfer" as Pruefer {
+  name : String
+}
+
+class Antrag {
+  antragsnummer : String
+  status : Enum {IN_ERFASSUNG, EINGEREICHT, IN_PRUEFUNG, FREIGEGEBEN}
+  erfasstAm : DateTime
+  eingereichtAm : DateTime
+}
+
+class Kreditnehmer {
+  name : String
+  kundennummer : String
+}
+
+class Dokument {
+  dateiname : String
+  quelldatei : String
+  seiten : String
+  hochgeladenAm : DateTime
+  status : Enum {ABGELEGT, VON_KI_ZUGEORDNET, UNSICHER, BESTAETIGT, VERWORFEN, EINGEREICHT}
+}
+
+class Zuordnung <<neu>> {
+  ziel : Enum {PFLICHTDOKUMENT, WEITERES_DOKUMENT}
+  konfidenz : Decimal
+  quelle : Enum {KI, MENSCH}
+  zeitpunkt : DateTime
+}
+
+class Pflichtdokument {
+  bezug : Enum {PERSON, OBJEKT}
+  status : Enum {FEHLT, UNSICHER, VORHANDEN}
+}
+
+class Dokumenttyp {
+  bezeichnung : String
+  erlaubteFormate : String
+}
+
+class Protokolleintrag <<neu>> {
+  zeitpunkt : DateTime
+  akteur : Enum {KI, BERATER}
+  aktion : String
+}
+
+Partner "1" -- "1..*" Berater : beschäftigt >
+Berater "1" -- "0..*" KiVerbindung : nutzt >
+Berater "1" -- "0..*" Antrag : erfasst >
+Pruefer "0..1" -- "0..*" Antrag : prüft, gibt frei >
+Antrag "0..*" -- "1..*" Kreditnehmer : betrifft >
+Antrag "1" *-- "0..*" Dokument : enthält >
+Antrag "1" *-- "1..*" Pflichtdokument : verlangt >
+Antrag "1" *-- "0..*" Protokolleintrag : dokumentiert >
+Pflichtdokument "0..*" -- "0..1" Kreditnehmer : bezieht sich auf >
+Pflichtdokument "0..*" -- "1" Dokumenttyp : ist vom Typ >
+Dokument "1" *-- "1" Zuordnung : erhält >
+Zuordnung "0..*" -- "0..1" Pflichtdokument : verweist auf >
+
+@enduml

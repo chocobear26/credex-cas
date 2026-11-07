@@ -1,0 +1,19 @@
+@startuml vollstaendigkeitPruefen
+!theme plain
+title Aktivitätsdiagramm – UC-05 Vollständigkeit prüfen
+|Partner-KI|
+start
+:credex_vollstaendigkeit_pruefen aufrufen;
+|CredEx-System|
+if (Antrag bekannt?) then (ja)
+  :Status jedes Pflichtdokuments\naus den Zuordnungen ableiten;
+  :Fehlende und unsichere Pflichtdokumente\nmit Link zur Übersicht melden;
+  |Partner-KI|
+  :Ergebnis dem Berater/in zusammenfassen;
+  stop
+else (nein)
+  :Fehlermeldung "Antrag unbekannt";
+  stop
+endif
+
+@enduml

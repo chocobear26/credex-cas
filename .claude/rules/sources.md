@@ -1,0 +1,110 @@
+---
+paths:
+  - content/sources/**
+---
+
+# Konventionen Quellen
+
+`content/sources/` enthält das Material, aus dem die Änderungen der Dokumentation stammen, in zwei Arten:
+
+- **Change Requests** – jede Änderung nach dem Change-Request-Protokoll wird hier zuerst
+  aufgeschrieben, und jedes Artefakt, das sie erstellt oder umbaut, zitiert sie in `sources:`.
+- **Assessments** – jeder Lauf von `/okf-check` wird hier abgelegt. Ein Assessment ändert nichts; es
+  ist der Beleg, den ein späterer Change Request für seine Korrekturen zitiert.
+
+Beide werden einmal geschrieben und nie überschrieben, damit der Ordner als Geschichte lesbar bleibt:
+was gefunden, was verlangt, was entschieden wurde. Die Abschnitte zum Assessment unten bleiben auf
+Englisch, weil sie dem englischen Prüfregister `okf-v0-2-checks.md` folgen.
+
+## Dateien
+- `cr_{major}_{minor}.md` – ein Change Request pro Version (z.B. `cr_1_1.md` für v1.1), ID `CR-{major}.{minor}`
+- `okf_assessment_{yyyy}_{mm}_{dd}.md` – ein OKF-Assessment pro Lauf, benannt nach dem Tag. Ein zweiter
+  Lauf am selben Tag bekommt `_2`.
+- `weight` setzt die Reihenfolge des Ordners über beide Arten fort.
+
+## Change Request – Aufbau
+```
+# CR-{X.Y} – {Titel}
+## Anfrage           → Wer hat wann was verlangt – in den Worten der anfragenden Person
+## Analyse           → Die Änderung in eigenen Worten und welche Artefakte sie berührt (Schritt 1)
+## Grundlagen        → Die Unterlagen der Gruppe, auf denen die Änderung beruht (Datei, Stand)
+## Entscheide        → Was geklärt wurde (Schritt 2), mit Datum; jede Annahme als **Annahme:** markiert
+## Auswirkungen      → Tabelle: Artefakt | Auswirkung (neu / geändert / keine) | Details (Schritt 3)
+## User Stories      → Links auf die Stories aus Schritt 5, oder «Keine» mit Grund
+## Abnahme           → Woran man erkennt, dass die Änderung fertig ist
+## Status            → Vorgeschlagen · Umgesetzt in v{X.Y} am {Datum} · Freigegeben (mit `make verify`)
+```
+
+## Change Request – Inhalt
+- Ein Change Request hält einen Entscheid fest; er wird nach der Umsetzung **nicht umgeschrieben**.
+  Stellt sich die Änderung als falsch heraus, sagt das der nächste Change Request.
+- Klassennamen exakt wie überall.
+- Jede Annahme wird aufgeschrieben und als **Annahme:** markiert.
+- Der Versionseintrag im Change Log verlinkt seinen Change Request und umgekehrt.
+- Ein Change Request, der Befunde eines Assessments behebt, zitiert das Assessment in `sources:`
+  (`id: okf-assessment-2026-11-07`) und belegt jede behobene Check-ID mit einer Fussnote.
+
+## Assessment — frontmatter
+- `title: "OKF v0.2 Conformance Assessment – {YYYY-MM-DD}"`, `linkTitle: "OKF Assessment {YYYY-MM-DD}"`
+- `type: assessment`
+- `description` — the result in one sentence: conformant or not, and the count per status. It is the
+  line `content/log.md` shows for the run, so a reader of the log learns the result without opening
+  the page.
+- `generated` stamped when the run is filed. No `tags`: an assessment names no domain entity.
+
+## Assessment — Markdown structure
+
+A reader must learn what was checked without opening the register, and see the verdict before the
+detail. So every check row carries its **name** from the register next to its ID, and the rows are
+grouped: the three checks that decide conformance first, then one table per family.
+
+```
+# OKF v0.2 Conformance Assessment – {YYYY-MM-DD}
+{One sentence: what was assessed, on which day, with what result.}
+
+## Scope             → Two-column table with rows Bundle, Commit, Specification, Register, Validation
+## Result            → Conformant or not, on the three mandatory checks alone. Then a table:
+                       Family | meets | partial | not adopted | deviates | n/a, one row per family
+                       in the order of the sections below, and a Total row
+## Needs attention   → One bullet per `partial` or `deviates` check: ID, name, and the remediation in
+                       one line. "Nothing." if there is none
+## Mandatory checks  → OKF-CNF-01, OKF-CNF-02, OKF-CNF-03 — the §11 conformance criteria
+## Bundle structure  → OKF-BUN-*
+## Concept documents → OKF-CPT-*
+## Provenance        → OKF-SRC-*
+## Trust             → OKF-TRU-*
+## Lifecycle         → OKF-LIF-*
+## Cross-linking and paths → OKF-LNK-*
+## Reserved files    → OKF-RSV-*
+## Attested computations → OKF-CMP-*
+## Consumer floor    → OKF-CNF-04
+## Versioning        → OKF-VER-*
+## Register notes    → Only when the run changed the register, or found something it has no ID for
+```
+
+Every check section is one table, with the rows in register order:
+
+```
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-BUN-01`](https://…/SPEC.md#3-bundle-structure) | Markdown directory tree | meets | … | |
+```
+
+- **Check** is the ID, linked to the clause of the specification the register links.
+- **Name** is copied verbatim from the register.
+- **Status** is one of the register's five words, and nothing else — decoration breaks the diff.
+- **Remediation** is empty for `meets`, and precise for everything else.
+- Every register ID appears exactly once in the page.
+
+## Assessment — content rules
+- **Never rewritten.** The next run is a new page; two pages are compared check by check, which is
+  what the register's permanent IDs are for. A finding that turns out wrong is corrected by the next
+  run, which says so under *Register notes*.
+- **Not a change.** Filing an assessment gets no version and no change log entry. `make generate`
+  lists it in `content/log.md` under the day it ran.
+- **Links** to the specification use its URL; links to the register use the repository path in
+  backticks, since the register lives outside the bundle.
+
+## Freigabe
+- `generated:` wird gestempelt, wenn Jarvis die Seite schreibt. `verified:` hält die freigebende Person
+  mit `make verify` fest, nie Jarvis.

@@ -1,0 +1,102 @@
+# Die Artefakttypen dieser Dokumentation, einmal deklariert.
+#
+# Jede Markdown-Datei unter content/ trägt einen dieser Typen als `type:`. Das Open Knowledge Format
+# verlangt auf jeder Datei einen nicht leeren Typ, und `make lint` lehnt jeden Wert ab, der hier nicht
+# steht. Die Typentabelle in AGENTS.md wird mit `make generate` aus dieser Datei erzeugt.
+#
+#   where     die Dateien dieses Typs, relativ zu content/
+#   rules     die Schreibregeln für den Typ unter .claude/rules/ (keine bei Strukturtypen)
+#   requires  Frontmatter-Schlüssel, die ein Artefakt dieses Typs zusätzlich tragen muss;
+#             `make lint` warnt (W3), wenn einer fehlt
+#   holds     eine Zeile dazu, was ein Artefakt dieses Typs ist
+
+types:
+  overview:
+    where: _index.md
+    holds: Die Startseite – was die Dokumentation abdeckt, und ein Link auf jedes Artefakt.
+  domain-model:
+    where: domain_model/domainModel.md
+    rules: domain-model.md
+    requires: [generated, tags]
+    holds: Das Fachklassenmodell auf einen Blick – Klassendiagramm und ein Link auf jede Entität.
+  entity:
+    where: domain_model/entities/<className>.md
+    rules: domain-model.md
+    requires: [sources, generated, tags]
+    holds: Eine Fachklasse – was sie darstellt und ihre Attribute. Die zentrale Referenz.
+  business-process:
+    where: business_process/businessProcess.md
+    rules: business-process.md
+    requires: [sources, generated, tags]
+    holds: Der Soll-Prozess als eingebettetes Mermaid-Flussdiagramm mit nummerierten Schritten.
+  system-context:
+    where: system_context/systemContext.md
+    rules: system-context.md
+    requires: [sources, generated, tags]
+    holds: Systemgrenze, Nachbarsysteme und gerichtete Informationsflüsse als Mermaid-Diagramm.
+  use-case-diagram:
+    where: use_case/useCaseDiagram.md
+    rules: use-cases.md
+    requires: [sources, generated, tags]
+    holds: Akteure, ihre Use Cases und die include-Beziehungen zwischen ihnen.
+  actor-descriptions:
+    where: use_case/actorDescriptions.md
+    rules: use-cases.md
+    requires: [sources, generated, tags]
+    holds: Die Akteure auf einen Blick, mit einem Link auf jeden.
+  actor:
+    where: use_case/actors/<actorName>.md
+    rules: use-cases.md
+    requires: [sources, generated, tags]
+    holds: Ein Akteur – Art, Rolle im Prozess und worauf er zugreifen kann.
+  use-case:
+    where: use_case/<use_case>/<useCase>.md
+    rules: use-cases.md
+    requires: [sources, generated, tags]
+    holds: Ein Use Case – Vor- und Nachbedingungen, Beschreibung und Aktivitätsdiagramm.
+  state-chart:
+    where: state_chart/<entity>StateChart.md
+    rules: state-charts.md
+    requires: [sources, generated, tags]
+    holds: Der Lebenszyklus des Status einer Entität, jeder Übergang auf eine Use-Case-Aktivität zurückgeführt.
+  story-map:
+    where: epics/epics.md
+    rules: epics.md
+    requires: [sources, generated, tags]
+    holds: Die Epics, eines pro Use Case, mit den User Stories in Release-Zeilen.
+  user-story:
+    where: epics/user_stories/us_<epic>_<seq>.md
+    rules: epics.md
+    requires: [sources, generated, tags]
+    holds: Eine User Story im Format Card – Conversation – Confirmation, mit MoSCoW und KANO.
+  requirement-catalog:
+    where: requirements/<catalog>.md
+    rules: requirements.md
+    requires: [sources, generated, tags]
+    holds: Ein Anforderungskatalog – Geschäftsanforderungen, funktionale oder nicht-funktionale Anforderungen mit IDs und Abnahmekriterien.
+  interface-spec:
+    where: interface/<interface>.md
+    rules: interface.md
+    requires: [sources, generated, tags]
+    holds: Die Spezifikation einer Schnittstelle – Werkzeuge, Eingaben, Ausgaben und Fehlerfälle.
+  change-log:
+    where: change_log/changeLog.md
+    rules: change-log.md
+    requires: [sources, generated]
+    holds: Jede Version und jedes darin erstellte oder geänderte Artefakt. Dauerhaft.
+  change-request:
+    where: sources/cr_<major>_<minor>.md
+    rules: sources.md
+    requires: [generated]
+    holds: Ein Change Request – was verlangt wurde, was er betrifft und was entschieden wurde. Geänderte Artefakte zitieren ihn.
+  assessment:
+    where: sources/okf_assessment_<yyyy>_<mm>_<dd>.md
+    rules: sources.md
+    requires: [generated]
+    holds: Ein Lauf von /okf-check – jede Prüfung des OKF-v0.2-Registers mit Status und Beleg. Wird nie überschrieben.
+  log:
+    where: log.md
+    holds: Das Log im Open Knowledge Format – ein Eintrag pro Version und pro Assessment, neueste zuerst. Erzeugt aus Change Log und Assessments.
+  section:
+    where: <folder>/_index.md
+    holds: Ein Ordner in der Seitenleiste – Titel, Beschreibung in einer Zeile und Position.

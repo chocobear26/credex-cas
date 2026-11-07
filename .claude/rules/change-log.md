@@ -1,0 +1,61 @@
+---
+paths:
+  - content/change_log/**
+---
+
+# Konventionen Change Log und Versionen
+
+## Dateien
+- `changeLog.md` – dauerhaftes Change Log, nur ergänzen (ein Abschnitt pro Version)
+
+## Aufbau
+```
+# Change Log – {Systemname}
+## So liest man dieses Log → Erklärung + Legende der Versionsmarker
+## v{X.Y} – {Titel} ({Datum}) → ein Abschnitt pro Version, neueste oben
+```
+
+## Versionsabschnitte
+- H2: `## v{X.Y} – {Titel} ({YYYY-MM-DD})`
+- Darunter ein Satz Zusammenfassung (wird ins OKF-Log übernommen)
+- **Tabelle** `Artefakt | Status | Beschreibung`
+- Status: 🟢 `neu` · 🟡 `geändert` · 🔴 `veraltet` · ⚫ `entfernt`
+- Jedes berührte Artefakt **muss** eine Zeile haben, mit relativem Link
+
+## Markierungen in den Artefakten
+Blockquote-Hinweise in betroffenen `.md`-Dateien:
+```markdown
+> [!NOTE] v{X.Y} – Neu {YYYY-MM-DD}
+> Kurz, was dazukam.
+
+> [!WARNING] v{X.Y} – Geändert {YYYY-MM-DD}
+> Kurz, was sich geändert hat.
+
+> [!CAUTION] v{X.Y} – Veraltet {YYYY-MM-DD}
+> Kurz, was veraltet ist und wann es entfernt wird.
+```
+
+## Diagrammmarker
+
+### Mermaid
+```
+classDef vNew fill:#C7F9CC,stroke:#38A169,color:#1C4532
+classDef vChanged fill:#FEFCBF,stroke:#D69E2E,color:#744210
+classDef vDeprecated fill:#FED7D7,stroke:#E53E3E,color:#742A2A
+```
+Anwendung: `neuerSchritt["3.5 Neuer Schritt"]:::vNew`
+
+### PlantUML
+Stereotype wie `<<v1-1-neu>>` mit einem `skinparam`-Block für die Farbe.
+
+### Markdown-Elemente
+CSS-Klassen aus `assets/scss/_styles_project.scss` als Blockattribut auf der Zeile direkt nach dem
+Absatz, der Liste oder der Tabelle: `{.v-new}`, `{.v-changed}`, `{.v-deprecated}`, `{.v-removed}`
+
+## Aufräumen
+- Hinweise, Diagrammmarker und CSS-Marker werden **nach zwei weiteren Versionen** entfernt
+- Das Change Log selbst ist **dauerhaft**
+
+## Checkliste
+Wer irgendein Artefakt erstellt oder ändert, **muss** den Eintrag in `content/change_log/changeLog.md`
+nachführen (Checkliste in `AGENTS.md`).

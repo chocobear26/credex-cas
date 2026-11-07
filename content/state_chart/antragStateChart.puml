@@ -1,0 +1,13 @@
+@startuml AntragStateChart
+!theme plain
+skinparam stateFontStyle bold
+
+title Zustandsdiagramm – Antrag
+
+[*] --> IN_ERFASSUNG : Antragsschritte 1–4\n(ausserhalb Phase 1)
+IN_ERFASSUNG --> EINGEREICHT : CredEx-System setzt Antrag\n(status = EINGEREICHT)
+
+state IN_ERFASSUNG : Schritt 5 «Hochladen»,\nAblage über MCP möglich
+state EINGEREICHT : Dossier an Glarner KB,\nkeine Ablage mehr
+
+@enduml

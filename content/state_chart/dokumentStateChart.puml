@@ -1,0 +1,30 @@
+@startuml DokumentStateChart
+!theme plain
+skinparam stateFontStyle bold
+
+title Zustandsdiagramm – Dokument
+
+[*] --> ABGELEGT : CredEx-System legt\nDokument an
+ABGELEGT --> VON_KI_ZUGEORDNET : [Konfidenz ≥ Schwelle]
+ABGELEGT --> UNSICHER : [Konfidenz < Schwelle]
+UNSICHER --> BESTAETIGT : bestätigen\noder umordnen
+VON_KI_ZUGEORDNET --> BESTAETIGT : umordnen
+UNSICHER --> VERWORFEN : verwerfen
+VON_KI_ZUGEORDNET --> EINGEREICHT : Antrag eingereicht
+BESTAETIGT --> EINGEREICHT : Antrag eingereicht
+VERWORFEN --> [*]
+EINGEREICHT --> [*]
+
+state ABGELEGT : Datei gespeichert,\nZuordnung der KI liegt vor
+state VON_KI_ZUGEORDNET : Konfidenz auf oder\nüber der Schwelle
+state UNSICHER : sperrt das Einreichen
+state BESTAETIGT : quelle = MENSCH
+state VERWORFEN : Pflichtdokument\nwieder FEHLT
+state EINGEREICHT : Teil des Dossiers
+
+note bottom of UNSICHER
+  Schwelle: Startwert 0.80,
+  im PoC kalibrieren
+end note
+
+@enduml

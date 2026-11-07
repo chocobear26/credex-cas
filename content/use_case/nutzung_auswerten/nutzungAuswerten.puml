@@ -1,0 +1,14 @@
+@startuml nutzungAuswerten
+!theme plain
+title Aktivitätsdiagramm – UC-09 Nutzung auswerten
+|Partnermanagement|
+start
+:Auswertung für einen Monat öffnen;
+|CredEx-System|
+:Protokolleinträge pro Partner\nund Antrag zusammenfassen;
+:Anträge über MCP, Dauer bis Einreichung\nund Anteil Bestätigungen berechnen;
+|Partnermanagement|
+:Kennzahlen pro Partner prüfen;
+stop
+
+@enduml

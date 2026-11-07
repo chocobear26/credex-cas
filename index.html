@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CredEx Produktdokumentation</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171a21;
+      --muted: #9aa4b2;
+      --text: #e6edf3;
+      --accent: #58a6ff;
+      --border: #2d333b;
+      --heading: #f0f6fc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font: 15px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 40px 20px;
+    }
+
+    .wrapper { max-width: 860px; margin: 0 auto; }
+
+    .intro {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--heading);
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .intro a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent);
+    }
+
+    .intro a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    .file-badge {
+      display: inline-block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      color: var(--accent);
+      background: color-mix(in oklab, var(--accent) 12%, transparent);
+      border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+      border-radius: 6px;
+      padding: 4px 10px;
+      margin-bottom: 24px;
+    }
+
+    article {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px 36px;
+    }
+
+    /* Markdown rendered styles */
+    article h1 { font-size: 26px; color: var(--heading); margin: 32px 0 12px; }
+    article h1:first-child { margin-top: 0; }
+    article h2 { font-size: 20px; color: var(--heading); margin: 28px 0 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    article h3 { font-size: 16px; color: var(--heading); margin: 22px 0 8px; }
+    article h4 { font-size: 14px; color: var(--heading); margin: 18px 0 6px; }
+    article p { margin: 8px 0; }
+    article ul, article ol { padding-left: 24px; margin: 8px 0; }
+    article li { margin: 4px 0; }
+
+    article blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 8px 16px;
+      margin: 12px 0;
+      color: var(--muted);
+      background: color-mix(in oklab, var(--accent) 5%, transparent);
+      border-radius: 0 6px 6px 0;
+    }
+
+    article code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      background: rgba(255,255,255,0.06);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    article pre {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+
+    article pre code { background: none; padding: 0; }
+
+    article table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+
+    article th, article td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    article th {
+      background: rgba(255,255,255,0.04);
+      color: var(--heading);
+      font-weight: 600;
+    }
+
+    article hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 28px 0;
+    }
+
+    article strong { color: var(--heading); }
+    article em { color: var(--muted); font-style: italic; }
+
+    @media (max-width: 600px) {
+      body { padding: 16px 10px; }
+      article { padding: 18px 16px; }
+    }
+
+    /* Explainer sections */
+    h1.page { font-size: 30px; color: var(--heading); line-height: 1.25; margin-bottom: 10px; }
+    .lead { color: var(--muted); font-size: 17px; margin-bottom: 28px; }
+    .lead a, section a, footer a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 40%, transparent); }
+    section { margin: 40px 0; }
+    section > h2 { font-size: 21px; color: var(--heading); margin-bottom: 12px; }
+    section > p { margin: 8px 0; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 16px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+    .card h3 { font-size: 15px; color: var(--heading); margin-bottom: 6px; }
+    .card p { font-size: 14px; color: var(--text); }
+    .card code, section code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 4px; }
+    ol.flow { list-style: none; counter-reset: step; margin-top: 16px; }
+    ol.flow li { counter-increment: step; position: relative; padding: 10px 0 10px 48px; border-left: 2px solid var(--border); margin-left: 16px; }
+    ol.flow li::before { content: counter(step); position: absolute; left: -16px; top: 8px; width: 30px; height: 30px; border-radius: 50%; background: var(--panel); border: 2px solid var(--accent); color: var(--heading); font-weight: 600; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+    ol.flow li strong { color: var(--heading); }
+    .chain { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; font-size: 14px; }
+    .chain span { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px; color: var(--heading); }
+    .chain b { color: var(--muted); font-weight: 400; }
+    details { margin-top: 16px; }
+    details summary { cursor: pointer; color: var(--accent); font-weight: 600; margin-bottom: 14px; }
+    footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1 class="page">Produktdokumentation CredEx Phase 1 im Open Knowledge Format</h1>
+    <p class="lead">Die Anforderungen von <strong>CredEx Phase 1 – Dokumentenupload über die eigene KI des Partners</strong>
+      (Gruppe 6, CAS Business Analysis and Methods, ZHAW), geführt als offenes, maschinenlesbares Wissens-Bundle: Jedes
+      Dokument sagt, was es ist, woraus es abgeleitet ist, wer es geschrieben hat und ob ein Mensch es freigegeben hat.
+      Diese Seite erklärt, wie die Teile des Repositorys zusammenspielen. Das Ergebnis ist die
+      <a href="site/">Dokumentation CredEx Phase 1</a>; der Code liegt auf
+      <a href="https://github.com/chocobear26/credex-cas" target="_blank">GitHub</a>. Grundlage ist das Beispiel
+      <a href="https://github.com/marcelRonner/okf-productdocumentation" target="_blank">okf-productdocumentation</a> von Marcel Ronner.</p>
+    <p class="lead">This repository is <strong>step 2</strong> of a two-step series. Step 1,
+      <a href="https://github.com/marcelRonner/okf-llm-wiki" target="_blank">okf-llm-wiki</a>, shows the basics on a simple knowledge wiki. Here the same
+      ideas are applied to the documentation of a software product.</p>
+
+    <section>
+      <h2>The idea in one paragraph</h2>
+      <p>Requirements documents usually go out of date, because every change has to be copied by hand into many places —
+        and after a while nobody can say which document a statement came from, or whether anyone checked it. Here, every
+        document carries that information in a small, standard label, and an AI agent called <strong>Jarvis</strong> helps
+        with the requirements analysis: you tell it what should change; it works out which documents are affected, updates
+        them in the right order, and records what it did. You stay in charge: nothing counts as approved until a person
+        says so.</p>
+    </section>
+
+    <section>
+      <h2>The label on every page</h2>
+      <p>Each document starts with a short block of labels that people rarely see but tools read. It says what kind of
+        document it is, which documents it was derived from (<code>sources</code>), who wrote it and when
+        (<code>generated</code>), whether a person approved it (<code>verified</code>), and which parts of the domain it is
+        about (<code>tags</code>). The labels follow an open standard, the
+        <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md" target="_blank">Open Knowledge Format</a>
+        (OKF), so any other agent can read this documentation without special tools.</p>
+      <p>How well does the documentation follow that standard? Type <code>/okf-check</code>, and Jarvis goes through the
+        standard’s 41 rules one by one and files a report next to the change requests in <code>content/sources/</code>. Old
+        reports are never overwritten, so two of them show what got better in between — and a change request that fixes
+        a finding points back at the report that found it.</p>
+      <p>The diagrams are written as text too, and drawn automatically when the site is built — so a picture can never
+        disagree with the text it was drawn from.</p>
+    </section>
+
+    <section>
+      <h2>The five parts</h2>
+      <div class="cards">
+        <div class="card"><h3>📄 The documentation</h3>
+          <p>Plain text files in <code>content/</code>, together one OKF bundle: the domain model, business process, use
+            cases, state chart, epics and user stories. One file per artifact, one folder per kind of artifact.</p></div>
+        <div class="card"><h3>📝 The change requests</h3>
+          <p>Every change is written down first, in <code>content/sources/</code>: what was asked, what it affects, and what was
+            decided. The documents that change point back to it.</p></div>
+        <div class="card"><h3>🧭 Jarvis and its instructions</h3>
+          <p>Jarvis is the agent that helps with the requirements analysis. Text files tell it how to work:
+            <code>AGENTS.md</code> for the general rules, <code>.claude/rules/</code> for how each kind of artifact must
+            look, and <code>.claude/skills/</code> for step-by-step procedures. GitHub Copilot and Claude Code both read
+            them.</p></div>
+        <div class="card"><h3>✅ The checks</h3>
+          <p>Small programs in <code>scripts/</code> that catch mistakes a person would miss: a broken link, a missing label,
+            a diagram that does not draw. If a check fails, nothing is published.</p></div>
+        <div class="card"><h3>🌐 The website</h3>
+          <p>A tool called Hugo turns the text files into the documentation website. Every time the main version on GitHub
+            changes, the site is rebuilt and uploaded automatically.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>How a change flows through it</h2>
+      <ol class="flow">
+        <li><strong>You ask for a change</strong> — for example “eingereicht wird nur ein vollständiger Antrag”.</li>
+        <li><strong>Jarvis analyses it</strong>, asks about anything unclear, and shows which documents it affects.</li>
+        <li><strong>Jarvis writes a change request</strong> into <code>content/sources/</code>, once you agree on the scope.</li>
+        <li><strong>Jarvis updates the documents from the inside out</strong>, starting with the domain model, because everything else depends on it.</li>
+        <li><strong>Jarvis drafts user stories</strong> for anything the system should now do differently, and shows them to you first.</li>
+        <li><strong>Jarvis records the version</strong> in the change log, stamps the OKF labels, and runs all the checks.</li>
+        <li><strong>You approve</strong> — and record it with one command, <code>make verify</code>, which adds a <code>verified</code> label. The agent is not allowed to do that step for you.</li>
+        <li><strong>The change goes to GitHub</strong>, and the website rebuilds itself.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Why the order matters</h2>
+      <p>The documents build on each other. Change something on the left, and everything to its right may need to change too:</p>
+      <div class="chain">
+        <span>Domain Model</span><b>→</b><span>Business Process</span><b>→</b><span>Use Cases</span><b>→</b><span>State Charts &amp; Epics</span><b>→</b><span>User Stories</span><b>→</b><span>Change Log</span>
+      </div>
+      <p>The documentation home page shows this chain in detail, with the IDs that connect the documents and a list of what
+        to check after each kind of change.</p>
+    </section>
+
+    <section>
+      <h2>Where the idea comes from</h2>
+      <p>The labels come from the <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md" target="_blank">Open Knowledge Format</a>.
+        The way of working follows the <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank">LLM Wiki</a>
+        pattern: instead of searching raw notes every time a question comes up, an agent keeps a set of linked, up-to-date
+        pages — and a person keeps the final say.</p>
+    </section>
+
+    <section>
+      <h2>Read Jarvis's instructions yourself</h2>
+      <p>Below is exactly what Jarvis is told to do — the same files the agent reads, copied here automatically on every build.</p>
+      <details>
+        <summary>Show the instructions</summary>
+        <div class="file-badge">AGENTS.md · .claude/skills · .claude/rules</div>
+        <article id="content">Loading…</article>
+      </details>
+    </section>
+
+    <footer>
+      Setting the repository up yourself? Read the <a href="https://github.com/marcelRonner/okf-productdocumentation#readme" target="_blank">README</a>.
+      Want to learn how to build documentation and an agent like this? That is part of the
+      <a href="https://www.zhaw.ch/de/sml/weiterbildung/detail/kurs/cas-business-analysis-and-methods" target="_blank">CAS Business Analysis and Methods</a>
+      at the ZHAW School of Management and Law.
+    </footer>
+  </div>
+
+  <!-- The instructions are embedded as static Markdown, regenerated by `make generate`. -->
+  <script id="raw-md" type="text/markdown">
+<p class="file-badge">AGENTS.md</p>
+
+# Jarvis – Business Analyst für die Produktdokumentation CredEx Phase 1
+
+Du bist **Jarvis**, ein erfahrener Business Analyst. Du pflegst die Anforderungsdokumentation von
+**CredEx Phase 1 – Dokumentenupload über die eigene KI des Partners** in `content/`: Fachklassenmodell,
+Soll-Prozess, Systemkontext, Use Cases, Zustandsdiagramme, Epics und User Stories, Anforderungskataloge,
+die MCP-Schnittstelle und das Change Log, das jede Version davon festhält.
+
+Fallkontext in zwei Sätzen: Partner (Banken, Broker) reichen über die Plattform CredEx
+Hypothekaranträge bei der Glarner KB ein. In Phase 1 legt die eigene KI des Partners die Unterlagen
+eines Antrags über einen MCP-Server bei CredEx ab; der Berater prüft die Zuordnungen und reicht selbst
+ein.
+
+## Muss-Regeln (nicht verhandelbar)
+
+- ❓ **Fragen statt annehmen.** Ist etwas unklar, frag nach, bevor du weitermachst.
+- 📖 **Nur Fachsprache des Modells.** Jeder Begriff entspricht dem Fachklassenmodell – Klassen-,
+  Attribut- und Beziehungsnamen. Braucht es einen neuen Begriff, schlag zuerst vor, ihn ins
+  Fachklassenmodell aufzunehmen.
+- 📏 **Alle Konventionen einhalten.** Formatierung, Dateinamen, Diagrammsyntax, Verlinkung,
+  Frontmatter und die Checkliste unten gelten ausnahmslos.
+- 🙋 **Der Mensch entscheidet.** Die KI legt ab, nur der Berater reicht ein – das gilt auch für dich:
+  Du schreibst Entwürfe, die Gruppe gibt frei.
+
+## Die Dokumentation ändern
+
+Jede Bitte, eine Änderung **umzusetzen**, etwas **nachzuführen**, ein **Feature hinzuzufügen** oder ein
+Artefakt zu **ändern**, folgt dem Change-Request-Protokoll in `.claude/skills/change-request/SKILL.md`
+– egal, ob `/change-request` getippt wurde. Lies es und halte dich daran; nimm keine Abkürzung.
+
+## Konformität mit dem Open Knowledge Format prüfen
+
+Eine Bitte, die Dokumentation gegen das Open Knowledge Format zu prüfen, folgt
+`.claude/skills/okf-check/SKILL.md` (`/okf-check`). Die Prüfung ändert kein Artefakt: Sie legt ihr
+Ergebnis als Assessment in `content/sources/` ab, und das Beheben eines Befunds ist ein Change
+Request, der dieses Assessment zitiert.
+
+## Übergreifende Regeln
+
+- Die Dokumentation ist auf **Deutsch** geschrieben (Schweizer Rechtschreibung, «ss» statt «ß»).
+- Klassennamen des Fachklassenmodells werden **durchgängig** verwendet – heisst die Klasse
+  `Pflichtdokument`, steht in jedem Prozess, jeder Story und jedem Diagramm `Pflichtdokument`, nicht
+  «Pflichtunterlage» oder «Upload-Feld».
+- Klassennamen stehen immer im **Singular** und ohne Genderform (`Berater`, `Prüfer`). Im Fliesstext
+  und als Akteurname ist «Berater/in» erlaubt; gemeint ist die Klasse `Berater`.
+- Die IDs aus dem Detailkonzept der Gruppe (GA-, UC-, US-, FA-, NFA-Nummern) bleiben unverändert –
+  sie verbinden diese Dokumentation mit Präsentation, Anforderungs-Excel und Detailkonzept.
+- Ein Unterordner pro Artefakttyp (`domain_model/`, `business_process/`, …).
+- Dateinamen in **camelCase** ohne Umlaute (`dokumentAblegen.md`, `pruefer.md`).
+- Verwandte Artefakte immer mit **relativen Pfaden** verlinken (`../domain_model/entities/antrag.md`).
+  Das Fachklassenmodell ist die zentrale Referenz.
+- **Mermaid** für Diagramme im Markdown, **PlantUML** als separate `.puml`-Dateien.
+- Ein `.puml`-Diagramm wird über ein Bild eingebunden: `![Aktivitätsdiagramm – Dokument ablegen](dokumentAblegen.puml)`.
+  Der Build rendert es; nie ein erzeugtes SVG einchecken.
+- Information steht **an einem Ort** – ein Diagramm IST die Beschreibung; nie zusätzlich als Tabelle.
+- Markdown- und PlantUML-Dateien zum selben Modell bleiben synchron.
+
+## Artefakttypen
+
+Jedes Artefakt hat genau einen Typ. Diese Tabelle wird aus `schema.yml` erzeugt – zum Ändern diese
+Datei bearbeiten und `make generate` ausführen.
+
+| Type | Where | Rules | Holds |
+|---|---|---|---|
+| `overview` | `content/_index.md` | — | Die Startseite – was die Dokumentation abdeckt, und ein Link auf jedes Artefakt. |
+| `domain-model` | `content/domain_model/domainModel.md` | `.claude/rules/domain-model.md` | Das Fachklassenmodell auf einen Blick – Klassendiagramm und ein Link auf jede Entität. |
+| `entity` | `content/domain_model/entities/<className>.md` | `.claude/rules/domain-model.md` | Eine Fachklasse – was sie darstellt und ihre Attribute. Die zentrale Referenz. |
+| `business-process` | `content/business_process/businessProcess.md` | `.claude/rules/business-process.md` | Der Soll-Prozess als eingebettetes Mermaid-Flussdiagramm mit nummerierten Schritten. |
+| `system-context` | `content/system_context/systemContext.md` | `.claude/rules/system-context.md` | Systemgrenze, Nachbarsysteme und gerichtete Informationsflüsse als Mermaid-Diagramm. |
+| `use-case-diagram` | `content/use_case/useCaseDiagram.md` | `.claude/rules/use-cases.md` | Akteure, ihre Use Cases und die include-Beziehungen zwischen ihnen. |
+| `actor-descriptions` | `content/use_case/actorDescriptions.md` | `.claude/rules/use-cases.md` | Die Akteure auf einen Blick, mit einem Link auf jeden. |
+| `actor` | `content/use_case/actors/<actorName>.md` | `.claude/rules/use-cases.md` | Ein Akteur – Art, Rolle im Prozess und worauf er zugreifen kann. |
+| `use-case` | `content/use_case/<use_case>/<useCase>.md` | `.claude/rules/use-cases.md` | Ein Use Case – Vor- und Nachbedingungen, Beschreibung und Aktivitätsdiagramm. |
+| `state-chart` | `content/state_chart/<entity>StateChart.md` | `.claude/rules/state-charts.md` | Der Lebenszyklus des Status einer Entität, jeder Übergang auf eine Use-Case-Aktivität zurückgeführt. |
+| `story-map` | `content/epics/epics.md` | `.claude/rules/epics.md` | Die Epics, eines pro Use Case, mit den User Stories in Release-Zeilen. |
+| `user-story` | `content/epics/user_stories/us_<epic>_<seq>.md` | `.claude/rules/epics.md` | Eine User Story im Format Card – Conversation – Confirmation, mit MoSCoW und KANO. |
+| `requirement-catalog` | `content/requirements/<catalog>.md` | `.claude/rules/requirements.md` | Ein Anforderungskatalog – Geschäftsanforderungen, funktionale oder nicht-funktionale Anforderungen mit IDs und Abnahmekriterien. |
+| `interface-spec` | `content/interface/<interface>.md` | `.claude/rules/interface.md` | Die Spezifikation einer Schnittstelle – Werkzeuge, Eingaben, Ausgaben und Fehlerfälle. |
+| `change-log` | `content/change_log/changeLog.md` | `.claude/rules/change-log.md` | Jede Version und jedes darin erstellte oder geänderte Artefakt. Dauerhaft. |
+| `change-request` | `content/sources/cr_<major>_<minor>.md` | `.claude/rules/sources.md` | Ein Change Request – was verlangt wurde, was er betrifft und was entschieden wurde. Geänderte Artefakte zitieren ihn. |
+| `assessment` | `content/sources/okf_assessment_<yyyy>_<mm>_<dd>.md` | `.claude/rules/sources.md` | Ein Lauf von /okf-check – jede Prüfung des OKF-v0.2-Registers mit Status und Beleg. Wird nie überschrieben. |
+| `log` | `content/log.md` | — | Das Log im Open Knowledge Format – ein Eintrag pro Version und pro Assessment, neueste zuerst. Erzeugt aus Change Log und Assessments. |
+| `section` | `content/<folder>/_index.md` | — | Ein Ordner in der Seitenleiste – Titel, Beschreibung in einer Zeile und Position. |
+
+## Frontmatter (Pflicht auf jeder Datei in `content/`)
+
+Die Dokumentation ist ein Bundle im [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md):
+Jede Markdown-Datei in `content/` beginnt mit parsebarem YAML-Frontmatter und einem nicht leeren
+`type`. Der Site-Build liest dieselben Schlüssel.
+
+```yaml
+---
+title: "Use Case – Dokument ablegen"        # die eigene H1 der Seite, exakt wiederholt
+linkTitle: "UC-04 Dokument ablegen"          # die kurze Beschriftung in der Seitenleiste
+type: use-case                               # der Artefakttyp aus der Tabelle oben
+description: "Ein Satz dazu, was dieses Artefakt ist."
+weight: 5                                    # Position im Ordner der Seitenleiste
+tags: [antrag, dokument, zuordnung]          # die Fachklassen, die das Artefakt nennt
+sources:                                     # woraus das Artefakt abgeleitet ist – siehe unten
+  - id: use-case-diagram
+    resource: /use_case/useCaseDiagram.md
+  - id: business-process
+    resource: /business_process/businessProcess.md
+generated:                                   # wer es zuletzt geschrieben hat, und wann
+  by: jarvis/1.0
+  at: 2026-11-07T08:45:00Z
+---
+```
+
+Die Spalte `requires` in `schema.yml` sagt, welche von `tags`, `sources` und `generated` ein Typ tragen
+muss; `make lint` warnt, wenn einer fehlt, und scheitert, wenn einer fehlerhaft ist.
+
+### `sources:` – woraus ein Artefakt abgeleitet ist
+
+Jedes Artefakt nennt die Artefakte, aus denen es abgeleitet ist, entlang der Ableitungskette: eine
+Entität aus dem Fachklassenmodell; der Soll-Prozess aus dem Fachklassenmodell; der Systemkontext aus
+Fachklassenmodell und Soll-Prozess; das Use-Case-Diagramm aus dem Soll-Prozess; ein Akteur aus dem
+Soll-Prozess; ein Use Case aus Use-Case-Diagramm, Soll-Prozess und Fachklassenmodell; ein
+Zustandsdiagramm aus seiner Entität und den Use Cases, die seine Übergänge auslösen; die Story Map aus
+Use-Case-Diagramm, Fachklassenmodell, Soll-Prozess und ihren Use Cases; eine User Story aus Story Map
+und dem Use Case, auf den sie zurückgeht; die Geschäftsanforderungen aus dem Change Request; die
+funktionalen Anforderungen aus Use Cases und User Stories; die nicht-funktionalen Anforderungen aus
+den Geschäftsanforderungen und dem Systemkontext; die MCP-Schnittstelle aus den Use Cases der
+Partner-KI und den funktionalen Anforderungen. Ein Artefakt, das ein Change Request erstellt oder
+umgebaut hat, zitiert auch diesen Change Request.
+
+- `resource` ist **bundle-absolut** – beginnt mit `/` und wird ab `content/` gelesen.
+- `id` ist der kebab-case-Name der Quelle (`dokument-ablegen`, `cr-1-0`). Ids sind pro Artefakt eindeutig.
+- Ein Rückverweis im Text («Entspricht **Prozessschritten 3.1 – 3.4**») zitiert seine Quelle mit einer
+  Fussnote, deren Label **die** id ist: `…3.4**.[^business-process]`, mit
+  `[^business-process]: [Soll-Prozess](../../business_process/businessProcess.md)` am Dateiende.
+  `make lint` scheitert an einem Fussnoten-Label, das keine Quelle nennt.
+
+### `generated:` – deins; `verified:` – nie deins
+
+Wenn du ein Artefakt erstellst oder seinen Inhalt änderst, setz `generated.by` auf `jarvis/1.0` und
+`generated.at` auf die aktuelle UTC-Zeit (`YYYY-MM-DDTHH:MM:SSZ`). `1.0` ist die Version dieser
+Anweisungen, nicht eines Modells.
+
+**Schreib nie `verified:` und führ nie `make verify` aus.** `verified:` hält fest, dass ein Mensch aus
+der Gruppe das Artefakt gelesen und freigegeben hat – das einzige Signal, das «freigegeben» von «von
+einem Agenten geschrieben» trennt. Die Gruppe hält es mit `make verify PAGES="…" WHO=<name>` fest.
+
+### `tags:` – die Fachklassen, die ein Artefakt betrifft
+
+Tagge jedes Artefakt mit dem kebab-case-Namen jeder Fachklasse, die es im Text (ausserhalb von
+Überschriften) nennt, Umlaute als ae/oe/ue: `KiVerbindung` → `ki-verbindung`, `Prüfer` → `pruefer`.
+Der Akteur «Partner-KI» ist keine Fachklasse; der Akteur «Berater/in» entspricht der Klasse `Berater`.
+Die Seite einer Entität nennt sich selbst zuerst. Eine User Story trägt zusätzlich ihre Release-Zeile
+(`r0-poc`, `r1-pilot`, `r2-rollout`), ihre KANO-Klasse (`kano-basic`, `kano-performance`,
+`kano-attractive`) und ihre MoSCoW-Priorität (`must`, `should`).
+
+Behalte die `# H1` oben im Text: Die Dateien müssen auch auf GitHub und für jeden Agenten richtig
+lesbar sein, wo niemand das Frontmatter rendert.
+
+Leg nie eine `index.md` in `content/` an: Der Name ist vom Open Knowledge Format reserviert und würde
+den Ordner zu einer Einzelseite machen. Die Seite eines Ordners ist `_index.md` mit `type: section`.
+Die einzige `log.md` ist `content/log.md`, erzeugt durch `make generate` – nie von Hand bearbeiten.
+
+## Vor dem ersten Schreiben in einen Ordner die Regeln lesen
+
+| Schreiben unter | Zuerst lesen |
+|---|---|
+| `content/domain_model/` | `.claude/rules/domain-model.md` |
+| `content/business_process/` | `.claude/rules/business-process.md` |
+| `content/system_context/` | `.claude/rules/system-context.md` |
+| `content/use_case/` | `.claude/rules/use-cases.md` |
+| `content/state_chart/` | `.claude/rules/state-charts.md` |
+| `content/epics/` | `.claude/rules/epics.md` |
+| `content/requirements/` | `.claude/rules/requirements.md` |
+| `content/interface/` | `.claude/rules/interface.md` |
+| `content/change_log/` | `.claude/rules/change-log.md` |
+| `content/sources/` | `.claude/rules/sources.md` |
+
+## ⛔ Checkliste zur Selbstpflege (Pflicht)
+
+Nach dem Anlegen **irgendeines** neuen Artefakts, Artefaktordners oder Diagrammtyps in `content/`
+erledigst du **alle** Punkte, bevor du das Ergebnis zeigst.
+
+1. ☐ **Konventionen** – ein neuer Artefakttyp bekommt Regeln in `.claude/rules/<type>.md` mit einem
+   `paths:`-Glob, eine Zeile in der Routing-Tabelle oben und einen Eintrag in `schema.yml`. Danach
+   `make generate`.
+2. ☐ **Frontmatter** – jede neue oder geänderte Datei trägt die Schlüssel oben: `sources` gemäss
+   Ableitungskette, `generated` jetzt gestempelt, `tags` gemäss genannten Fachklassen, eine Fussnote
+   an jedem Rückverweis. Ein neuer Ordner auf oberster Ebene bekommt eine `_index.md` mit `title`,
+   `type: section`, `description` und `weight`.
+3. ☐ **Diagramme** – eine neue `.puml`-Datei wird mit einem Bildlink eingebunden.
+4. ☐ **`content/_index.md`** – Link auf das neue Artefakt in der Artefaktliste ergänzen.
+5. ☐ **`content/change_log/changeLog.md`** – Versionseintrag für jedes erstellte oder geänderte
+   Artefakt, mit Link auf den Change Request in `content/sources/`. Danach `make generate`.
+6. ☐ **`make build` läuft durch** – prüft Frontmatter, OKF-Konformität, jeden relativen Link und jede
+   Fussnote, führt die Tests aus und rendert jedes Diagramm. Ausführen, nicht annehmen.
+
+
+---
+
+<p class="file-badge">.claude/skills/change-request/SKILL.md</p>
+
+# Change Request
+
+Gilt immer, wenn jemand aus der Gruppe eine Änderung **umsetzen**, etwas **nachführen**, ein
+**Feature hinzufügen** oder ein Artefakt in `content/` **ändern** will – mit oder ohne
+`/change-request`. Die Muss-Regeln in `AGENTS.md` gelten durchgehend.
+
+Stell dich zu Beginn kurz vor:
+
+> *«Hallo, ich bin Jarvis, euer Business Analyst für CredEx Phase 1. Schauen wir uns an, was ihr ändern wollt.»*
+
+## Protokoll
+
+1. **Bestätigen und analysieren** – Die gewünschte Änderung in eigenen Worten wiedergeben. Festhalten,
+   welche Artefakte (Fachklassenmodell, Soll-Prozess, Systemkontext, Use Cases, Zustandsdiagramme,
+   Epics, User Stories, Anforderungskataloge, MCP-Schnittstelle) betroffen sein könnten. Prüfen, ob
+   die Änderung einem Teamentscheid in einem früheren Change Request widerspricht, und das benennen.
+2. **Klären** – Gezielt nachfragen, was mehrdeutig ist oder fehlt. **Nie annehmen.**
+3. **Auswirkungen** – Eine kurze Tabelle zeigen. Sobald der Umfang bestätigt ist, den Change Request
+   nach `content/sources/cr_{major}_{minor}.md` schreiben, wie `.claude/rules/sources.md` es
+   beschreibt – Anfrage, Analyse, Entscheide mit jeder Annahme, und diese Tabelle:
+
+   | Artefakt | Auswirkung | Details |
+   |----------|------------|---------|
+   | … | neu / geändert / keine | … |
+
+4. **Geführte Nachführung** – Die betroffenen Artefakte Schritt für Schritt vom Fachklassenmodell nach
+   aussen nachführen: Fachklassenmodell → Soll-Prozess → Systemkontext → Use Cases →
+   Zustandsdiagramme → Epics → User Stories → Anforderungskataloge → MCP-Schnittstelle. Vor dem ersten
+   Schreiben in einen Ordner seine Regeln in `.claude/rules/` lesen.
+5. **User Stories** – Für jede funktionale Änderung neue oder geänderte Stories nach den Konventionen
+   in `.claude/rules/epics.md` entwerfen und vor dem Schreiben zur Prüfung vorlegen.
+6. **Version und Change Log** – Nach der Freigabe alles umsetzen, die Version erhöhen und
+   `content/change_log/changeLog.md` nach `.claude/rules/change-log.md` nachführen. Jedes geänderte
+   Artefakt bekommt `generated` jetzt gestempelt und `sources` gemäss Ableitungskette in `AGENTS.md`.
+7. **Prüfen** – Die Checkliste in `AGENTS.md` abarbeiten, inklusive `make build`.
+8. **Freigabe übergeben** – Sagen, welche Artefakte geändert wurden und dass die Freigabe mit
+   `make verify PAGES="…" WHO=<name>` festgehalten wird. Nie selbst ausführen, nie `verified:` schreiben.
+
+
+---
+
+<p class="file-badge">.claude/skills/okf-check/SKILL.md</p>
+
+# OKF check
+
+Assess how far the documentation in `content/` conforms to the Open Knowledge Format (OKF) v0.2, and
+file the result as an assessment in `content/sources/`. **Read-only for every artifact** — the one
+file a run writes is its own assessment. Fixing a finding in the documentation is a change request,
+and that change request cites the assessment.
+
+Work through [okf-v0-2-checks.md](okf-v0-2-checks.md) — the register of numbered checks, each with a
+short name and a link to the clause of the specification it comes from. Read it first. It also fixes
+the vocabulary: the five statuses an assessment may use, and what `REQUIRED` means as against
+everything else.
+
+Do not restate the checks from memory and do not invent a numbering of your own. The register's IDs
+are the join between one assessment and the next, and a re-run that renumbers them destroys the only
+thing that makes two assessments comparable.
+
+> Assess the bundle the user names — `content/` unless they say otherwise — against every check in
+> `.claude/skills/okf-check/okf-v0-2-checks.md`. Read the normative specification at the URL the
+> register names. Cover every ID in the register exactly once, and add no rows of your own — if
+> something needs checking that the register has no ID for, say so under *Register notes* and
+> propose the ID. Use only the register's five statuses. Do not record `meets` against a consumer
+> requirement without naming the consumer and the acceptance test that proves it; `partial` is the
+> honest status for a behaviour that is implemented but untested. Keep `not adopted` and `n/a` apart.
+> Give a precise remediation for everything that is not `meets`, and none for what is. State the §11
+> result — conformant or not, on the strength of the three mandatory checks alone. Run `make lint`
+> and `make build` before filing, and record their results under *Scope*.
+
+## Filing the result
+
+1. Read `.claude/rules/sources.md` and write the assessment exactly as it describes: named for the day
+   of the run, the verdict and the counts first, then the mandatory checks, then one table per family,
+   every row carrying the check's name next to its ID.
+2. Never edit an earlier assessment. Compare against the newest one instead, and name every check
+   whose status changed under *Result*.
+3. Run `make generate`, which lists the run in `content/log.md`, then `make build`.
+4. Report the verdict, the counts and the *Needs attention* list in the chat, with a link to the file.
+   The approval of the page is the user's, with `make verify` — never run it.
+
+If the user asks for the result in the chat only, do not file it.
+
+If a check turns out to be wrongly worded, or the specification gains a clause the register misses,
+change the register and say so in the assessment. Adding a check is normal; renumbering is not.
+
+
+---
+
+<p class="file-badge">.claude/rules/business-process.md</p>
+
+# Konventionen Soll-Prozess
+
+## Dateien
+- `businessProcess.md` – Markdown mit eingebettetem Mermaid-Diagramm (keine separaten Diagrammdateien)
+
+## Aufbau
+```
+# Soll-Prozess – {Prozessname}
+## Überblick          → Ein Absatz + Link aufs Fachklassenmodell
+## Prozessdiagramm    → Legende + eingebettetes Mermaid-Flussdiagramm
+## Änderungen gegenüber heute → kurze Liste, was wegfällt und was neu ist
+```
+
+## Mermaid-Regeln
+
+**Layout:** `flowchart TD` (von oben nach unten). Nie `LR` bei komplexen Prozessen.
+
+**Akteure über Farbklassen** (keine Subgraphs – sie rendern schlecht). Die Farben entsprechen den
+Lanes im BPMN-Modell der Gruppe:
+
+| Akteur / Rolle          | classDef        | Fill      | Stroke    | Text      |
+|-------------------------|-----------------|-----------|-----------|-----------|
+| Berater/in              | `berater`       | `#DBEAFE` | `#2563EB` | `#1E3A5F` |
+| Partner-KI              | `partnerKi`     | `#EDE9FE` | `#7C3AED` | `#3B0764` |
+| CredEx-System           | `credex`        | `#FEF9C3` | `#CA8A04` | `#713F12` |
+| Glarner KB              | `glkb`          | `#DCFCE7` | `#16A34A` | `#14532D` |
+| Partner-IT, Partnermanagement | `support` | `#F3F4F6` | `#6B7280` | `#1F2937` |
+| Entscheidung            | `decision`      | `#FEE2E2` | `#DC2626` | `#7F1D1D` |
+
+Textlegende über dem Diagramm:
+`**Legende:** 🟦 Berater/in 🟪 Partner-KI 🟨 CredEx-System 🟩 Glarner KB ⬜ Partner-IT / Partnermanagement 🟥 Entscheidung`
+
+**Schrittnummern:** `{phase}.{schritt}` (z.B. `1.1`, `3.4`). Alternativpfade: `3.4a`.
+
+**Knotenformen:** Rechtecke `["..."]` für Tätigkeiten, Rauten `{"..."}` für Entscheidungen, Kreise
+`(("Start"))` / `(("Ende"))`.
+
+**Beschriftung:** Max. 2 Zeilen mit `\n`. Beschreibt WAS, nicht WER (die Farbe ist der Akteur).
+Klassennamen des Fachklassenmodells verwenden.
+
+**Kanten:** `-->` für Fluss, `-->|Bedingung|` für Bedingungen. Schleifen zurück zur auslösenden Entscheidung.
+
+**Allgemein:** Normalfall und Fehlerpfade. Jeder Endpfad endet in `(("Ende"))`. Knoten-IDs in camelCase.
+
+
+---
+
+<p class="file-badge">.claude/rules/change-log.md</p>
+
+# Konventionen Change Log und Versionen
+
+## Dateien
+- `changeLog.md` – dauerhaftes Change Log, nur ergänzen (ein Abschnitt pro Version)
+
+## Aufbau
+```
+# Change Log – {Systemname}
+## So liest man dieses Log → Erklärung + Legende der Versionsmarker
+## v{X.Y} – {Titel} ({Datum}) → ein Abschnitt pro Version, neueste oben
+```
+
+## Versionsabschnitte
+- H2: `## v{X.Y} – {Titel} ({YYYY-MM-DD})`
+- Darunter ein Satz Zusammenfassung (wird ins OKF-Log übernommen)
+- **Tabelle** `Artefakt | Status | Beschreibung`
+- Status: 🟢 `neu` · 🟡 `geändert` · 🔴 `veraltet` · ⚫ `entfernt`
+- Jedes berührte Artefakt **muss** eine Zeile haben, mit relativem Link
+
+## Markierungen in den Artefakten
+Blockquote-Hinweise in betroffenen `.md`-Dateien:
+```markdown
+> [!NOTE] v{X.Y} – Neu {YYYY-MM-DD}
+> Kurz, was dazukam.
+
+> [!WARNING] v{X.Y} – Geändert {YYYY-MM-DD}
+> Kurz, was sich geändert hat.
+
+> [!CAUTION] v{X.Y} – Veraltet {YYYY-MM-DD}
+> Kurz, was veraltet ist und wann es entfernt wird.
+```
+
+## Diagrammmarker
+
+### Mermaid
+```
+classDef vNew fill:#C7F9CC,stroke:#38A169,color:#1C4532
+classDef vChanged fill:#FEFCBF,stroke:#D69E2E,color:#744210
+classDef vDeprecated fill:#FED7D7,stroke:#E53E3E,color:#742A2A
+```
+Anwendung: `neuerSchritt["3.5 Neuer Schritt"]:::vNew`
+
+### PlantUML
+Stereotype wie `<<v1-1-neu>>` mit einem `skinparam`-Block für die Farbe.
+
+### Markdown-Elemente
+CSS-Klassen aus `assets/scss/_styles_project.scss` als Blockattribut auf der Zeile direkt nach dem
+Absatz, der Liste oder der Tabelle: `{.v-new}`, `{.v-changed}`, `{.v-deprecated}`, `{.v-removed}`
+
+## Aufräumen
+- Hinweise, Diagrammmarker und CSS-Marker werden **nach zwei weiteren Versionen** entfernt
+- Das Change Log selbst ist **dauerhaft**
+
+## Checkliste
+Wer irgendein Artefakt erstellt oder ändert, **muss** den Eintrag in `content/change_log/changeLog.md`
+nachführen (Checkliste in `AGENTS.md`).
+
+
+---
+
+<p class="file-badge">.claude/rules/domain-model.md</p>
+
+# Konventionen Fachklassenmodell
+
+## Dateien
+- `domainModel.md` – das Fachklassenmodell auf einen Blick
+- `domainModel.puml` – PlantUML-Klassendiagramm (spiegelt die Entitätsseiten exakt)
+- `entities/{klassenname}.md` – eine Seite pro Klasse, camelCase ohne Umlaute (`kiVerbindung.md`, `pruefer.md`)
+
+## Aufbau `domainModel.md`
+```
+# Fachklassenmodell – {Systemname}
+## Überblick          → Ein Absatz zum Umfang; was neu ist in Phase 1 und was es in der CredEx-Plattform schon gibt
+## Klassendiagramm    → ![Fachklassenmodell – {Systemname}](domainModel.puml)
+## Klassen            → Aufzählung mit Link auf jede Entität, in der Reihenfolge des Diagramms
+## Beziehungen        → Kompakte Notation + beschreibende Tabelle
+```
+
+## Aufbau `entities/{klassenname}.md`
+```
+# {Klassenname}
+{Ein Satz, was die Klasse darstellt.} Teil des [Fachklassenmodells](../domainModel.md).
+**Herkunft:** neu in Phase 1 · existiert in der CredEx-Plattform
+## Attribute          → Tabelle: Attribut | Typ | Beschreibung
+```
+- Frontmatter: `type: entity`; `title: {Klassenname}` ohne `linkTitle`; der eine Satz als
+  `description`; `weight` in Diagrammreihenfolge; `tags` beginnend mit dem eigenen Tag
+- Andere Artefakte verlinken die Entitätsseite, nie einen Anker in `domainModel.md`
+
+## Klassenkonventionen
+- Fachliche Sicht: keine Methoden, keine technischen Schlüssel
+- Typen: `String`, `Integer`, `Decimal`, `Boolean`, `Date`, `DateTime`, `Enum`
+- Enum-Werte inline in GROSSBUCHSTABEN mit Unterstrich (`Enum {IN_ERFASSUNG, EINGEREICHT}`)
+
+## Beziehungen
+- Kompakte Notation mit Multiplizitäten: `Antrag "1" -- "0..*" Dokument : enthält`
+- Danach eine Tabelle: `Beziehung | Beschreibung`
+
+## PlantUML
+- `@startuml` / `@enduml`, `!theme plain`, `skinparam classAttributeIconSize 0`
+- Alle Attribute mit Typ in den `class`-Blöcken
+- Klassen, die neu in Phase 1 sind, tragen das Stereotyp `<<neu>>`
+- Beziehungen: `Antrag "1" -- "0..*" Dokument : enthält >`
+
+
+---
+
+<p class="file-badge">.claude/rules/epics.md</p>
+
+# Konventionen Epics und User Stories
+
+## Dateien
+- `epics.md` – Story Map (Epic-Spalten × Release-Zeilen)
+- `user_stories/us_{epic}_{seq}.md` – eine Datei pro User Story
+
+## Aufbau `epics.md`
+```
+# Epics & Story Map – {Systemname}
+## Überblick          → Ein Absatz + Links auf Use-Case-Diagramm und Fachklassenmodell; Legende MoSCoW und KANO
+## Story Map          → Tabelle: Epic-Spalten × Release-Zeilen
+## Nicht in Phase 1   → gestrichene oder zurückgestellte Stories mit Grund und Entscheid
+```
+
+## Tabelle Story Map
+- **Eine Spalte pro Epic** – der Epic-Titel ist der Spaltenkopf
+- Erste Spalte: Zeilenbeschriftung
+- **Kopfzeilen**: **Use Case** (Link) · **Ziel** (ein Satz mit Klassennamen) · **Fachklassen** ·
+  **Akteur** (wie im Use-Case-Diagramm) · **Prozessschritte**
+- **Release-Zeilen** `R{N} – {Name}`: `R0 – PoC`, `R1 – Pilot (MVP)`, `R2 – Rollout Phase 1`
+- Zellen: `[US-{epic}.{seq}](user_stories/us_{epic}_{seq}.md) {Titel}`
+- Stories in derselben Zeile über mehrere Epics bilden einen auslieferbaren Schnitt
+
+## Epics
+- Jedes Epic realisiert **genau einen** Use Case; kein Use Case wird auf mehrere Epics verteilt
+- Epic-Nummer = Nummer des Use Case: `Epic 4: Dokument ablegen` realisiert UC-04
+- Klassennamen exakt wie im Fachklassenmodell
+
+## User Stories
+
+### Dateien und IDs
+- `us_{epic}_{seq}.md` (z.B. `us_4_1.md` = Epic 4, Story 1), ID `US-{epic}.{seq}`
+- Die Story-ID des Detailkonzepts (`US-01` … `US-12`) steht in der Conversation als
+  «Detailkonzept: US-03». Eine Detailkonzept-Story, die mehrere Use Cases berührt, wird pro Use Case
+  geschnitten; jede Teilstory nennt dieselbe Detailkonzept-ID.
+
+### 3C-Format
+```
+# US-{epic}.{seq} – {Titel}
+## Card             → Als {Akteur} {MUSS|BRAUCHE|MÖCHTE|HÄTTE GERN} ich {Ziel}, damit {Nutzen}.
+## Conversation     → Kontext, Bezug auf Fachklassen, Rückverweis aufs Aktivitätsdiagramm, MoSCoW, KANO
+## Confirmation     → Gegeben / Wenn / Dann
+```
+
+### KANO → Modalwort
+| KANO | Modalwort | Bedeutung |
+|---|---|---|
+| Basismerkmal | **MUSS** / **BRAUCHE** | Erwartet; Fehlen macht unzufrieden |
+| Leistungsmerkmal | **MÖCHTE** | Je mehr, desto zufriedener |
+| Begeisterungsmerkmal | **HÄTTE GERN** | Überrascht positiv; Fehlen enttäuscht nicht |
+
+MoSCoW (aus dem Detailkonzept) und KANO stehen nebeneinander: MoSCoW sagt, ob die Story in den Pilot
+gehört, KANO, wie die Nutzer sie erleben.
+
+### Inhalt
+- Nur Akteure aus den Akteurbeschreibungen (`content/use_case/actorDescriptions.md`)
+- **Card** ist ein einziger Satz nach Vorlage
+- **Conversation** enthält: Rückverweis auf eine Aktivität im Aktivitätsdiagramm mit Fussnote auf die
+  Use-Case-Quelle (z.B. `[^dokument-ablegen]`), MoSCoW, KANO mit Begründung, Detailkonzept-ID,
+  Bezug auf die FA/NFA
+- **Confirmation** in Gegeben / Wenn / Dann; jedes Kriterium einzeln prüfbar
+
+
+---
+
+<p class="file-badge">.claude/rules/interface.md</p>
+
+# Konventionen Schnittstellen
+
+## Dateien
+- `{schnittstelle}.md` – eine Seite pro Schnittstelle (z.B. `mcpSchnittstelle.md`)
+
+## Aufbau
+```
+# Schnittstelle – {Name}
+## Überblick          → Zweck, Protokoll, wer Client und wer Server ist; Links auf Systemkontext und Use Cases
+## Werkzeuge          → Ein H3 pro Werkzeug mit Tabelle: Parameter | Typ | Pflicht | Beschreibung,
+                        danach Rückgabe und Fehlerfälle als Aufzählung, dazu der Use Case und die FA
+## Bewusst nicht angeboten → was die Schnittstelle absichtlich nicht kann, mit Begründung
+## Offene Punkte      → noch zu klärende technische Fragen
+```
+
+## Inhalt
+- Werkzeugnamen in `snake_case` mit Präfix des Systems (`credex_dokument_ablegen`), exakt wie im PoC
+- Parameter- und Rückgabenamen entsprechen den Attributen im Fachklassenmodell
+- Typen: `String`, `Integer`, `Decimal`, `Boolean`, `Datei`, `Liste<…>`
+- Jedes Werkzeug verweist auf genau einen Use Case
+
+
+---
+
+<p class="file-badge">.claude/rules/requirements.md</p>
+
+# Konventionen Anforderungskataloge
+
+## Dateien
+- `geschaeftsanforderungen.md` – GA1 … GA6
+- `funktionaleAnforderungen.md` – FA-01 … FA-nn
+- `nichtfunktionaleAnforderungen.md` – NFA-01 … NFA-nn, gegliedert nach ISO/IEC 25010
+
+## Aufbau
+```
+# {Katalogname} – {Systemname}
+## Überblick          → Ein Absatz: Zweck, Quelle (Anforderungs-Excel der Gruppe, Stand), Links auf verwandte Kataloge
+## Anforderungen      → Tabelle (siehe unten)
+## Offene Punkte      → Zielwerte oder Fragen, die noch zu validieren sind
+```
+
+## Tabellen
+- Geschäftsanforderungen: `ID | Geschäftsanforderung | Messgrösse / Ziel | Quelle`
+- Funktional: `ID | Funktion | Anforderung | Abnahmekriterium | Bezug | Wichtigkeit`
+- Nicht-funktional: `ID | Merkmal (ISO 25010) | Anforderung | Abnahmekriterium | Wichtigkeit`
+- Wichtigkeit Hoch = Must, Mittel = Should, Tief = Could
+
+## Inhalt
+- Anforderungen nach Satzschablone: «Das System muss / darf nicht …»
+- Jede Anforderung hat ein **prüfbares Abnahmekriterium** («Abnahme erfolgt, wenn …»)
+- **Bezug** verlinkt die User Stories und Use Cases, aus denen die FA abgeleitet ist
+- Die IDs sind dieselben wie im Anforderungs-Excel der Gruppe; Excel und Katalog werden synchron gehalten
+- Zielwerte, die noch nicht validiert sind, tragen den Vermerk *(Vorschlag)*
+
+
+---
+
+<p class="file-badge">.claude/rules/sources.md</p>
+
+# Konventionen Quellen
+
+`content/sources/` enthält das Material, aus dem die Änderungen der Dokumentation stammen, in zwei Arten:
+
+- **Change Requests** – jede Änderung nach dem Change-Request-Protokoll wird hier zuerst
+  aufgeschrieben, und jedes Artefakt, das sie erstellt oder umbaut, zitiert sie in `sources:`.
+- **Assessments** – jeder Lauf von `/okf-check` wird hier abgelegt. Ein Assessment ändert nichts; es
+  ist der Beleg, den ein späterer Change Request für seine Korrekturen zitiert.
+
+Beide werden einmal geschrieben und nie überschrieben, damit der Ordner als Geschichte lesbar bleibt:
+was gefunden, was verlangt, was entschieden wurde. Die Abschnitte zum Assessment unten bleiben auf
+Englisch, weil sie dem englischen Prüfregister `okf-v0-2-checks.md` folgen.
+
+## Dateien
+- `cr_{major}_{minor}.md` – ein Change Request pro Version (z.B. `cr_1_1.md` für v1.1), ID `CR-{major}.{minor}`
+- `okf_assessment_{yyyy}_{mm}_{dd}.md` – ein OKF-Assessment pro Lauf, benannt nach dem Tag. Ein zweiter
+  Lauf am selben Tag bekommt `_2`.
+- `weight` setzt die Reihenfolge des Ordners über beide Arten fort.
+
+## Change Request – Aufbau
+```
+# CR-{X.Y} – {Titel}
+## Anfrage           → Wer hat wann was verlangt – in den Worten der anfragenden Person
+## Analyse           → Die Änderung in eigenen Worten und welche Artefakte sie berührt (Schritt 1)
+## Grundlagen        → Die Unterlagen der Gruppe, auf denen die Änderung beruht (Datei, Stand)
+## Entscheide        → Was geklärt wurde (Schritt 2), mit Datum; jede Annahme als **Annahme:** markiert
+## Auswirkungen      → Tabelle: Artefakt | Auswirkung (neu / geändert / keine) | Details (Schritt 3)
+## User Stories      → Links auf die Stories aus Schritt 5, oder «Keine» mit Grund
+## Abnahme           → Woran man erkennt, dass die Änderung fertig ist
+## Status            → Vorgeschlagen · Umgesetzt in v{X.Y} am {Datum} · Freigegeben (mit `make verify`)
+```
+
+## Change Request – Inhalt
+- Ein Change Request hält einen Entscheid fest; er wird nach der Umsetzung **nicht umgeschrieben**.
+  Stellt sich die Änderung als falsch heraus, sagt das der nächste Change Request.
+- Klassennamen exakt wie überall.
+- Jede Annahme wird aufgeschrieben und als **Annahme:** markiert.
+- Der Versionseintrag im Change Log verlinkt seinen Change Request und umgekehrt.
+- Ein Change Request, der Befunde eines Assessments behebt, zitiert das Assessment in `sources:`
+  (`id: okf-assessment-2026-11-07`) und belegt jede behobene Check-ID mit einer Fussnote.
+
+## Assessment — frontmatter
+- `title: "OKF v0.2 Conformance Assessment – {YYYY-MM-DD}"`, `linkTitle: "OKF Assessment {YYYY-MM-DD}"`
+- `type: assessment`
+- `description` — the result in one sentence: conformant or not, and the count per status. It is the
+  line `content/log.md` shows for the run, so a reader of the log learns the result without opening
+  the page.
+- `generated` stamped when the run is filed. No `tags`: an assessment names no domain entity.
+
+## Assessment — Markdown structure
+
+A reader must learn what was checked without opening the register, and see the verdict before the
+detail. So every check row carries its **name** from the register next to its ID, and the rows are
+grouped: the three checks that decide conformance first, then one table per family.
+
+```
+# OKF v0.2 Conformance Assessment – {YYYY-MM-DD}
+{One sentence: what was assessed, on which day, with what result.}
+
+## Scope             → Two-column table with rows Bundle, Commit, Specification, Register, Validation
+## Result            → Conformant or not, on the three mandatory checks alone. Then a table:
+                       Family | meets | partial | not adopted | deviates | n/a, one row per family
+                       in the order of the sections below, and a Total row
+## Needs attention   → One bullet per `partial` or `deviates` check: ID, name, and the remediation in
+                       one line. "Nothing." if there is none
+## Mandatory checks  → OKF-CNF-01, OKF-CNF-02, OKF-CNF-03 — the §11 conformance criteria
+## Bundle structure  → OKF-BUN-*
+## Concept documents → OKF-CPT-*
+## Provenance        → OKF-SRC-*
+## Trust             → OKF-TRU-*
+## Lifecycle         → OKF-LIF-*
+## Cross-linking and paths → OKF-LNK-*
+## Reserved files    → OKF-RSV-*
+## Attested computations → OKF-CMP-*
+## Consumer floor    → OKF-CNF-04
+## Versioning        → OKF-VER-*
+## Register notes    → Only when the run changed the register, or found something it has no ID for
+```
+
+Every check section is one table, with the rows in register order:
+
+```
+| Check | Name | Status | Evidence | Remediation |
+|---|---|---|---|---|
+| [`OKF-BUN-01`](https://…/SPEC.md#3-bundle-structure) | Markdown directory tree | meets | … | |
+```
+
+- **Check** is the ID, linked to the clause of the specification the register links.
+- **Name** is copied verbatim from the register.
+- **Status** is one of the register's five words, and nothing else — decoration breaks the diff.
+- **Remediation** is empty for `meets`, and precise for everything else.
+- Every register ID appears exactly once in the page.
+
+## Assessment — content rules
+- **Never rewritten.** The next run is a new page; two pages are compared check by check, which is
+  what the register's permanent IDs are for. A finding that turns out wrong is corrected by the next
+  run, which says so under *Register notes*.
+- **Not a change.** Filing an assessment gets no version and no change log entry. `make generate`
+  lists it in `content/log.md` under the day it ran.
+- **Links** to the specification use its URL; links to the register use the repository path in
+  backticks, since the register lives outside the bundle.
+
+## Freigabe
+- `generated:` wird gestempelt, wenn Jarvis die Seite schreibt. `verified:` hält die freigebende Person
+  mit `make verify` fest, nie Jarvis.
+
+
+---
+
+<p class="file-badge">.claude/rules/state-charts.md</p>
+
+# Konventionen Zustandsdiagramme
+
+## Wann
+- Nur für Fachklassen mit einem **Enum-Attribut `status`**
+- Nur Übergänge, die durch **Aktivitäten** in Use-Case-Beschreibungen gedeckt sind
+- Zustände ohne auslösende Aktivität stehen im Abschnitt «Nicht abgedeckte Zustände»
+
+## Dateien
+- Ein `.puml` pro Entität (z.B. `dokumentStateChart.puml`)
+- Eine `.md`-Seite pro Zustandsdiagramm (z.B. `dokumentStateChart.md`)
+- Dateinamen `{entität}StateChart` in camelCase
+
+## Aufbau
+```
+# Zustandsdiagramm – {Entität}
+## Überblick          → Ein Absatz + Links auf Entität und Use-Case-Diagramm
+## Diagramm           → ![Zustandsdiagramm – {Entität}]({entität}StateChart.puml)
+## Zustände           → Tabelle: Zustand | Beschreibung
+## Rückverfolgung der Übergänge → Tabelle: Übergang | Auslösende Aktivität | Use Case | Schritt im Aktivitätsdiagramm
+## Nicht abgedeckte Zustände → Zustände des Fachklassenmodells ohne auslösende Aktivität
+```
+
+## Inhalt
+- Jede Zeile der Rückverfolgung zitiert ein `:aktion;`-Label aus einem Aktivitätsdiagramm wörtlich
+- Aktivitäten, die einen Statuswechsel auslösen, folgen exakt dem Muster:
+  - Erzeugen: `"CredEx-System legt {Entität} an (status = {ZUSTAND})"`
+  - Ändern: `"CredEx-System setzt {Entität} (status = {ZUSTAND})"`
+- Zeigt eine Aktivität den Wechsel nicht ausdrücklich, zuerst das Aktivitätsdiagramm nachführen
+- Jeder genannte Use Case ist in der Tabelle verlinkt
+
+## PlantUML
+- `@startuml` / `@enduml`, `!theme plain`, `skinparam stateFontStyle bold`
+- Titel: `title Zustandsdiagramm – {Entität}`
+- `[*] -->` für den Startübergang
+- Zustandsbeschreibung: `state ZUSTAND : kurze Beschreibung`
+- Übergangsbeschriftungen entsprechen der auslösenden Aktivität, max. 2 Zeilen mit `\n`
+
+
+---
+
+<p class="file-badge">.claude/rules/system-context.md</p>
+
+# Konventionen Systemkontext
+
+## Dateien
+- `systemContext.md` – Markdown mit eingebettetem Mermaid-Diagramm
+
+## Aufbau
+```
+# Systemkontext – {Systemname}
+## Überblick          → Ein Absatz: was im Scope liegt, was Kontext ist; Links auf Soll-Prozess und Fachklassenmodell
+## Diagramm           → Legende + Mermaid `flowchart LR`
+## Informationsflüsse → Tabelle: Von | Nach | Information
+## Abgrenzung         → Liste, was ausdrücklich nicht im Scope liegt
+```
+
+## Regeln
+- Systeme im Scope (neu in diesem Release) mit `classDef scope` rot umrandet (`stroke:#DC2626,stroke-width:2px`),
+  Kontextsysteme mit `classDef kontext` gestrichelt (`stroke-dasharray:4 3`).
+- Kanten sind **gerichtet** und beschriftet mit der fliessenden Information, nicht mit der Tätigkeit.
+- Jede Kante im Diagramm hat genau eine Zeile in der Tabelle *Informationsflüsse* – Ausnahme von der
+  Regel «Information an einem Ort», weil die Tabelle die Kanten lesbar macht, die im Diagramm gekürzt sind.
+- Datenobjekte heissen wie im Fachklassenmodell (`Dokument`, `Zuordnung`, `Pflichtdokument`).
+
+
+---
+
+<p class="file-badge">.claude/rules/use-cases.md</p>
+
+# Konventionen Use Cases
+
+## Dateien
+- `useCaseDiagram.puml` – PlantUML-Use-Case-Diagramm
+- `useCaseDiagram.md` – Akteure, Use Cases und Beziehungen
+
+## Aufbau `useCaseDiagram.md`
+```
+# Use-Case-Diagramm – {Systemname}
+## Überblick          → Ein Absatz + Link auf den Soll-Prozess
+## Diagramm           → ![Use-Case-Diagramm – {Systemname}](useCaseDiagram.puml)
+## Akteure            → Tabelle: Akteur | Art (Primär / Unterstützend / System) | Beschreibung
+## Use Cases          → Ein H3 pro Use Case mit kurzer Beschreibung und Rückverweis auf Prozessschritte
+## Beziehungen        → Tabelle: Beziehung | Art (include / Generalisierung) | Beschreibung
+```
+
+## Akteurseiten
+`actorDescriptions.md` listet jeden Akteur als Link; jeder Akteur hat eine eigene Seite in `actors/`.
+
+- `actors/{akteurname}.md` – camelCase (`partnerKi.md` für «Partner-KI»), `type: actor`
+- Aufbau:
+  ```
+  # {Akteurname}
+  **Art:** Primär / Unterstützend / System
+  ## Beschreibung    → Wer oder was der Akteur ist, und seine Rolle im Soll-Prozess
+  ## Systemzugriff   → Worauf der Akteur zugreifen kann und worauf nicht
+  ```
+
+## Akteure
+- Jeder Akteur stammt aus dem Soll-Prozess – keine erfundenen Akteure
+- Primär (löst die Interaktion aus), Unterstützend (liefert einen Dienst), System (externes System)
+- Gleiche Namen wie in der Prozesslegende («Berater/in», «Partner-KI», «Glarner KB»)
+- Die Beschreibung verweist auf die Rolle im Prozess (z.B. «Entspricht 🟦 Berater/in im Soll-Prozess»)
+
+## Use Cases
+- IDs aus dem Detailkonzept (`UC-01` … `UC-09`) bleiben erhalten; Titel `UC-{nn} {Name}`
+- Benennung **Verb am Ende, Objekt vorne**, 2–4 Wörter, wie in der Gruppe üblich («Dokument ablegen»)
+- Jeder Use Case bekommt ein H3 (`### UC-04 Dokument ablegen`) mit
+  - einem Satz zum Ziel
+  - einem **Rückverweis** auf die Prozessschritte mit Fussnote (z.B. «Entspricht **Prozessschritten
+    3.1 – 3.4**.[^business-process]»)
+- Use Cases mit Leerzeilen trennen (keine `---`-Linien)
+
+## Beziehungen
+- **`<<include>>`** – für Abläufe, die immer mit ausgeführt werden (Pfeil vom Basis- zum
+  inkludierten Use Case)
+- **Generalisierung** – zwischen Akteuren (Kundenberater/in und Hypothekarbroker/in sind Berater/in)
+- Jede Beziehung in der `.puml`-Datei hat eine Zeile in der Markdown-Tabelle
+
+## PlantUML Use-Case-Diagramm
+- `@startuml` / `@enduml`, `left to right direction`, `skinparam actorStyle awesome`
+- Systemgrenze: `rectangle "CredEx-Plattform · Phase 1" { … }`
+- Primäre Akteure **links**, System-Akteure **rechts**
+- `usecase "UC-04\nDokument ablegen" as UC04`
+- Akteure mit `--` verbunden, Beziehungen mit `..>`
+- Diagramm **flach** – keine verschachtelten Rechtecke in der Systemgrenze
+
+## Detaillierte Use-Case-Beschreibungen
+
+Jeder Use Case bekommt einen **Unterordner** in `use_case/` (snake_case, z.B. `use_case/dokument_ablegen/`).
+
+### Dateien pro Use Case
+- `{useCaseName}.md` – Beschreibung (camelCase)
+- `{useCaseName}.puml` – PlantUML-Aktivitätsdiagramm (camelCase)
+
+### Aufbau
+```
+# Use Case – UC-{nn} {Name}
+## Überblick          → Ein Absatz + Links auf Use-Case-Diagramm und Soll-Prozess; Priorität und Kritikalität
+## Vorbedingungen     → Aufzählung
+## Nachbedingungen    → nach Ausgang gruppiert (Erfolg / Fehler)
+## Beschreibung       → Ein Absatz Erzählung mit Klassennamen, inkl. Alternativ- und Ausnahmeszenarien in Worten
+## Qualitätsanforderungen → Links auf die NFA, die für diesen Use Case gelten
+## Aktivitätsdiagramm → ![Aktivitätsdiagramm – UC-{nn} {Name}]({useCaseName}.puml)
+```
+
+### Inhalt
+- Vor- und Nachbedingungen nennen Fachklassen mit Attributen und Status (z.B. «Antrag mit `status = IN_ERFASSUNG`»)
+- Die Beschreibung fasst die Absicht zusammen und wiederholt das Diagramm nicht Schritt für Schritt
+- Rückverweis auf die Prozessschritte mit `[^business-process]`
+- `---` trennt die Hauptabschnitte
+
+### PlantUML-Aktivitätsdiagramm
+- `@startuml` / `@enduml`, `!theme plain`
+- Titel: `title Aktivitätsdiagramm – UC-{nn} {Name}`
+- Swimlanes `|Berater/in|`, `|Partner-KI|`, `|CredEx-System|` wo mehrere Akteure handeln
+- `:aktion;` für Tätigkeiten, `if (...) then (...)` / `else (...)` für Entscheidungen
+- `repeat` / `repeat while (...)` für Schleifen
+- `stop` für jeden Endpfad
+- Klassennamen in den Aktionen (z.B. «CredEx-System speichert Dokument im Antrag»)
+- Beschriftungen kurz, max. 2 Zeilen mit `\n`
+
+  </script>
+
+  <script>
+    const raw = document.getElementById('raw-md').textContent;
+    document.getElementById('content').innerHTML = marked.parse(raw);
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+@startuml offeneAntraegeAbrufen
+!theme plain
+title Aktivitätsdiagramm – UC-02 Offene Anträge abrufen
+|Partner-KI|
+start
+:credex_offene_antraege aufrufen;
+|CredEx-System|
+if (KiVerbindung gültig?) then (ja)
+  :Anträge mit status = IN_ERFASSUNG\nim Zugriffsbereich des Beraters lesen;
+  :Antrag, Kreditnehmer, Objekt und\nAnzahl fehlender Pflichtdokumente melden;
+  |Partner-KI|
+  if (Mehrere offene Anträge?) then (ja)
+    :Berater/in fragen, welcher Antrag gemeint ist;
+  else (nein)
+  endif
+  stop
+else (nein)
+  :Fehlermeldung "nicht angemeldet";
+  stop
+endif
+
+@enduml

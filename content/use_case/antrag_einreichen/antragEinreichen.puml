@@ -1,0 +1,30 @@
+@startuml antragEinreichen
+!theme plain
+title Aktivitätsdiagramm – UC-07 Antrag einreichen
+|Berater/in|
+start
+:In der Übersicht "Einreichen" wählen;
+|CredEx-System|
+:Vollständigkeit prüfen (UC-05);
+if (Zuordnung unsicher?) then (ja)
+  :Einreichen sperren,\nHinweis auf unsichere Zuordnung (1x);
+  stop
+else (nein)
+endif
+if (Alle Pflichtdokumente vorhanden?) then (nein)
+  :Einreichen sperren,\nfehlende Pflichtdokumente anzeigen (2a);
+  stop
+else (ja)
+endif
+:Dossier über die bestehende\nSchnittstelle übermitteln;
+if (Übermittlung erfolgreich?) then (ja)
+  :CredEx-System setzt Antrag\n(status = EINGEREICHT);
+  :CredEx-System setzt Dokument\n(status = EINGEREICHT);
+  :Protokolleintrag schreiben;
+  stop
+else (nein)
+  :Antrag bleibt in Erfassung,\nMeldung an Berater/in (3x);
+  stop
+endif
+
+@enduml

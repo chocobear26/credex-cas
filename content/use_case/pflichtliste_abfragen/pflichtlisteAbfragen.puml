@@ -1,0 +1,17 @@
+@startuml pflichtlisteAbfragen
+!theme plain
+title Aktivitätsdiagramm – UC-03 Pflichtliste abfragen
+|Partner-KI|
+start
+:credex_pflichtliste mit antrag_id aufrufen;
+|CredEx-System|
+if (Antrag bekannt und berechtigt?) then (ja)
+  :Pflichtdokumente mit Dokumenttyp,\nBezug und status lesen;
+  :Pflichtliste und Ziel\n"weiteres Dokument" melden;
+  stop
+else (nein)
+  :Fehlermeldung "Antrag unbekannt\noder keine Berechtigung";
+  stop
+endif
+
+@enduml
